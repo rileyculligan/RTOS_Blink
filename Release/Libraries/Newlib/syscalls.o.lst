@@ -1,0 +1,273 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "syscalls.c"
+  14              	 .section .text._open,"ax",%progbits
+  15              	 .align 1
+  16              	 .weak _open
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	_open:
+  21 0000 0120     	 mov r0,#1
+  22              	 
+  23 0002 4042     	 neg r0,r0
+  24 0004 7047     	 bx lr
+  26              	 .section .text._lseek,"ax",%progbits
+  27              	 .align 1
+  28              	 .weak _lseek
+  29              	 .code 16
+  30              	 .thumb_func
+  32              	_lseek:
+  33 0000 0120     	 mov r0,#1
+  34              	 
+  35 0002 4042     	 neg r0,r0
+  36 0004 7047     	 bx lr
+  38              	 .section .text._read,"ax",%progbits
+  39              	 .align 1
+  40              	 .weak _read
+  41              	 .code 16
+  42              	 .thumb_func
+  44              	_read:
+  45 0000 0020     	 mov r0,#0
+  46              	 
+  47 0002 7047     	 bx lr
+  49              	 .section .text._write,"ax",%progbits
+  50              	 .align 1
+  51              	 .weak _write
+  52              	 .code 16
+  53              	 .thumb_func
+  55              	_write:
+  56 0000 0120     	 mov r0,#1
+  57              	 
+  58 0002 4042     	 neg r0,r0
+  59 0004 7047     	 bx lr
+  61              	 .section .text._close,"ax",%progbits
+  62              	 .align 1
+  63              	 .weak _close
+  64              	 .code 16
+  65              	 .thumb_func
+  67              	_close:
+  68 0000 0120     	 mov r0,#1
+  69              	 
+  70 0002 4042     	 neg r0,r0
+  71 0004 7047     	 bx lr
+  73              	 .section .text._fstat,"ax",%progbits
+  74              	 .align 1
+  75              	 .weak _fstat
+  76              	 .code 16
+  77              	 .thumb_func
+  79              	_fstat:
+  80 0000 481E     	 sub r0,r1,#1
+  81 0002 8141     	 sbc r1,r1,r0
+  82              	 
+  83 0004 881E     	 sub r0,r1,#2
+  84 0006 7047     	 bx lr
+  86              	 .section .text._link,"ax",%progbits
+  87              	 .align 1
+  88              	 .weak _link
+  89              	 .code 16
+  90              	 .thumb_func
+  92              	_link:
+  93 0000 401A     	 sub r0,r0,r1
+  94 0002 4142     	 neg r1,r0
+  95 0004 4841     	 adc r0,r0,r1
+  96              	 
+  97 0006 0238     	 sub r0,r0,#2
+  98 0008 7047     	 bx lr
+ 100              	 .section .text._unlink,"ax",%progbits
+ 101              	 .align 1
+ 102              	 .weak _unlink
+ 103              	 .code 16
+ 104              	 .thumb_func
+ 106              	_unlink:
+ 107 0000 0120     	 mov r0,#1
+ 108              	 
+ 109 0002 4042     	 neg r0,r0
+ 110 0004 7047     	 bx lr
+ 112              	 .section .text._sbrk,"ax",%progbits
+ 113              	 .align 1
+ 114              	 .weak _sbrk
+ 115              	 .code 16
+ 116              	 .thumb_func
+ 118              	_sbrk:
+ 119 0000 0B4B     	 ldr r3,.L18
+ 120 0002 10B5     	 push {r4,lr}
+ 121 0004 1A68     	 ldr r2,[r3]
+ 122 0006 0B4C     	 ldr r4,.L18+4
+ 123 0008 002A     	 cmp r2,#0
+ 124 000a 04D1     	 bne .L14
+ 125 000c 0A49     	 ldr r1,.L18+8
+ 126 000e 0B4A     	 ldr r2,.L18+12
+ 127 0010 1960     	 str r1,[r3]
+ 128 0012 8A18     	 add r2,r1,r2
+ 129 0014 2260     	 str r2,[r4]
+ 130              	.L14:
+ 131 0016 1968     	 ldr r1,[r3]
+ 132 0018 2468     	 ldr r4,[r4]
+ 133 001a CA1D     	 add r2,r1,#7
+ 134 001c 1218     	 add r2,r2,r0
+ 135 001e 0720     	 mov r0,#7
+ 136 0020 8243     	 bic r2,r0
+ 137 0022 0020     	 mov r0,#0
+ 138 0024 A242     	 cmp r2,r4
+ 139 0026 01D2     	 bcs .L15
+ 140 0028 081C     	 mov r0,r1
+ 141 002a 1A60     	 str r2,[r3]
+ 142              	.L15:
+ 143              	 
+ 144 002c 10BD     	 pop {r4,pc}
+ 145              	.L19:
+ 146 002e C046     	 .align 2
+ 147              	.L18:
+ 148 0030 00000000 	 .word .LANCHOR0
+ 149 0034 00000000 	 .word .LANCHOR1
+ 150 0038 00000000 	 .word Heap_Bank1_Start
+ 151 003c 00000000 	 .word Heap_Bank1_Size
+ 153              	 .section .text._times,"ax",%progbits
+ 154              	 .align 1
+ 155              	 .weak _times
+ 156              	 .code 16
+ 157              	 .thumb_func
+ 159              	_times:
+ 160 0000 0120     	 mov r0,#1
+ 161              	 
+ 162 0002 4042     	 neg r0,r0
+ 163 0004 7047     	 bx lr
+ 165              	 .section .text._wait,"ax",%progbits
+ 166              	 .align 1
+ 167              	 .weak _wait
+ 168              	 .code 16
+ 169              	 .thumb_func
+ 171              	_wait:
+ 172 0000 0120     	 mov r0,#1
+ 173              	 
+ 174 0002 4042     	 neg r0,r0
+ 175 0004 7047     	 bx lr
+ 177              	 .section .text._kill,"ax",%progbits
+ 178              	 .align 1
+ 179              	 .weak _kill
+ 180              	 .code 16
+ 181              	 .thumb_func
+ 183              	_kill:
+ 184 0000 0120     	 mov r0,#1
+ 185              	 
+ 186 0002 4042     	 neg r0,r0
+ 187 0004 7047     	 bx lr
+ 189              	 .section .text._fork,"ax",%progbits
+ 190              	 .align 1
+ 191              	 .weak _fork
+ 192              	 .code 16
+ 193              	 .thumb_func
+ 195              	_fork:
+ 196 0000 0120     	 mov r0,#1
+ 197              	 
+ 198 0002 4042     	 neg r0,r0
+ 199 0004 7047     	 bx lr
+ 201              	 .section .text._getpid,"ax",%progbits
+ 202              	 .align 1
+ 203              	 .weak _getpid
+ 204              	 .code 16
+ 205              	 .thumb_func
+ 207              	_getpid:
+ 208 0000 0120     	 mov r0,#1
+ 209              	 
+ 210 0002 4042     	 neg r0,r0
+ 211 0004 7047     	 bx lr
+ 213              	 .section .text._exit,"ax",%progbits
+ 214              	 .align 1
+ 215              	 .weak _exit
+ 216              	 .code 16
+ 217              	 .thumb_func
+ 219              	_exit:
+ 220              	.L26:
+ 221 0000 FEE7     	 b .L26
+ 223              	 .section .text._init,"ax",%progbits
+ 224              	 .align 1
+ 225              	 .weak _init
+ 226              	 .code 16
+ 227              	 .thumb_func
+ 229              	_init:
+ 230              	 
+ 231 0000 7047     	 bx lr
+ 233              	 .section .text._isatty,"ax",%progbits
+ 234              	 .align 1
+ 235              	 .weak _isatty
+ 236              	 .code 16
+ 237              	 .thumb_func
+ 239              	_isatty:
+ 240 0000 0120     	 mov r0,#1
+ 241              	 
+ 242 0002 4042     	 neg r0,r0
+ 243 0004 7047     	 bx lr
+ 245              	 .global __dso_handle
+ 246              	 .section .bss.heap.4702,"aw",%nobits
+ 247              	 .align 2
+ 248              	 .set .LANCHOR0,.+0
+ 251              	heap.4702:
+ 252 0000 00000000 	 .space 4
+ 253              	 .section .bss.__dso_handle,"aw",%nobits
+ 254              	 .align 2
+ 257              	__dso_handle:
+ 258 0000 00000000 	 .space 4
+ 259              	 .section .bss.HeapBound.4701,"aw",%nobits
+ 260              	 .align 2
+ 261              	 .set .LANCHOR1,.+0
+ 264              	HeapBound.4701:
+ 265 0000 00000000 	 .space 4
+ 266              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 syscalls.c
+    {standard input}:15     .text._open:00000000 $t
+    {standard input}:20     .text._open:00000000 _open
+    {standard input}:27     .text._lseek:00000000 $t
+    {standard input}:32     .text._lseek:00000000 _lseek
+    {standard input}:39     .text._read:00000000 $t
+    {standard input}:44     .text._read:00000000 _read
+    {standard input}:50     .text._write:00000000 $t
+    {standard input}:55     .text._write:00000000 _write
+    {standard input}:62     .text._close:00000000 $t
+    {standard input}:67     .text._close:00000000 _close
+    {standard input}:74     .text._fstat:00000000 $t
+    {standard input}:79     .text._fstat:00000000 _fstat
+    {standard input}:87     .text._link:00000000 $t
+    {standard input}:92     .text._link:00000000 _link
+    {standard input}:101    .text._unlink:00000000 $t
+    {standard input}:106    .text._unlink:00000000 _unlink
+    {standard input}:113    .text._sbrk:00000000 $t
+    {standard input}:118    .text._sbrk:00000000 _sbrk
+    {standard input}:148    .text._sbrk:00000030 $d
+    {standard input}:154    .text._times:00000000 $t
+    {standard input}:159    .text._times:00000000 _times
+    {standard input}:166    .text._wait:00000000 $t
+    {standard input}:171    .text._wait:00000000 _wait
+    {standard input}:178    .text._kill:00000000 $t
+    {standard input}:183    .text._kill:00000000 _kill
+    {standard input}:190    .text._fork:00000000 $t
+    {standard input}:195    .text._fork:00000000 _fork
+    {standard input}:202    .text._getpid:00000000 $t
+    {standard input}:207    .text._getpid:00000000 _getpid
+    {standard input}:214    .text._exit:00000000 $t
+    {standard input}:219    .text._exit:00000000 _exit
+    {standard input}:224    .text._init:00000000 $t
+    {standard input}:229    .text._init:00000000 _init
+    {standard input}:234    .text._isatty:00000000 $t
+    {standard input}:239    .text._isatty:00000000 _isatty
+    {standard input}:257    .bss.__dso_handle:00000000 __dso_handle
+    {standard input}:247    .bss.heap.4702:00000000 $d
+    {standard input}:251    .bss.heap.4702:00000000 heap.4702
+    {standard input}:254    .bss.__dso_handle:00000000 $d
+    {standard input}:260    .bss.HeapBound.4701:00000000 $d
+    {standard input}:264    .bss.HeapBound.4701:00000000 HeapBound.4701
+
+UNDEFINED SYMBOLS
+Heap_Bank1_Start
+Heap_Bank1_Size

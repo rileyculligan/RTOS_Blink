@@ -1,0 +1,79 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "main.c"
+  14              	 .section .text.LEDTask,"ax",%progbits
+  15              	 .align 1
+  16              	 .global LEDTask
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	LEDTask:
+  21 0000 0122     	 mov r2,#1
+  22 0002 074B     	 ldr r3,.L4
+  23 0004 8021     	 mov r1,#128
+  24 0006 10B5     	 push {r4,lr}
+  25 0008 1C1C     	 mov r4,r3
+  26 000a 5A60     	 str r2,[r3,#4]
+  27 000c 1A69     	 ldr r2,[r3,#16]
+  28 000e 0A43     	 orr r2,r1
+  29 0010 1A61     	 str r2,[r3,#16]
+  30              	.L2:
+  31 0012 044B     	 ldr r3,.L4+4
+  32 0014 FA20     	 mov r0,#250
+  33 0016 6360     	 str r3,[r4,#4]
+  34 0018 FFF7FEFF 	 bl vTaskDelay
+  35 001c F9E7     	 b .L2
+  36              	.L5:
+  37 001e C046     	 .align 2
+  38              	.L4:
+  39 0020 00000440 	 .word 1074003968
+  40 0024 01000100 	 .word 65537
+  42              	 .section .text.startup.main,"ax",%progbits
+  43              	 .align 1
+  44              	 .global main
+  45              	 .code 16
+  46              	 .thumb_func
+  48              	main:
+  49 0000 0123     	 mov r3,#1
+  50 0002 07B5     	 push {r0,r1,r2,lr}
+  51 0004 0093     	 str r3,[sp]
+  52 0006 0023     	 mov r3,#0
+  53 0008 0449     	 ldr r1,.L8
+  54 000a 0193     	 str r3,[sp,#4]
+  55 000c 8022     	 mov r2,#128
+  56 000e 0448     	 ldr r0,.L8+4
+  57 0010 FFF7FEFF 	 bl xTaskCreate
+  58 0014 FFF7FEFF 	 bl vTaskStartScheduler
+  59              	.L7:
+  60 0018 FEE7     	 b .L7
+  61              	.L9:
+  62 001a C046     	 .align 2
+  63              	.L8:
+  64 001c 00000000 	 .word .LC1
+  65 0020 00000000 	 .word LEDTask
+  67              	 .section .rodata.str1.1,"aMS",%progbits,1
+  68              	.LC1:
+  69 0000 4C454400 	 .ascii "LED\000"
+  70              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+    {standard input}:15     .text.LEDTask:00000000 $t
+    {standard input}:20     .text.LEDTask:00000000 LEDTask
+    {standard input}:39     .text.LEDTask:00000020 $d
+    {standard input}:43     .text.startup.main:00000000 $t
+    {standard input}:48     .text.startup.main:00000000 main
+    {standard input}:64     .text.startup.main:0000001c $d
+
+UNDEFINED SYMBOLS
+vTaskDelay
+xTaskCreate
+vTaskStartScheduler

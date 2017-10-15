@@ -1,0 +1,2785 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "tasks.c"
+  14              	 .section .text.prvTaskIsTaskSuspended,"ax",%progbits
+  15              	 .align 1
+  16              	 .code 16
+  17              	 .thumb_func
+  19              	prvTaskIsTaskSuspended:
+  20 0000 0028     	 cmp r0,#0
+  21 0002 01D1     	 bne .L2
+  22              	
+  23 0004 72B6     	 cpsid i
+  24              	
+  25              	 .code 16
+  26              	.L3:
+  27 0006 FEE7     	 b .L3
+  28              	.L2:
+  29 0008 064B     	 ldr r3,.L10
+  30 000a 4269     	 ldr r2,[r0,#20]
+  31 000c 9A42     	 cmp r2,r3
+  32 000e 06D1     	 bne .L8
+  33 0010 806A     	 ldr r0,[r0,#40]
+  34 0012 054B     	 ldr r3,.L10+4
+  35 0014 9842     	 cmp r0,r3
+  36 0016 02D0     	 beq .L8
+  37 0018 4242     	 neg r2,r0
+  38 001a 4241     	 adc r2,r2,r0
+  39 001c 00E0     	 b .L7
+  40              	.L8:
+  41 001e 0022     	 mov r2,#0
+  42              	.L7:
+  43 0020 101C     	 mov r0,r2
+  44              	 
+  45 0022 7047     	 bx lr
+  46              	.L11:
+  47              	 .align 2
+  48              	.L10:
+  49 0024 00000000 	 .word .LANCHOR0
+  50 0028 00000000 	 .word .LANCHOR1
+  52              	 .section .text.prvResetNextTaskUnblockTime,"ax",%progbits
+  53              	 .align 1
+  54              	 .code 16
+  55              	 .thumb_func
+  57              	prvResetNextTaskUnblockTime:
+  58 0000 074A     	 ldr r2,.L18
+  59 0002 1368     	 ldr r3,[r2]
+  60 0004 1968     	 ldr r1,[r3]
+  61 0006 074B     	 ldr r3,.L18+4
+  62 0008 0029     	 cmp r1,#0
+  63 000a 02D1     	 bne .L16
+  64 000c 0122     	 mov r2,#1
+  65 000e 5242     	 neg r2,r2
+  66 0010 03E0     	 b .L17
+  67              	.L16:
+  68 0012 1268     	 ldr r2,[r2]
+  69 0014 D268     	 ldr r2,[r2,#12]
+  70 0016 D268     	 ldr r2,[r2,#12]
+  71 0018 5268     	 ldr r2,[r2,#4]
+  72              	.L17:
+  73 001a 1A60     	 str r2,[r3]
+  74              	 
+  75 001c 7047     	 bx lr
+  76              	.L19:
+  77 001e C046     	 .align 2
+  78              	.L18:
+  79 0020 00000000 	 .word .LANCHOR2
+  80 0024 00000000 	 .word .LANCHOR3
+  82              	 .section .text.prvAddCurrentTaskToDelayedList,"ax",%progbits
+  83              	 .align 1
+  84              	 .code 16
+  85              	 .thumb_func
+  87              	prvAddCurrentTaskToDelayedList:
+  88 0000 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+  89 0002 041C     	 mov r4,r0
+  90 0004 154B     	 ldr r3,.L27
+  91 0006 164D     	 ldr r5,.L27+4
+  92 0008 1E68     	 ldr r6,[r3]
+  93 000a 2868     	 ldr r0,[r5]
+  94 000c 0F1C     	 mov r7,r1
+  95 000e 0430     	 add r0,r0,#4
+  96 0010 FFF7FEFF 	 bl uxListRemove
+  97 0014 2B1C     	 mov r3,r5
+  98 0016 621C     	 add r2,r4,#1
+  99 0018 07D1     	 bne .L21
+ 100 001a 002F     	 cmp r7,#0
+ 101 001c 05D0     	 beq .L21
+ 102 001e 2968     	 ldr r1,[r5]
+ 103 0020 1048     	 ldr r0,.L27+8
+ 104 0022 0431     	 add r1,r1,#4
+ 105 0024 FFF7FEFF 	 bl vListInsertEnd
+ 106 0028 16E0     	 b .L20
+ 107              	.L21:
+ 108 002a 1A68     	 ldr r2,[r3]
+ 109 002c A419     	 add r4,r4,r6
+ 110 002e 5460     	 str r4,[r2,#4]
+ 111 0030 B442     	 cmp r4,r6
+ 112 0032 06D2     	 bcs .L23
+ 113 0034 0C4A     	 ldr r2,.L27+12
+ 114 0036 1068     	 ldr r0,[r2]
+ 115 0038 1968     	 ldr r1,[r3]
+ 116 003a 0431     	 add r1,r1,#4
+ 117 003c FFF7FEFF 	 bl vListInsert
+ 118 0040 0AE0     	 b .L20
+ 119              	.L23:
+ 120 0042 0A4A     	 ldr r2,.L27+16
+ 121 0044 1068     	 ldr r0,[r2]
+ 122 0046 1968     	 ldr r1,[r3]
+ 123 0048 0431     	 add r1,r1,#4
+ 124 004a FFF7FEFF 	 bl vListInsert
+ 125 004e 084B     	 ldr r3,.L27+20
+ 126 0050 1A68     	 ldr r2,[r3]
+ 127 0052 9442     	 cmp r4,r2
+ 128 0054 00D2     	 bcs .L20
+ 129 0056 1C60     	 str r4,[r3]
+ 130              	.L20:
+ 131              	 
+ 132 0058 F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 133              	.L28:
+ 134 005a C046     	 .align 2
+ 135              	.L27:
+ 136 005c 00000000 	 .word .LANCHOR4
+ 137 0060 00000000 	 .word .LANCHOR5
+ 138 0064 00000000 	 .word .LANCHOR0
+ 139 0068 00000000 	 .word .LANCHOR6
+ 140 006c 00000000 	 .word .LANCHOR2
+ 141 0070 00000000 	 .word .LANCHOR3
+ 143              	 .section .text.xTaskCreate,"ax",%progbits
+ 144              	 .align 1
+ 145              	 .global xTaskCreate
+ 146              	 .code 16
+ 147              	 .thumb_func
+ 149              	xTaskCreate:
+ 150 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 151 0002 9500     	 lsl r5,r2,#2
+ 152 0004 85B0     	 sub sp,sp,#20
+ 153 0006 0290     	 str r0,[sp,#8]
+ 154 0008 281C     	 mov r0,r5
+ 155 000a 0F1C     	 mov r7,r1
+ 156 000c 0393     	 str r3,[sp,#12]
+ 157 000e FFF7FEFF 	 bl pvPortMalloc
+ 158 0012 061E     	 sub r6,r0,#0
+ 159 0014 00D1     	 bne .LCB169
+ 160 0016 96E0     	 b .L30
+ 161              	.LCB169:
+ 162 0018 4C20     	 mov r0,#76
+ 163 001a FFF7FEFF 	 bl pvPortMalloc
+ 164 001e 041E     	 sub r4,r0,#0
+ 165 0020 07D0     	 beq .L31
+ 166 0022 0723     	 mov r3,#7
+ 167 0024 043D     	 sub r5,r5,#4
+ 168 0026 0663     	 str r6,[r0,#48]
+ 169 0028 7619     	 add r6,r6,r5
+ 170 002a 9E43     	 bic r6,r3
+ 171 002c 0196     	 str r6,[sp,#4]
+ 172 002e 0023     	 mov r3,#0
+ 173 0030 06E0     	 b .L32
+ 174              	.L31:
+ 175 0032 301C     	 mov r0,r6
+ 176 0034 FFF7FEFF 	 bl vPortFree
+ 177 0038 85E0     	 b .L30
+ 178              	.L56:
+ 179 003a 0133     	 add r3,r3,#1
+ 180 003c 052B     	 cmp r3,#5
+ 181 003e 06D0     	 beq .L33
+ 182              	.L32:
+ 183 0040 1A1C     	 mov r2,r3
+ 184 0042 F95C     	 ldrb r1,[r7,r3]
+ 185 0044 3432     	 add r2,r2,#52
+ 186 0046 A154     	 strb r1,[r4,r2]
+ 187 0048 FA5C     	 ldrb r2,[r7,r3]
+ 188 004a 002A     	 cmp r2,#0
+ 189 004c F5D1     	 bne .L56
+ 190              	.L33:
+ 191 004e 231C     	 mov r3,r4
+ 192 0050 0025     	 mov r5,#0
+ 193 0052 0A9E     	 ldr r6,[sp,#40]
+ 194 0054 3833     	 add r3,r3,#56
+ 195 0056 1D70     	 strb r5,[r3]
+ 196 0058 042E     	 cmp r6,#4
+ 197 005a 00D9     	 bls .L34
+ 198 005c 0426     	 mov r6,#4
+ 199              	.L34:
+ 200 005e 231D     	 add r3,r4,#4
+ 201 0060 181C     	 mov r0,r3
+ 202 0062 E662     	 str r6,[r4,#44]
+ 203 0064 E663     	 str r6,[r4,#60]
+ 204 0066 2564     	 str r5,[r4,#64]
+ 205 0068 0093     	 str r3,[sp]
+ 206 006a FFF7FEFF 	 bl vListInitialiseItem
+ 207 006e 201C     	 mov r0,r4
+ 208 0070 1830     	 add r0,r0,#24
+ 209 0072 FFF7FEFF 	 bl vListInitialiseItem
+ 210 0076 0523     	 mov r3,#5
+ 211 0078 9E1B     	 sub r6,r3,r6
+ 212 007a 231C     	 mov r3,r4
+ 213 007c 4833     	 add r3,r3,#72
+ 214 007e 2461     	 str r4,[r4,#16]
+ 215 0080 A661     	 str r6,[r4,#24]
+ 216 0082 6462     	 str r4,[r4,#36]
+ 217 0084 6564     	 str r5,[r4,#68]
+ 218 0086 0198     	 ldr r0,[sp,#4]
+ 219 0088 1D70     	 strb r5,[r3]
+ 220 008a 0299     	 ldr r1,[sp,#8]
+ 221 008c 039A     	 ldr r2,[sp,#12]
+ 222 008e FFF7FEFF 	 bl pxPortInitialiseStack
+ 223 0092 0B9B     	 ldr r3,[sp,#44]
+ 224 0094 2060     	 str r0,[r4]
+ 225 0096 002B     	 cmp r3,#0
+ 226 0098 00D0     	 beq .L35
+ 227 009a 1C60     	 str r4,[r3]
+ 228              	.L35:
+ 229 009c FFF7FEFF 	 bl vPortEnterCritical
+ 230 00a0 2B4B     	 ldr r3,.L57
+ 231 00a2 2C4D     	 ldr r5,.L57+4
+ 232 00a4 1A68     	 ldr r2,[r3]
+ 233 00a6 0132     	 add r2,r2,#1
+ 234 00a8 1A60     	 str r2,[r3]
+ 235 00aa 2E68     	 ldr r6,[r5]
+ 236 00ac 002E     	 cmp r6,#0
+ 237 00ae 20D1     	 bne .L36
+ 238 00b0 2C60     	 str r4,[r5]
+ 239 00b2 1B68     	 ldr r3,[r3]
+ 240 00b4 012B     	 cmp r3,#1
+ 241 00b6 26D1     	 bne .L38
+ 242              	.L37:
+ 243 00b8 274B     	 ldr r3,.L57+8
+ 244 00ba 9819     	 add r0,r3,r6
+ 245 00bc 1436     	 add r6,r6,#20
+ 246 00be FFF7FEFF 	 bl vListInitialise
+ 247 00c2 642E     	 cmp r6,#100
+ 248 00c4 F8D1     	 bne .L37
+ 249 00c6 254E     	 ldr r6,.L57+12
+ 250 00c8 301C     	 mov r0,r6
+ 251 00ca FFF7FEFF 	 bl vListInitialise
+ 252 00ce 244F     	 ldr r7,.L57+16
+ 253 00d0 381C     	 mov r0,r7
+ 254 00d2 FFF7FEFF 	 bl vListInitialise
+ 255 00d6 2348     	 ldr r0,.L57+20
+ 256 00d8 FFF7FEFF 	 bl vListInitialise
+ 257 00dc 2248     	 ldr r0,.L57+24
+ 258 00de FFF7FEFF 	 bl vListInitialise
+ 259 00e2 2248     	 ldr r0,.L57+28
+ 260 00e4 FFF7FEFF 	 bl vListInitialise
+ 261 00e8 214B     	 ldr r3,.L57+32
+ 262 00ea 1E60     	 str r6,[r3]
+ 263 00ec 214B     	 ldr r3,.L57+36
+ 264 00ee 1F60     	 str r7,[r3]
+ 265 00f0 09E0     	 b .L38
+ 266              	.L36:
+ 267 00f2 214B     	 ldr r3,.L57+40
+ 268 00f4 1B68     	 ldr r3,[r3]
+ 269 00f6 002B     	 cmp r3,#0
+ 270 00f8 05D1     	 bne .L38
+ 271 00fa 2B68     	 ldr r3,[r5]
+ 272 00fc E26A     	 ldr r2,[r4,#44]
+ 273 00fe DB6A     	 ldr r3,[r3,#44]
+ 274 0100 9342     	 cmp r3,r2
+ 275 0102 00D8     	 bhi .L38
+ 276 0104 2C60     	 str r4,[r5]
+ 277              	.L38:
+ 278 0106 1D4A     	 ldr r2,.L57+44
+ 279 0108 E06A     	 ldr r0,[r4,#44]
+ 280 010a 1368     	 ldr r3,[r2]
+ 281 010c 0133     	 add r3,r3,#1
+ 282 010e 1360     	 str r3,[r2]
+ 283 0110 1B4B     	 ldr r3,.L57+48
+ 284 0112 1A68     	 ldr r2,[r3]
+ 285 0114 9042     	 cmp r0,r2
+ 286 0116 00D9     	 bls .L40
+ 287 0118 1860     	 str r0,[r3]
+ 288              	.L40:
+ 289 011a 1423     	 mov r3,#20
+ 290 011c 5843     	 mul r0,r3
+ 291 011e 0E4B     	 ldr r3,.L57+8
+ 292 0120 0099     	 ldr r1,[sp]
+ 293 0122 1818     	 add r0,r3,r0
+ 294 0124 FFF7FEFF 	 bl vListInsertEnd
+ 295 0128 FFF7FEFF 	 bl vPortExitCritical
+ 296 012c 124B     	 ldr r3,.L57+40
+ 297 012e 0126     	 mov r6,#1
+ 298 0130 1B68     	 ldr r3,[r3]
+ 299 0132 002B     	 cmp r3,#0
+ 300 0134 09D0     	 beq .L51
+ 301 0136 2B68     	 ldr r3,[r5]
+ 302 0138 DA6A     	 ldr r2,[r3,#44]
+ 303 013a E36A     	 ldr r3,[r4,#44]
+ 304 013c 9A42     	 cmp r2,r3
+ 305 013e 04D2     	 bcs .L51
+ 306 0140 FFF7FEFF 	 bl vPortYield
+ 307 0144 01E0     	 b .L51
+ 308              	.L30:
+ 309 0146 0126     	 mov r6,#1
+ 310 0148 7642     	 neg r6,r6
+ 311              	.L51:
+ 312 014a 301C     	 mov r0,r6
+ 313 014c 05B0     	 add sp,sp,#20
+ 314              	 
+ 315 014e F0BD     	 pop {r4,r5,r6,r7,pc}
+ 316              	.L58:
+ 317              	 .align 2
+ 318              	.L57:
+ 319 0150 00000000 	 .word .LANCHOR7
+ 320 0154 00000000 	 .word .LANCHOR5
+ 321 0158 00000000 	 .word .LANCHOR8
+ 322 015c 00000000 	 .word .LANCHOR9
+ 323 0160 00000000 	 .word .LANCHOR10
+ 324 0164 00000000 	 .word .LANCHOR1
+ 325 0168 00000000 	 .word .LANCHOR11
+ 326 016c 00000000 	 .word .LANCHOR0
+ 327 0170 00000000 	 .word .LANCHOR2
+ 328 0174 00000000 	 .word .LANCHOR6
+ 329 0178 00000000 	 .word .LANCHOR12
+ 330 017c 00000000 	 .word .LANCHOR13
+ 331 0180 00000000 	 .word .LANCHOR14
+ 333              	 .section .text.vTaskDelete,"ax",%progbits
+ 334              	 .align 1
+ 335              	 .global vTaskDelete
+ 336              	 .code 16
+ 337              	 .thumb_func
+ 339              	vTaskDelete:
+ 340 0000 70B5     	 push {r4,r5,r6,lr}
+ 341 0002 041C     	 mov r4,r0
+ 342 0004 FFF7FEFF 	 bl vPortEnterCritical
+ 343 0008 1E4D     	 ldr r5,.L73
+ 344 000a 002C     	 cmp r4,#0
+ 345 000c 00D1     	 bne .L60
+ 346 000e 2C68     	 ldr r4,[r5]
+ 347              	.L60:
+ 348 0010 261D     	 add r6,r4,#4
+ 349 0012 301C     	 mov r0,r6
+ 350 0014 FFF7FEFF 	 bl uxListRemove
+ 351 0018 A36A     	 ldr r3,[r4,#40]
+ 352 001a 002B     	 cmp r3,#0
+ 353 001c 03D0     	 beq .L61
+ 354 001e 201C     	 mov r0,r4
+ 355 0020 1830     	 add r0,r0,#24
+ 356 0022 FFF7FEFF 	 bl uxListRemove
+ 357              	.L61:
+ 358 0026 184A     	 ldr r2,.L73+4
+ 359 0028 1368     	 ldr r3,[r2]
+ 360 002a 0133     	 add r3,r3,#1
+ 361 002c 1360     	 str r3,[r2]
+ 362 002e 2B68     	 ldr r3,[r5]
+ 363 0030 9C42     	 cmp r4,r3
+ 364 0032 08D1     	 bne .L62
+ 365 0034 1548     	 ldr r0,.L73+8
+ 366 0036 311C     	 mov r1,r6
+ 367 0038 FFF7FEFF 	 bl vListInsertEnd
+ 368 003c 144A     	 ldr r2,.L73+12
+ 369 003e 1368     	 ldr r3,[r2]
+ 370 0040 0133     	 add r3,r3,#1
+ 371 0042 1360     	 str r3,[r2]
+ 372 0044 0BE0     	 b .L63
+ 373              	.L62:
+ 374 0046 134A     	 ldr r2,.L73+16
+ 375 0048 206B     	 ldr r0,[r4,#48]
+ 376 004a 1368     	 ldr r3,[r2]
+ 377 004c 013B     	 sub r3,r3,#1
+ 378 004e 1360     	 str r3,[r2]
+ 379 0050 FFF7FEFF 	 bl vPortFree
+ 380 0054 201C     	 mov r0,r4
+ 381 0056 FFF7FEFF 	 bl vPortFree
+ 382 005a FFF7FEFF 	 bl prvResetNextTaskUnblockTime
+ 383              	.L63:
+ 384 005e FFF7FEFF 	 bl vPortExitCritical
+ 385 0062 0D4B     	 ldr r3,.L73+20
+ 386 0064 1B68     	 ldr r3,[r3]
+ 387 0066 002B     	 cmp r3,#0
+ 388 0068 0AD0     	 beq .L59
+ 389 006a 2B68     	 ldr r3,[r5]
+ 390 006c 9C42     	 cmp r4,r3
+ 391 006e 07D1     	 bne .L59
+ 392 0070 0A4B     	 ldr r3,.L73+24
+ 393 0072 1B68     	 ldr r3,[r3]
+ 394 0074 002B     	 cmp r3,#0
+ 395 0076 01D0     	 beq .L65
+ 396              	
+ 397 0078 72B6     	 cpsid i
+ 398              	
+ 399              	 .code 16
+ 400              	.L66:
+ 401 007a FEE7     	 b .L66
+ 402              	.L65:
+ 403 007c FFF7FEFF 	 bl vPortYield
+ 404              	.L59:
+ 405              	 
+ 406 0080 70BD     	 pop {r4,r5,r6,pc}
+ 407              	.L74:
+ 408 0082 C046     	 .align 2
+ 409              	.L73:
+ 410 0084 00000000 	 .word .LANCHOR5
+ 411 0088 00000000 	 .word .LANCHOR13
+ 412 008c 00000000 	 .word .LANCHOR11
+ 413 0090 00000000 	 .word .LANCHOR15
+ 414 0094 00000000 	 .word .LANCHOR7
+ 415 0098 00000000 	 .word .LANCHOR12
+ 416 009c 00000000 	 .word .LANCHOR16
+ 418              	 .section .text.eTaskGetState,"ax",%progbits
+ 419              	 .align 1
+ 420              	 .global eTaskGetState
+ 421              	 .code 16
+ 422              	 .thumb_func
+ 424              	eTaskGetState:
+ 425 0000 38B5     	 push {r3,r4,r5,lr}
+ 426 0002 0028     	 cmp r0,#0
+ 427 0004 01D1     	 bne .L76
+ 428              	
+ 429 0006 72B6     	 cpsid i
+ 430              	
+ 431              	 .code 16
+ 432              	.L77:
+ 433 0008 FEE7     	 b .L77
+ 434              	.L76:
+ 435 000a 134B     	 ldr r3,.L86
+ 436 000c 1A68     	 ldr r2,[r3]
+ 437 000e 0023     	 mov r3,#0
+ 438 0010 9042     	 cmp r0,r2
+ 439 0012 1ED0     	 beq .L78
+ 440 0014 041C     	 mov r4,r0
+ 441 0016 FFF7FEFF 	 bl vPortEnterCritical
+ 442 001a 6569     	 ldr r5,[r4,#20]
+ 443 001c FFF7FEFF 	 bl vPortExitCritical
+ 444 0020 0E4B     	 ldr r3,.L86+4
+ 445 0022 1A68     	 ldr r2,[r3]
+ 446 0024 0223     	 mov r3,#2
+ 447 0026 9542     	 cmp r5,r2
+ 448 0028 13D0     	 beq .L78
+ 449 002a 0D4B     	 ldr r3,.L86+8
+ 450 002c 1A68     	 ldr r2,[r3]
+ 451 002e 0223     	 mov r3,#2
+ 452 0030 9542     	 cmp r5,r2
+ 453 0032 0ED0     	 beq .L78
+ 454 0034 0B4B     	 ldr r3,.L86+12
+ 455 0036 9D42     	 cmp r5,r3
+ 456 0038 04D1     	 bne .L79
+ 457 003a A36A     	 ldr r3,[r4,#40]
+ 458 003c 5842     	 neg r0,r3
+ 459 003e 4341     	 adc r3,r3,r0
+ 460 0040 0233     	 add r3,r3,#2
+ 461 0042 06E0     	 b .L78
+ 462              	.L79:
+ 463 0044 084A     	 ldr r2,.L86+16
+ 464 0046 0423     	 mov r3,#4
+ 465 0048 9542     	 cmp r5,r2
+ 466 004a 02D0     	 beq .L78
+ 467 004c 002D     	 cmp r5,#0
+ 468 004e 00D0     	 beq .L78
+ 469 0050 033B     	 sub r3,r3,#3
+ 470              	.L78:
+ 471 0052 181C     	 mov r0,r3
+ 472              	 
+ 473 0054 38BD     	 pop {r3,r4,r5,pc}
+ 474              	.L87:
+ 475 0056 C046     	 .align 2
+ 476              	.L86:
+ 477 0058 00000000 	 .word .LANCHOR5
+ 478 005c 00000000 	 .word .LANCHOR2
+ 479 0060 00000000 	 .word .LANCHOR6
+ 480 0064 00000000 	 .word .LANCHOR0
+ 481 0068 00000000 	 .word .LANCHOR11
+ 483              	 .section .text.uxTaskPriorityGet,"ax",%progbits
+ 484              	 .align 1
+ 485              	 .global uxTaskPriorityGet
+ 486              	 .code 16
+ 487              	 .thumb_func
+ 489              	uxTaskPriorityGet:
+ 490 0000 10B5     	 push {r4,lr}
+ 491 0002 041C     	 mov r4,r0
+ 492 0004 FFF7FEFF 	 bl vPortEnterCritical
+ 493 0008 002C     	 cmp r4,#0
+ 494 000a 01D1     	 bne .L89
+ 495 000c 034B     	 ldr r3,.L90
+ 496 000e 1C68     	 ldr r4,[r3]
+ 497              	.L89:
+ 498 0010 E46A     	 ldr r4,[r4,#44]
+ 499              	 
+ 500 0012 FFF7FEFF 	 bl vPortExitCritical
+ 501 0016 201C     	 mov r0,r4
+ 502 0018 10BD     	 pop {r4,pc}
+ 503              	.L91:
+ 504 001a C046     	 .align 2
+ 505              	.L90:
+ 506 001c 00000000 	 .word .LANCHOR5
+ 508              	 .section .text.uxTaskPriorityGetFromISR,"ax",%progbits
+ 509              	 .align 1
+ 510              	 .global uxTaskPriorityGetFromISR
+ 511              	 .code 16
+ 512              	 .thumb_func
+ 514              	uxTaskPriorityGetFromISR:
+ 515 0000 10B5     	 push {r4,lr}
+ 516 0002 041C     	 mov r4,r0
+ 517 0004 FFF7FEFF 	 bl ulSetInterruptMaskFromISR
+ 518 0008 002C     	 cmp r4,#0
+ 519 000a 01D1     	 bne .L93
+ 520 000c 034B     	 ldr r3,.L94
+ 521 000e 1C68     	 ldr r4,[r3]
+ 522              	.L93:
+ 523 0010 E46A     	 ldr r4,[r4,#44]
+ 524              	 
+ 525 0012 FFF7FEFF 	 bl vClearInterruptMaskFromISR
+ 526 0016 201C     	 mov r0,r4
+ 527 0018 10BD     	 pop {r4,pc}
+ 528              	.L95:
+ 529 001a C046     	 .align 2
+ 530              	.L94:
+ 531 001c 00000000 	 .word .LANCHOR5
+ 533              	 .section .text.vTaskPrioritySet,"ax",%progbits
+ 534              	 .align 1
+ 535              	 .global vTaskPrioritySet
+ 536              	 .code 16
+ 537              	 .thumb_func
+ 539              	vTaskPrioritySet:
+ 540 0000 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+ 541 0002 041C     	 mov r4,r0
+ 542 0004 0D1E     	 sub r5,r1,#0
+ 543 0006 042D     	 cmp r5,#4
+ 544 0008 01D9     	 bls .L97
+ 545              	
+ 546 000a 72B6     	 cpsid i
+ 547              	
+ 548              	 .code 16
+ 549              	.L98:
+ 550 000c FEE7     	 b .L98
+ 551              	.L97:
+ 552 000e FFF7FEFF 	 bl vPortEnterCritical
+ 553 0012 002C     	 cmp r4,#0
+ 554 0014 01D1     	 bne .L99
+ 555 0016 204B     	 ldr r3,.L116
+ 556 0018 1C68     	 ldr r4,[r3]
+ 557              	.L99:
+ 558 001a E26B     	 ldr r2,[r4,#60]
+ 559 001c AA42     	 cmp r2,r5
+ 560 001e 38D0     	 beq .L101
+ 561 0020 1D4B     	 ldr r3,.L116
+ 562 0022 9542     	 cmp r5,r2
+ 563 0024 09D9     	 bls .L102
+ 564 0026 0021     	 mov r1,#0
+ 565 0028 1868     	 ldr r0,[r3]
+ 566 002a 0E1C     	 mov r6,r1
+ 567 002c 8442     	 cmp r4,r0
+ 568 002e 09D0     	 beq .L103
+ 569 0030 1B68     	 ldr r3,[r3]
+ 570 0032 DB6A     	 ldr r3,[r3,#44]
+ 571 0034 9D42     	 cmp r5,r3
+ 572 0036 4E41     	 adc r6,r6,r1
+ 573 0038 04E0     	 b .L103
+ 574              	.L102:
+ 575 003a 1E68     	 ldr r6,[r3]
+ 576 003c A61B     	 sub r6,r4,r6
+ 577 003e 7142     	 neg r1,r6
+ 578 0040 7141     	 adc r1,r1,r6
+ 579 0042 0E1C     	 mov r6,r1
+ 580              	.L103:
+ 581 0044 E16A     	 ldr r1,[r4,#44]
+ 582 0046 8A42     	 cmp r2,r1
+ 583 0048 00D1     	 bne .L104
+ 584 004a E562     	 str r5,[r4,#44]
+ 585              	.L104:
+ 586 004c A369     	 ldr r3,[r4,#24]
+ 587 004e E563     	 str r5,[r4,#60]
+ 588 0050 002B     	 cmp r3,#0
+ 589 0052 02DB     	 blt .L105
+ 590 0054 0522     	 mov r2,#5
+ 591 0056 551B     	 sub r5,r2,r5
+ 592 0058 A561     	 str r5,[r4,#24]
+ 593              	.L105:
+ 594 005a 1423     	 mov r3,#20
+ 595 005c 4B43     	 mul r3,r1
+ 596 005e 0F48     	 ldr r0,.L116+4
+ 597 0060 6269     	 ldr r2,[r4,#20]
+ 598 0062 C318     	 add r3,r0,r3
+ 599 0064 071C     	 mov r7,r0
+ 600 0066 9A42     	 cmp r2,r3
+ 601 0068 0FD1     	 bne .L107
+ 602 006a 251D     	 add r5,r4,#4
+ 603 006c 281C     	 mov r0,r5
+ 604 006e FFF7FEFF 	 bl uxListRemove
+ 605 0072 0B4B     	 ldr r3,.L116+8
+ 606 0074 E06A     	 ldr r0,[r4,#44]
+ 607 0076 1A68     	 ldr r2,[r3]
+ 608 0078 9042     	 cmp r0,r2
+ 609 007a 00D9     	 bls .L110
+ 610 007c 1860     	 str r0,[r3]
+ 611              	.L110:
+ 612 007e 1423     	 mov r3,#20
+ 613 0080 5843     	 mul r0,r3
+ 614 0082 291C     	 mov r1,r5
+ 615 0084 3818     	 add r0,r7,r0
+ 616 0086 FFF7FEFF 	 bl vListInsertEnd
+ 617              	.L107:
+ 618 008a 002E     	 cmp r6,#0
+ 619 008c 01D0     	 beq .L101
+ 620 008e FFF7FEFF 	 bl vPortYield
+ 621              	.L101:
+ 622 0092 FFF7FEFF 	 bl vPortExitCritical
+ 623              	 
+ 624 0096 F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 625              	.L117:
+ 626              	 .align 2
+ 627              	.L116:
+ 628 0098 00000000 	 .word .LANCHOR5
+ 629 009c 00000000 	 .word .LANCHOR8
+ 630 00a0 00000000 	 .word .LANCHOR14
+ 632              	 .section .text.vTaskResume,"ax",%progbits
+ 633              	 .align 1
+ 634              	 .global vTaskResume
+ 635              	 .code 16
+ 636              	 .thumb_func
+ 638              	vTaskResume:
+ 639 0000 70B5     	 push {r4,r5,r6,lr}
+ 640 0002 0028     	 cmp r0,#0
+ 641 0004 01D1     	 bne .L119
+ 642              	
+ 643 0006 72B6     	 cpsid i
+ 644              	
+ 645              	 .code 16
+ 646              	.L120:
+ 647 0008 FEE7     	 b .L120
+ 648              	.L119:
+ 649 000a 134D     	 ldr r5,.L126
+ 650 000c 2B68     	 ldr r3,[r5]
+ 651 000e 9842     	 cmp r0,r3
+ 652 0010 21D0     	 beq .L118
+ 653 0012 041C     	 mov r4,r0
+ 654 0014 FFF7FEFF 	 bl vPortEnterCritical
+ 655 0018 201C     	 mov r0,r4
+ 656 001a FFF7FEFF 	 bl prvTaskIsTaskSuspended
+ 657 001e 0028     	 cmp r0,#0
+ 658 0020 17D0     	 beq .L123
+ 659 0022 261D     	 add r6,r4,#4
+ 660 0024 301C     	 mov r0,r6
+ 661 0026 FFF7FEFF 	 bl uxListRemove
+ 662 002a 0C4B     	 ldr r3,.L126+4
+ 663 002c E06A     	 ldr r0,[r4,#44]
+ 664 002e 1A68     	 ldr r2,[r3]
+ 665 0030 9042     	 cmp r0,r2
+ 666 0032 00D9     	 bls .L124
+ 667 0034 1860     	 str r0,[r3]
+ 668              	.L124:
+ 669 0036 1423     	 mov r3,#20
+ 670 0038 5843     	 mul r0,r3
+ 671 003a 094B     	 ldr r3,.L126+8
+ 672 003c 311C     	 mov r1,r6
+ 673 003e 1818     	 add r0,r3,r0
+ 674 0040 FFF7FEFF 	 bl vListInsertEnd
+ 675 0044 2B68     	 ldr r3,[r5]
+ 676 0046 E26A     	 ldr r2,[r4,#44]
+ 677 0048 DB6A     	 ldr r3,[r3,#44]
+ 678 004a 9A42     	 cmp r2,r3
+ 679 004c 01D3     	 bcc .L123
+ 680 004e FFF7FEFF 	 bl vPortYield
+ 681              	.L123:
+ 682 0052 FFF7FEFF 	 bl vPortExitCritical
+ 683              	.L118:
+ 684              	 
+ 685 0056 70BD     	 pop {r4,r5,r6,pc}
+ 686              	.L127:
+ 687              	 .align 2
+ 688              	.L126:
+ 689 0058 00000000 	 .word .LANCHOR5
+ 690 005c 00000000 	 .word .LANCHOR14
+ 691 0060 00000000 	 .word .LANCHOR8
+ 693              	 .section .text.xTaskResumeFromISR,"ax",%progbits
+ 694              	 .align 1
+ 695              	 .global xTaskResumeFromISR
+ 696              	 .code 16
+ 697              	 .thumb_func
+ 699              	xTaskResumeFromISR:
+ 700 0000 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+ 701 0002 0028     	 cmp r0,#0
+ 702 0004 01D1     	 bne .L129
+ 703              	
+ 704 0006 72B6     	 cpsid i
+ 705              	
+ 706              	 .code 16
+ 707              	.L130:
+ 708 0008 FEE7     	 b .L130
+ 709              	.L129:
+ 710 000a 041C     	 mov r4,r0
+ 711 000c FFF7FEFF 	 bl ulSetInterruptMaskFromISR
+ 712 0010 061C     	 mov r6,r0
+ 713 0012 201C     	 mov r0,r4
+ 714 0014 FFF7FEFF 	 bl prvTaskIsTaskSuspended
+ 715 0018 0025     	 mov r5,#0
+ 716 001a A842     	 cmp r0,r5
+ 717 001c 1ED0     	 beq .L131
+ 718 001e 124B     	 ldr r3,.L137
+ 719 0020 1B68     	 ldr r3,[r3]
+ 720 0022 AB42     	 cmp r3,r5
+ 721 0024 15D1     	 bne .L132
+ 722 0026 114B     	 ldr r3,.L137+4
+ 723 0028 E26A     	 ldr r2,[r4,#44]
+ 724 002a 1B68     	 ldr r3,[r3]
+ 725 002c 271D     	 add r7,r4,#4
+ 726 002e DB6A     	 ldr r3,[r3,#44]
+ 727 0030 381C     	 mov r0,r7
+ 728 0032 9A42     	 cmp r2,r3
+ 729 0034 6D41     	 adc r5,r5,r5
+ 730 0036 FFF7FEFF 	 bl uxListRemove
+ 731 003a 0D4B     	 ldr r3,.L137+8
+ 732 003c E06A     	 ldr r0,[r4,#44]
+ 733 003e 1A68     	 ldr r2,[r3]
+ 734 0040 9042     	 cmp r0,r2
+ 735 0042 00D9     	 bls .L133
+ 736 0044 1860     	 str r0,[r3]
+ 737              	.L133:
+ 738 0046 1423     	 mov r3,#20
+ 739 0048 5843     	 mul r0,r3
+ 740 004a 0A4B     	 ldr r3,.L137+12
+ 741 004c 391C     	 mov r1,r7
+ 742 004e 1818     	 add r0,r3,r0
+ 743 0050 02E0     	 b .L136
+ 744              	.L132:
+ 745 0052 211C     	 mov r1,r4
+ 746 0054 0848     	 ldr r0,.L137+16
+ 747 0056 1831     	 add r1,r1,#24
+ 748              	.L136:
+ 749 0058 FFF7FEFF 	 bl vListInsertEnd
+ 750              	.L131:
+ 751 005c 301C     	 mov r0,r6
+ 752 005e FFF7FEFF 	 bl vClearInterruptMaskFromISR
+ 753              	 
+ 754 0062 281C     	 mov r0,r5
+ 755 0064 F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 756              	.L138:
+ 757 0066 C046     	 .align 2
+ 758              	.L137:
+ 759 0068 00000000 	 .word .LANCHOR16
+ 760 006c 00000000 	 .word .LANCHOR5
+ 761 0070 00000000 	 .word .LANCHOR14
+ 762 0074 00000000 	 .word .LANCHOR8
+ 763 0078 00000000 	 .word .LANCHOR1
+ 765              	 .section .text.vTaskStartScheduler,"ax",%progbits
+ 766              	 .align 1
+ 767              	 .global vTaskStartScheduler
+ 768              	 .code 16
+ 769              	 .thumb_func
+ 771              	vTaskStartScheduler:
+ 772 0000 13B5     	 push {r0,r1,r4,lr}
+ 773 0002 0024     	 mov r4,#0
+ 774 0004 0D4B     	 ldr r3,.L143
+ 775 0006 0094     	 str r4,[sp]
+ 776 0008 0193     	 str r3,[sp,#4]
+ 777 000a 0D48     	 ldr r0,.L143+4
+ 778 000c 0D49     	 ldr r1,.L143+8
+ 779 000e 3C22     	 mov r2,#60
+ 780 0010 231C     	 mov r3,r4
+ 781 0012 FFF7FEFF 	 bl xTaskCreate
+ 782 0016 0128     	 cmp r0,#1
+ 783 0018 0BD1     	 bne .L140
+ 784              	
+ 785 001a 72B6     	 cpsid i
+ 786              	
+ 787              	 .code 16
+ 788 001c 0122     	 mov r2,#1
+ 789 001e 0A4B     	 ldr r3,.L143+12
+ 790 0020 5242     	 neg r2,r2
+ 791 0022 1A60     	 str r2,[r3]
+ 792 0024 094B     	 ldr r3,.L143+16
+ 793 0026 1860     	 str r0,[r3]
+ 794 0028 094B     	 ldr r3,.L143+20
+ 795 002a 1C60     	 str r4,[r3]
+ 796 002c FFF7FEFF 	 bl xPortStartScheduler
+ 797 0030 03E0     	 b .L139
+ 798              	.L140:
+ 799 0032 431C     	 add r3,r0,#1
+ 800 0034 01D1     	 bne .L139
+ 801              	
+ 802 0036 72B6     	 cpsid i
+ 803              	
+ 804              	 .code 16
+ 805              	.L142:
+ 806 0038 FEE7     	 b .L142
+ 807              	.L139:
+ 808              	 
+ 809 003a 13BD     	 pop {r0,r1,r4,pc}
+ 810              	.L144:
+ 811              	 .align 2
+ 812              	.L143:
+ 813 003c 00000000 	 .word .LANCHOR17
+ 814 0040 00000000 	 .word prvIdleTask
+ 815 0044 00000000 	 .word .LC51
+ 816 0048 00000000 	 .word .LANCHOR3
+ 817 004c 00000000 	 .word .LANCHOR12
+ 818 0050 00000000 	 .word .LANCHOR4
+ 820              	 .section .text.vTaskEndScheduler,"ax",%progbits
+ 821              	 .align 1
+ 822              	 .global vTaskEndScheduler
+ 823              	 .code 16
+ 824              	 .thumb_func
+ 826              	vTaskEndScheduler:
+ 827 0000 08B5     	 push {r3,lr}
+ 828              	
+ 829 0002 72B6     	 cpsid i
+ 830              	
+ 831              	 .code 16
+ 832 0004 0022     	 mov r2,#0
+ 833 0006 024B     	 ldr r3,.L146
+ 834              	 
+ 835 0008 1A60     	 str r2,[r3]
+ 836 000a FFF7FEFF 	 bl vPortEndScheduler
+ 837 000e 08BD     	 pop {r3,pc}
+ 838              	.L147:
+ 839              	 .align 2
+ 840              	.L146:
+ 841 0010 00000000 	 .word .LANCHOR12
+ 843              	 .section .text.vTaskSuspendAll,"ax",%progbits
+ 844              	 .align 1
+ 845              	 .global vTaskSuspendAll
+ 846              	 .code 16
+ 847              	 .thumb_func
+ 849              	vTaskSuspendAll:
+ 850 0000 024A     	 ldr r2,.L149
+ 851              	 
+ 852 0002 1368     	 ldr r3,[r2]
+ 853 0004 0133     	 add r3,r3,#1
+ 854 0006 1360     	 str r3,[r2]
+ 855 0008 7047     	 bx lr
+ 856              	.L150:
+ 857 000a C046     	 .align 2
+ 858              	.L149:
+ 859 000c 00000000 	 .word .LANCHOR16
+ 861              	 .section .text.xTaskGetTickCount,"ax",%progbits
+ 862              	 .align 1
+ 863              	 .global xTaskGetTickCount
+ 864              	 .code 16
+ 865              	 .thumb_func
+ 867              	xTaskGetTickCount:
+ 868 0000 014B     	 ldr r3,.L152
+ 869              	 
+ 870 0002 1868     	 ldr r0,[r3]
+ 871 0004 7047     	 bx lr
+ 872              	.L153:
+ 873 0006 C046     	 .align 2
+ 874              	.L152:
+ 875 0008 00000000 	 .word .LANCHOR4
+ 877              	 .section .text.xTaskGetTickCountFromISR,"ax",%progbits
+ 878              	 .align 1
+ 879              	 .global xTaskGetTickCountFromISR
+ 880              	 .code 16
+ 881              	 .thumb_func
+ 883              	xTaskGetTickCountFromISR:
+ 884 0000 014B     	 ldr r3,.L155
+ 885              	 
+ 886 0002 1868     	 ldr r0,[r3]
+ 887 0004 7047     	 bx lr
+ 888              	.L156:
+ 889 0006 C046     	 .align 2
+ 890              	.L155:
+ 891 0008 00000000 	 .word .LANCHOR4
+ 893              	 .section .text.uxTaskGetNumberOfTasks,"ax",%progbits
+ 894              	 .align 1
+ 895              	 .global uxTaskGetNumberOfTasks
+ 896              	 .code 16
+ 897              	 .thumb_func
+ 899              	uxTaskGetNumberOfTasks:
+ 900 0000 014B     	 ldr r3,.L158
+ 901              	 
+ 902 0002 1868     	 ldr r0,[r3]
+ 903 0004 7047     	 bx lr
+ 904              	.L159:
+ 905 0006 C046     	 .align 2
+ 906              	.L158:
+ 907 0008 00000000 	 .word .LANCHOR7
+ 909              	 .section .text.pcTaskGetName,"ax",%progbits
+ 910              	 .align 1
+ 911              	 .global pcTaskGetName
+ 912              	 .code 16
+ 913              	 .thumb_func
+ 915              	pcTaskGetName:
+ 916 0000 0028     	 cmp r0,#0
+ 917 0002 05D1     	 bne .L161
+ 918 0004 034B     	 ldr r3,.L163
+ 919 0006 1868     	 ldr r0,[r3]
+ 920 0008 0028     	 cmp r0,#0
+ 921 000a 01D1     	 bne .L161
+ 922              	
+ 923 000c 72B6     	 cpsid i
+ 924              	
+ 925              	 .code 16
+ 926              	.L162:
+ 927 000e FEE7     	 b .L162
+ 928              	.L161:
+ 929 0010 3430     	 add r0,r0,#52
+ 930              	 
+ 931 0012 7047     	 bx lr
+ 932              	.L164:
+ 933              	 .align 2
+ 934              	.L163:
+ 935 0014 00000000 	 .word .LANCHOR5
+ 937              	 .section .text.xTaskIncrementTick,"ax",%progbits
+ 938              	 .align 1
+ 939              	 .global xTaskIncrementTick
+ 940              	 .code 16
+ 941              	 .thumb_func
+ 943              	xTaskIncrementTick:
+ 944 0000 344B     	 ldr r3,.L192
+ 945 0002 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 946 0004 1B68     	 ldr r3,[r3]
+ 947 0006 002B     	 cmp r3,#0
+ 948 0008 36D1     	 bne .L166
+ 949 000a 334B     	 ldr r3,.L192+4
+ 950 000c 1D68     	 ldr r5,[r3]
+ 951 000e 0135     	 add r5,r5,#1
+ 952 0010 1D60     	 str r5,[r3]
+ 953 0012 002D     	 cmp r5,#0
+ 954 0014 11D1     	 bne .L167
+ 955 0016 314B     	 ldr r3,.L192+8
+ 956 0018 1A68     	 ldr r2,[r3]
+ 957 001a 1268     	 ldr r2,[r2]
+ 958 001c 002A     	 cmp r2,#0
+ 959 001e 01D0     	 beq .L168
+ 960              	
+ 961 0020 72B6     	 cpsid i
+ 962              	
+ 963              	 .code 16
+ 964              	.L169:
+ 965 0022 FEE7     	 b .L169
+ 966              	.L168:
+ 967 0024 2E4A     	 ldr r2,.L192+12
+ 968 0026 1968     	 ldr r1,[r3]
+ 969 0028 1068     	 ldr r0,[r2]
+ 970 002a 1860     	 str r0,[r3]
+ 971 002c 1160     	 str r1,[r2]
+ 972 002e 2D4A     	 ldr r2,.L192+16
+ 973 0030 1368     	 ldr r3,[r2]
+ 974 0032 0133     	 add r3,r3,#1
+ 975 0034 1360     	 str r3,[r2]
+ 976 0036 FFF7FEFF 	 bl prvResetNextTaskUnblockTime
+ 977              	.L167:
+ 978 003a 2B4F     	 ldr r7,.L192+20
+ 979 003c 0024     	 mov r4,#0
+ 980 003e 3B68     	 ldr r3,[r7]
+ 981 0040 9D42     	 cmp r5,r3
+ 982 0042 0ED3     	 bcc .L171
+ 983              	.L170:
+ 984 0044 254B     	 ldr r3,.L192+8
+ 985 0046 1A68     	 ldr r2,[r3]
+ 986 0048 1268     	 ldr r2,[r2]
+ 987 004a 002A     	 cmp r2,#0
+ 988 004c 02D1     	 bne .L189
+ 989 004e 0123     	 mov r3,#1
+ 990 0050 5B42     	 neg r3,r3
+ 991 0052 05E0     	 b .L191
+ 992              	.L189:
+ 993 0054 1B68     	 ldr r3,[r3]
+ 994 0056 DB68     	 ldr r3,[r3,#12]
+ 995 0058 DE68     	 ldr r6,[r3,#12]
+ 996 005a 7368     	 ldr r3,[r6,#4]
+ 997 005c 9D42     	 cmp r5,r3
+ 998 005e 16D2     	 bcs .L190
+ 999              	.L191:
+ 1000 0060 3B60     	 str r3,[r7]
+ 1001              	.L171:
+ 1002 0062 224B     	 ldr r3,.L192+24
+ 1003 0064 1B68     	 ldr r3,[r3]
+ 1004 0066 DA6A     	 ldr r2,[r3,#44]
+ 1005 0068 1423     	 mov r3,#20
+ 1006 006a 5343     	 mul r3,r2
+ 1007 006c 204A     	 ldr r2,.L192+28
+ 1008 006e D358     	 ldr r3,[r2,r3]
+ 1009 0070 012B     	 cmp r3,#1
+ 1010 0072 06D9     	 bls .L177
+ 1011 0074 0124     	 mov r4,#1
+ 1012 0076 04E0     	 b .L177
+ 1013              	.L166:
+ 1014 0078 0024     	 mov r4,#0
+ 1015 007a 1E4A     	 ldr r2,.L192+32
+ 1016 007c 1368     	 ldr r3,[r2]
+ 1017 007e 0133     	 add r3,r3,#1
+ 1018 0080 1360     	 str r3,[r2]
+ 1019              	.L177:
+ 1020 0082 1D4B     	 ldr r3,.L192+36
+ 1021 0084 1B68     	 ldr r3,[r3]
+ 1022 0086 002B     	 cmp r3,#0
+ 1023 0088 22D0     	 beq .L184
+ 1024 008a 0124     	 mov r4,#1
+ 1025 008c 20E0     	 b .L184
+ 1026              	.L190:
+ 1027 008e 331D     	 add r3,r6,#4
+ 1028 0090 181C     	 mov r0,r3
+ 1029 0092 0193     	 str r3,[sp,#4]
+ 1030 0094 FFF7FEFF 	 bl uxListRemove
+ 1031 0098 B36A     	 ldr r3,[r6,#40]
+ 1032 009a 002B     	 cmp r3,#0
+ 1033 009c 03D0     	 beq .L174
+ 1034 009e 301C     	 mov r0,r6
+ 1035 00a0 1830     	 add r0,r0,#24
+ 1036 00a2 FFF7FEFF 	 bl uxListRemove
+ 1037              	.L174:
+ 1038 00a6 154B     	 ldr r3,.L192+40
+ 1039 00a8 F06A     	 ldr r0,[r6,#44]
+ 1040 00aa 1A68     	 ldr r2,[r3]
+ 1041 00ac 9042     	 cmp r0,r2
+ 1042 00ae 00D9     	 bls .L175
+ 1043 00b0 1860     	 str r0,[r3]
+ 1044              	.L175:
+ 1045 00b2 1423     	 mov r3,#20
+ 1046 00b4 5843     	 mul r0,r3
+ 1047 00b6 0E4B     	 ldr r3,.L192+28
+ 1048 00b8 0199     	 ldr r1,[sp,#4]
+ 1049 00ba 1818     	 add r0,r3,r0
+ 1050 00bc FFF7FEFF 	 bl vListInsertEnd
+ 1051 00c0 0A4B     	 ldr r3,.L192+24
+ 1052 00c2 F26A     	 ldr r2,[r6,#44]
+ 1053 00c4 1B68     	 ldr r3,[r3]
+ 1054 00c6 DB6A     	 ldr r3,[r3,#44]
+ 1055 00c8 9A42     	 cmp r2,r3
+ 1056 00ca BBD3     	 bcc .L170
+ 1057 00cc 0124     	 mov r4,#1
+ 1058 00ce B9E7     	 b .L170
+ 1059              	.L184:
+ 1060 00d0 201C     	 mov r0,r4
+ 1061              	 
+ 1062 00d2 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 1063              	.L193:
+ 1064              	 .align 2
+ 1065              	.L192:
+ 1066 00d4 00000000 	 .word .LANCHOR16
+ 1067 00d8 00000000 	 .word .LANCHOR4
+ 1068 00dc 00000000 	 .word .LANCHOR2
+ 1069 00e0 00000000 	 .word .LANCHOR6
+ 1070 00e4 00000000 	 .word .LANCHOR18
+ 1071 00e8 00000000 	 .word .LANCHOR3
+ 1072 00ec 00000000 	 .word .LANCHOR5
+ 1073 00f0 00000000 	 .word .LANCHOR8
+ 1074 00f4 00000000 	 .word .LANCHOR19
+ 1075 00f8 00000000 	 .word .LANCHOR20
+ 1076 00fc 00000000 	 .word .LANCHOR14
+ 1078              	 .section .text.xTaskResumeAll,"ax",%progbits
+ 1079              	 .align 1
+ 1080              	 .global xTaskResumeAll
+ 1081              	 .code 16
+ 1082              	 .thumb_func
+ 1084              	xTaskResumeAll:
+ 1085 0000 38B5     	 push {r3,r4,r5,lr}
+ 1086 0002 2C4C     	 ldr r4,.L222
+ 1087 0004 2368     	 ldr r3,[r4]
+ 1088 0006 002B     	 cmp r3,#0
+ 1089 0008 01D1     	 bne .L195
+ 1090              	
+ 1091 000a 72B6     	 cpsid i
+ 1092              	
+ 1093              	 .code 16
+ 1094              	.L196:
+ 1095 000c FEE7     	 b .L196
+ 1096              	.L195:
+ 1097 000e FFF7FEFF 	 bl vPortEnterCritical
+ 1098 0012 2368     	 ldr r3,[r4]
+ 1099 0014 013B     	 sub r3,r3,#1
+ 1100 0016 2360     	 str r3,[r4]
+ 1101 0018 2468     	 ldr r4,[r4]
+ 1102 001a 002C     	 cmp r4,#0
+ 1103 001c 01D0     	 beq .L197
+ 1104              	.L200:
+ 1105 001e 0024     	 mov r4,#0
+ 1106 0020 43E0     	 b .L198
+ 1107              	.L197:
+ 1108 0022 254B     	 ldr r3,.L222+4
+ 1109 0024 1B68     	 ldr r3,[r3]
+ 1110 0026 002B     	 cmp r3,#0
+ 1111 0028 F9D0     	 beq .L200
+ 1112              	.L199:
+ 1113 002a 244B     	 ldr r3,.L222+8
+ 1114 002c 1A68     	 ldr r2,[r3]
+ 1115 002e 002A     	 cmp r2,#0
+ 1116 0030 20D0     	 beq .L221
+ 1117 0032 DB68     	 ldr r3,[r3,#12]
+ 1118 0034 DC68     	 ldr r4,[r3,#12]
+ 1119 0036 201C     	 mov r0,r4
+ 1120 0038 251D     	 add r5,r4,#4
+ 1121 003a 1830     	 add r0,r0,#24
+ 1122 003c FFF7FEFF 	 bl uxListRemove
+ 1123 0040 281C     	 mov r0,r5
+ 1124 0042 FFF7FEFF 	 bl uxListRemove
+ 1125 0046 1E4B     	 ldr r3,.L222+12
+ 1126 0048 E06A     	 ldr r0,[r4,#44]
+ 1127 004a 1A68     	 ldr r2,[r3]
+ 1128 004c 9042     	 cmp r0,r2
+ 1129 004e 00D9     	 bls .L201
+ 1130 0050 1860     	 str r0,[r3]
+ 1131              	.L201:
+ 1132 0052 1423     	 mov r3,#20
+ 1133 0054 5843     	 mul r0,r3
+ 1134 0056 1B4B     	 ldr r3,.L222+16
+ 1135 0058 291C     	 mov r1,r5
+ 1136 005a 1818     	 add r0,r3,r0
+ 1137 005c FFF7FEFF 	 bl vListInsertEnd
+ 1138 0060 194B     	 ldr r3,.L222+20
+ 1139 0062 E26A     	 ldr r2,[r4,#44]
+ 1140 0064 1B68     	 ldr r3,[r3]
+ 1141 0066 DB6A     	 ldr r3,[r3,#44]
+ 1142 0068 9A42     	 cmp r2,r3
+ 1143 006a DED3     	 bcc .L199
+ 1144 006c 0122     	 mov r2,#1
+ 1145 006e 174B     	 ldr r3,.L222+24
+ 1146 0070 1A60     	 str r2,[r3]
+ 1147 0072 DAE7     	 b .L199
+ 1148              	.L221:
+ 1149 0074 002C     	 cmp r4,#0
+ 1150 0076 01D0     	 beq .L204
+ 1151 0078 FFF7FEFF 	 bl prvResetNextTaskUnblockTime
+ 1152              	.L204:
+ 1153 007c 144B     	 ldr r3,.L222+28
+ 1154 007e 1C68     	 ldr r4,[r3]
+ 1155 0080 1D1C     	 mov r5,r3
+ 1156 0082 002C     	 cmp r4,#0
+ 1157 0084 0AD0     	 beq .L205
+ 1158              	.L207:
+ 1159 0086 FFF7FEFF 	 bl xTaskIncrementTick
+ 1160 008a 0028     	 cmp r0,#0
+ 1161 008c 02D0     	 beq .L206
+ 1162 008e 0122     	 mov r2,#1
+ 1163 0090 0E4B     	 ldr r3,.L222+24
+ 1164 0092 1A60     	 str r2,[r3]
+ 1165              	.L206:
+ 1166 0094 013C     	 sub r4,r4,#1
+ 1167 0096 002C     	 cmp r4,#0
+ 1168 0098 F5D1     	 bne .L207
+ 1169 009a 2C60     	 str r4,[r5]
+ 1170              	.L205:
+ 1171 009c 0B4B     	 ldr r3,.L222+24
+ 1172 009e 1B68     	 ldr r3,[r3]
+ 1173 00a0 002B     	 cmp r3,#0
+ 1174 00a2 BCD0     	 beq .L200
+ 1175 00a4 FFF7FEFF 	 bl vPortYield
+ 1176 00a8 0124     	 mov r4,#1
+ 1177              	.L198:
+ 1178 00aa FFF7FEFF 	 bl vPortExitCritical
+ 1179              	 
+ 1180 00ae 201C     	 mov r0,r4
+ 1181 00b0 38BD     	 pop {r3,r4,r5,pc}
+ 1182              	.L223:
+ 1183 00b2 C046     	 .align 2
+ 1184              	.L222:
+ 1185 00b4 00000000 	 .word .LANCHOR16
+ 1186 00b8 00000000 	 .word .LANCHOR7
+ 1187 00bc 00000000 	 .word .LANCHOR1
+ 1188 00c0 00000000 	 .word .LANCHOR14
+ 1189 00c4 00000000 	 .word .LANCHOR8
+ 1190 00c8 00000000 	 .word .LANCHOR5
+ 1191 00cc 00000000 	 .word .LANCHOR20
+ 1192 00d0 00000000 	 .word .LANCHOR19
+ 1194              	 .section .text.vTaskDelayUntil,"ax",%progbits
+ 1195              	 .align 1
+ 1196              	 .global vTaskDelayUntil
+ 1197              	 .code 16
+ 1198              	 .thumb_func
+ 1200              	vTaskDelayUntil:
+ 1201 0000 70B5     	 push {r4,r5,r6,lr}
+ 1202 0002 0028     	 cmp r0,#0
+ 1203 0004 01D1     	 bne .L225
+ 1204              	
+ 1205 0006 72B6     	 cpsid i
+ 1206              	
+ 1207              	 .code 16
+ 1208              	.L226:
+ 1209 0008 FEE7     	 b .L226
+ 1210              	.L225:
+ 1211 000a 0029     	 cmp r1,#0
+ 1212 000c 01D1     	 bne .L227
+ 1213              	
+ 1214 000e 72B6     	 cpsid i
+ 1215              	
+ 1216              	 .code 16
+ 1217              	.L228:
+ 1218 0010 FEE7     	 b .L228
+ 1219              	.L227:
+ 1220 0012 144B     	 ldr r3,.L241
+ 1221 0014 1E68     	 ldr r6,[r3]
+ 1222 0016 002E     	 cmp r6,#0
+ 1223 0018 01D0     	 beq .L229
+ 1224              	
+ 1225 001a 72B6     	 cpsid i
+ 1226              	
+ 1227              	 .code 16
+ 1228              	.L230:
+ 1229 001c FEE7     	 b .L230
+ 1230              	.L229:
+ 1231 001e 041C     	 mov r4,r0
+ 1232 0020 0D1C     	 mov r5,r1
+ 1233 0022 FFF7FEFF 	 bl vTaskSuspendAll
+ 1234 0026 104B     	 ldr r3,.L241+4
+ 1235 0028 2268     	 ldr r2,[r4]
+ 1236 002a 1868     	 ldr r0,[r3]
+ 1237 002c 5119     	 add r1,r2,r5
+ 1238 002e 9042     	 cmp r0,r2
+ 1239 0030 03D2     	 bcs .L231
+ 1240 0032 331C     	 mov r3,r6
+ 1241 0034 9142     	 cmp r1,r2
+ 1242 0036 06D2     	 bcs .L232
+ 1243 0038 02E0     	 b .L240
+ 1244              	.L231:
+ 1245 003a 0123     	 mov r3,#1
+ 1246 003c 9142     	 cmp r1,r2
+ 1247 003e 02D3     	 bcc .L232
+ 1248              	.L240:
+ 1249 0040 8842     	 cmp r0,r1
+ 1250 0042 9B41     	 sbc r3,r3,r3
+ 1251 0044 5B42     	 neg r3,r3
+ 1252              	.L232:
+ 1253 0046 2160     	 str r1,[r4]
+ 1254 0048 002B     	 cmp r3,#0
+ 1255 004a 03D0     	 beq .L233
+ 1256 004c 081A     	 sub r0,r1,r0
+ 1257 004e 0021     	 mov r1,#0
+ 1258 0050 FFF7FEFF 	 bl prvAddCurrentTaskToDelayedList
+ 1259              	.L233:
+ 1260 0054 FFF7FEFF 	 bl xTaskResumeAll
+ 1261 0058 0028     	 cmp r0,#0
+ 1262 005a 01D1     	 bne .L224
+ 1263 005c FFF7FEFF 	 bl vPortYield
+ 1264              	.L224:
+ 1265              	 
+ 1266 0060 70BD     	 pop {r4,r5,r6,pc}
+ 1267              	.L242:
+ 1268 0062 C046     	 .align 2
+ 1269              	.L241:
+ 1270 0064 00000000 	 .word .LANCHOR16
+ 1271 0068 00000000 	 .word .LANCHOR4
+ 1273              	 .section .text.vTaskDelay,"ax",%progbits
+ 1274              	 .align 1
+ 1275              	 .global vTaskDelay
+ 1276              	 .code 16
+ 1277              	 .thumb_func
+ 1279              	vTaskDelay:
+ 1280 0000 38B5     	 push {r3,r4,r5,lr}
+ 1281 0002 051E     	 sub r5,r0,#0
+ 1282 0004 02D1     	 bne .L244
+ 1283              	.L248:
+ 1284 0006 FFF7FEFF 	 bl vPortYield
+ 1285 000a 0FE0     	 b .L243
+ 1286              	.L244:
+ 1287 000c 084B     	 ldr r3,.L252
+ 1288 000e 1C68     	 ldr r4,[r3]
+ 1289 0010 002C     	 cmp r4,#0
+ 1290 0012 01D0     	 beq .L246
+ 1291              	
+ 1292 0014 72B6     	 cpsid i
+ 1293              	
+ 1294              	 .code 16
+ 1295              	.L247:
+ 1296 0016 FEE7     	 b .L247
+ 1297              	.L246:
+ 1298 0018 FFF7FEFF 	 bl vTaskSuspendAll
+ 1299 001c 281C     	 mov r0,r5
+ 1300 001e 211C     	 mov r1,r4
+ 1301 0020 FFF7FEFF 	 bl prvAddCurrentTaskToDelayedList
+ 1302 0024 FFF7FEFF 	 bl xTaskResumeAll
+ 1303 0028 0028     	 cmp r0,#0
+ 1304 002a ECD0     	 beq .L248
+ 1305              	.L243:
+ 1306              	 
+ 1307 002c 38BD     	 pop {r3,r4,r5,pc}
+ 1308              	.L253:
+ 1309 002e C046     	 .align 2
+ 1310              	.L252:
+ 1311 0030 00000000 	 .word .LANCHOR16
+ 1313              	 .section .text.prvIdleTask,"ax",%progbits
+ 1314              	 .align 1
+ 1315              	 .code 16
+ 1316              	 .thumb_func
+ 1318              	prvIdleTask:
+ 1319 0000 70B5     	 push {r4,r5,r6,lr}
+ 1320              	.L256:
+ 1321 0002 154C     	 ldr r4,.L262
+ 1322 0004 2368     	 ldr r3,[r4]
+ 1323 0006 002B     	 cmp r3,#0
+ 1324 0008 1ED0     	 beq .L261
+ 1325 000a FFF7FEFF 	 bl vTaskSuspendAll
+ 1326 000e 134D     	 ldr r5,.L262+4
+ 1327 0010 2E68     	 ldr r6,[r5]
+ 1328 0012 FFF7FEFF 	 bl xTaskResumeAll
+ 1329 0016 002E     	 cmp r6,#0
+ 1330 0018 F3D0     	 beq .L256
+ 1331 001a FFF7FEFF 	 bl vPortEnterCritical
+ 1332 001e EB68     	 ldr r3,[r5,#12]
+ 1333 0020 DD68     	 ldr r5,[r3,#12]
+ 1334 0022 281D     	 add r0,r5,#4
+ 1335 0024 FFF7FEFF 	 bl uxListRemove
+ 1336 0028 0D4A     	 ldr r2,.L262+8
+ 1337 002a 1368     	 ldr r3,[r2]
+ 1338 002c 013B     	 sub r3,r3,#1
+ 1339 002e 1360     	 str r3,[r2]
+ 1340 0030 2368     	 ldr r3,[r4]
+ 1341 0032 013B     	 sub r3,r3,#1
+ 1342 0034 2360     	 str r3,[r4]
+ 1343 0036 FFF7FEFF 	 bl vPortExitCritical
+ 1344 003a 286B     	 ldr r0,[r5,#48]
+ 1345 003c FFF7FEFF 	 bl vPortFree
+ 1346 0040 281C     	 mov r0,r5
+ 1347 0042 FFF7FEFF 	 bl vPortFree
+ 1348 0046 DCE7     	 b .L256
+ 1349              	.L261:
+ 1350 0048 064B     	 ldr r3,.L262+12
+ 1351 004a 1B68     	 ldr r3,[r3]
+ 1352 004c 012B     	 cmp r3,#1
+ 1353 004e D8D9     	 bls .L256
+ 1354 0050 FFF7FEFF 	 bl vPortYield
+ 1355 0054 D5E7     	 b .L256
+ 1356              	.L263:
+ 1357 0056 C046     	 .align 2
+ 1358              	.L262:
+ 1359 0058 00000000 	 .word .LANCHOR15
+ 1360 005c 00000000 	 .word .LANCHOR11
+ 1361 0060 00000000 	 .word .LANCHOR7
+ 1362 0064 00000000 	 .word .LANCHOR8
+ 1364              	 .section .text.vTaskSwitchContext,"ax",%progbits
+ 1365              	 .align 1
+ 1366              	 .global vTaskSwitchContext
+ 1367              	 .code 16
+ 1368              	 .thumb_func
+ 1370              	vTaskSwitchContext:
+ 1371 0000 154B     	 ldr r3,.L273
+ 1372 0002 30B5     	 push {r4,r5,lr}
+ 1373 0004 1A68     	 ldr r2,[r3]
+ 1374 0006 154B     	 ldr r3,.L273+4
+ 1375 0008 002A     	 cmp r2,#0
+ 1376 000a 02D0     	 beq .L265
+ 1377 000c 0122     	 mov r2,#1
+ 1378 000e 1A60     	 str r2,[r3]
+ 1379 0010 20E0     	 b .L264
+ 1380              	.L265:
+ 1381 0012 1348     	 ldr r0,.L273+8
+ 1382 0014 1A60     	 str r2,[r3]
+ 1383 0016 0268     	 ldr r2,[r0]
+ 1384              	.L267:
+ 1385 0018 1423     	 mov r3,#20
+ 1386 001a 5343     	 mul r3,r2
+ 1387 001c 1149     	 ldr r1,.L273+12
+ 1388 001e 5C58     	 ldr r4,[r3,r1]
+ 1389 0020 002C     	 cmp r4,#0
+ 1390 0022 05D1     	 bne .L272
+ 1391 0024 002A     	 cmp r2,#0
+ 1392 0026 01D1     	 bne .L268
+ 1393              	
+ 1394 0028 72B6     	 cpsid i
+ 1395              	
+ 1396              	 .code 16
+ 1397              	.L269:
+ 1398 002a FEE7     	 b .L269
+ 1399              	.L268:
+ 1400 002c 013A     	 sub r2,r2,#1
+ 1401 002e F3E7     	 b .L267
+ 1402              	.L272:
+ 1403 0030 CC18     	 add r4,r1,r3
+ 1404 0032 6568     	 ldr r5,[r4,#4]
+ 1405 0034 0833     	 add r3,r3,#8
+ 1406 0036 6D68     	 ldr r5,[r5,#4]
+ 1407 0038 CB18     	 add r3,r1,r3
+ 1408 003a 6560     	 str r5,[r4,#4]
+ 1409 003c 9D42     	 cmp r5,r3
+ 1410 003e 01D1     	 bne .L271
+ 1411 0040 6B68     	 ldr r3,[r5,#4]
+ 1412 0042 6360     	 str r3,[r4,#4]
+ 1413              	.L271:
+ 1414 0044 1423     	 mov r3,#20
+ 1415 0046 5343     	 mul r3,r2
+ 1416 0048 C918     	 add r1,r1,r3
+ 1417 004a 4B68     	 ldr r3,[r1,#4]
+ 1418 004c D968     	 ldr r1,[r3,#12]
+ 1419 004e 064B     	 ldr r3,.L273+16
+ 1420 0050 1960     	 str r1,[r3]
+ 1421 0052 0260     	 str r2,[r0]
+ 1422              	.L264:
+ 1423              	 
+ 1424 0054 30BD     	 pop {r4,r5,pc}
+ 1425              	.L274:
+ 1426 0056 C046     	 .align 2
+ 1427              	.L273:
+ 1428 0058 00000000 	 .word .LANCHOR16
+ 1429 005c 00000000 	 .word .LANCHOR20
+ 1430 0060 00000000 	 .word .LANCHOR14
+ 1431 0064 00000000 	 .word .LANCHOR8
+ 1432 0068 00000000 	 .word .LANCHOR5
+ 1434              	 .section .text.vTaskSuspend,"ax",%progbits
+ 1435              	 .align 1
+ 1436              	 .global vTaskSuspend
+ 1437              	 .code 16
+ 1438              	 .thumb_func
+ 1440              	vTaskSuspend:
+ 1441 0000 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+ 1442 0002 041C     	 mov r4,r0
+ 1443 0004 FFF7FEFF 	 bl vPortEnterCritical
+ 1444 0008 1C4E     	 ldr r6,.L290
+ 1445 000a 002C     	 cmp r4,#0
+ 1446 000c 00D1     	 bne .L276
+ 1447 000e 3468     	 ldr r4,[r6]
+ 1448              	.L276:
+ 1449 0010 271D     	 add r7,r4,#4
+ 1450 0012 381C     	 mov r0,r7
+ 1451 0014 FFF7FEFF 	 bl uxListRemove
+ 1452 0018 A36A     	 ldr r3,[r4,#40]
+ 1453 001a 002B     	 cmp r3,#0
+ 1454 001c 03D0     	 beq .L277
+ 1455 001e 201C     	 mov r0,r4
+ 1456 0020 1830     	 add r0,r0,#24
+ 1457 0022 FFF7FEFF 	 bl uxListRemove
+ 1458              	.L277:
+ 1459 0026 164D     	 ldr r5,.L290+4
+ 1460 0028 391C     	 mov r1,r7
+ 1461 002a 281C     	 mov r0,r5
+ 1462 002c FFF7FEFF 	 bl vListInsertEnd
+ 1463 0030 FFF7FEFF 	 bl vPortExitCritical
+ 1464 0034 134B     	 ldr r3,.L290+8
+ 1465 0036 1A68     	 ldr r2,[r3]
+ 1466 0038 1F1C     	 mov r7,r3
+ 1467 003a 002A     	 cmp r2,#0
+ 1468 003c 05D0     	 beq .L278
+ 1469 003e FFF7FEFF 	 bl vPortEnterCritical
+ 1470 0042 FFF7FEFF 	 bl prvResetNextTaskUnblockTime
+ 1471 0046 FFF7FEFF 	 bl vPortExitCritical
+ 1472              	.L278:
+ 1473 004a 3368     	 ldr r3,[r6]
+ 1474 004c 9C42     	 cmp r4,r3
+ 1475 004e 14D1     	 bne .L275
+ 1476 0050 3B68     	 ldr r3,[r7]
+ 1477 0052 002B     	 cmp r3,#0
+ 1478 0054 08D0     	 beq .L280
+ 1479 0056 0C4B     	 ldr r3,.L290+12
+ 1480 0058 1B68     	 ldr r3,[r3]
+ 1481 005a 002B     	 cmp r3,#0
+ 1482 005c 01D0     	 beq .L281
+ 1483              	
+ 1484 005e 72B6     	 cpsid i
+ 1485              	
+ 1486              	 .code 16
+ 1487              	.L282:
+ 1488 0060 FEE7     	 b .L282
+ 1489              	.L281:
+ 1490 0062 FFF7FEFF 	 bl vPortYield
+ 1491 0066 08E0     	 b .L275
+ 1492              	.L280:
+ 1493 0068 084A     	 ldr r2,.L290+16
+ 1494 006a 2968     	 ldr r1,[r5]
+ 1495 006c 1268     	 ldr r2,[r2]
+ 1496 006e 9142     	 cmp r1,r2
+ 1497 0070 01D1     	 bne .L283
+ 1498 0072 3360     	 str r3,[r6]
+ 1499 0074 01E0     	 b .L275
+ 1500              	.L283:
+ 1501 0076 FFF7FEFF 	 bl vTaskSwitchContext
+ 1502              	.L275:
+ 1503              	 
+ 1504 007a F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 1505              	.L291:
+ 1506              	 .align 2
+ 1507              	.L290:
+ 1508 007c 00000000 	 .word .LANCHOR5
+ 1509 0080 00000000 	 .word .LANCHOR0
+ 1510 0084 00000000 	 .word .LANCHOR12
+ 1511 0088 00000000 	 .word .LANCHOR16
+ 1512 008c 00000000 	 .word .LANCHOR7
+ 1514              	 .section .text.vTaskPlaceOnEventList,"ax",%progbits
+ 1515              	 .align 1
+ 1516              	 .global vTaskPlaceOnEventList
+ 1517              	 .code 16
+ 1518              	 .thumb_func
+ 1520              	vTaskPlaceOnEventList:
+ 1521 0000 10B5     	 push {r4,lr}
+ 1522 0002 0028     	 cmp r0,#0
+ 1523 0004 01D1     	 bne .L293
+ 1524              	
+ 1525 0006 72B6     	 cpsid i
+ 1526              	
+ 1527              	 .code 16
+ 1528              	.L294:
+ 1529 0008 FEE7     	 b .L294
+ 1530              	.L293:
+ 1531 000a 0C1C     	 mov r4,r1
+ 1532 000c 044B     	 ldr r3,.L295
+ 1533              	 
+ 1534 000e 1968     	 ldr r1,[r3]
+ 1535 0010 1831     	 add r1,r1,#24
+ 1536 0012 FFF7FEFF 	 bl vListInsert
+ 1537 0016 201C     	 mov r0,r4
+ 1538 0018 0121     	 mov r1,#1
+ 1539 001a FFF7FEFF 	 bl prvAddCurrentTaskToDelayedList
+ 1540 001e 10BD     	 pop {r4,pc}
+ 1541              	.L296:
+ 1542              	 .align 2
+ 1543              	.L295:
+ 1544 0020 00000000 	 .word .LANCHOR5
+ 1546              	 .section .text.vTaskPlaceOnUnorderedEventList,"ax",%progbits
+ 1547              	 .align 1
+ 1548              	 .global vTaskPlaceOnUnorderedEventList
+ 1549              	 .code 16
+ 1550              	 .thumb_func
+ 1552              	vTaskPlaceOnUnorderedEventList:
+ 1553 0000 38B5     	 push {r3,r4,r5,lr}
+ 1554 0002 0028     	 cmp r0,#0
+ 1555 0004 01D1     	 bne .L298
+ 1556              	
+ 1557 0006 72B6     	 cpsid i
+ 1558              	
+ 1559              	 .code 16
+ 1560              	.L299:
+ 1561 0008 FEE7     	 b .L299
+ 1562              	.L298:
+ 1563 000a 0B4B     	 ldr r3,.L302
+ 1564 000c 1B68     	 ldr r3,[r3]
+ 1565 000e 002B     	 cmp r3,#0
+ 1566 0010 01D1     	 bne .L300
+ 1567              	
+ 1568 0012 72B6     	 cpsid i
+ 1569              	
+ 1570              	 .code 16
+ 1571              	.L301:
+ 1572 0014 FEE7     	 b .L301
+ 1573              	.L300:
+ 1574 0016 8025     	 mov r5,#128
+ 1575 0018 141C     	 mov r4,r2
+ 1576 001a 084B     	 ldr r3,.L302+4
+ 1577 001c 2D06     	 lsl r5,r5,#24
+ 1578 001e 1A68     	 ldr r2,[r3]
+ 1579 0020 2943     	 orr r1,r5
+ 1580 0022 9161     	 str r1,[r2,#24]
+ 1581 0024 1968     	 ldr r1,[r3]
+ 1582              	 
+ 1583 0026 1831     	 add r1,r1,#24
+ 1584 0028 FFF7FEFF 	 bl vListInsertEnd
+ 1585 002c 201C     	 mov r0,r4
+ 1586 002e 0121     	 mov r1,#1
+ 1587 0030 FFF7FEFF 	 bl prvAddCurrentTaskToDelayedList
+ 1588 0034 38BD     	 pop {r3,r4,r5,pc}
+ 1589              	.L303:
+ 1590 0036 C046     	 .align 2
+ 1591              	.L302:
+ 1592 0038 00000000 	 .word .LANCHOR16
+ 1593 003c 00000000 	 .word .LANCHOR5
+ 1595              	 .section .text.xTaskRemoveFromEventList,"ax",%progbits
+ 1596              	 .align 1
+ 1597              	 .global xTaskRemoveFromEventList
+ 1598              	 .code 16
+ 1599              	 .thumb_func
+ 1601              	xTaskRemoveFromEventList:
+ 1602 0000 38B5     	 push {r3,r4,r5,lr}
+ 1603 0002 C368     	 ldr r3,[r0,#12]
+ 1604 0004 DC68     	 ldr r4,[r3,#12]
+ 1605 0006 002C     	 cmp r4,#0
+ 1606 0008 01D1     	 bne .L305
+ 1607              	
+ 1608 000a 72B6     	 cpsid i
+ 1609              	
+ 1610              	 .code 16
+ 1611              	.L306:
+ 1612 000c FEE7     	 b .L306
+ 1613              	.L305:
+ 1614 000e 251C     	 mov r5,r4
+ 1615 0010 1835     	 add r5,r5,#24
+ 1616 0012 281C     	 mov r0,r5
+ 1617 0014 FFF7FEFF 	 bl uxListRemove
+ 1618 0018 104B     	 ldr r3,.L313
+ 1619 001a 1148     	 ldr r0,.L313+4
+ 1620 001c 1B68     	 ldr r3,[r3]
+ 1621 001e 002B     	 cmp r3,#0
+ 1622 0020 0DD1     	 bne .L312
+ 1623 0022 251D     	 add r5,r4,#4
+ 1624 0024 281C     	 mov r0,r5
+ 1625 0026 FFF7FEFF 	 bl uxListRemove
+ 1626 002a 0E4B     	 ldr r3,.L313+8
+ 1627 002c E06A     	 ldr r0,[r4,#44]
+ 1628 002e 1A68     	 ldr r2,[r3]
+ 1629 0030 9042     	 cmp r0,r2
+ 1630 0032 00D9     	 bls .L308
+ 1631 0034 1860     	 str r0,[r3]
+ 1632              	.L308:
+ 1633 0036 1423     	 mov r3,#20
+ 1634 0038 5843     	 mul r0,r3
+ 1635 003a 0B4B     	 ldr r3,.L313+12
+ 1636 003c 1818     	 add r0,r3,r0
+ 1637              	.L312:
+ 1638 003e 291C     	 mov r1,r5
+ 1639 0040 FFF7FEFF 	 bl vListInsertEnd
+ 1640 0044 094B     	 ldr r3,.L313+16
+ 1641 0046 E26A     	 ldr r2,[r4,#44]
+ 1642 0048 1B68     	 ldr r3,[r3]
+ 1643 004a 0020     	 mov r0,#0
+ 1644 004c DB6A     	 ldr r3,[r3,#44]
+ 1645 004e 9A42     	 cmp r2,r3
+ 1646 0050 02D9     	 bls .L310
+ 1647 0052 074B     	 ldr r3,.L313+20
+ 1648 0054 0130     	 add r0,r0,#1
+ 1649 0056 1860     	 str r0,[r3]
+ 1650              	.L310:
+ 1651              	 
+ 1652 0058 38BD     	 pop {r3,r4,r5,pc}
+ 1653              	.L314:
+ 1654 005a C046     	 .align 2
+ 1655              	.L313:
+ 1656 005c 00000000 	 .word .LANCHOR16
+ 1657 0060 00000000 	 .word .LANCHOR1
+ 1658 0064 00000000 	 .word .LANCHOR14
+ 1659 0068 00000000 	 .word .LANCHOR8
+ 1660 006c 00000000 	 .word .LANCHOR5
+ 1661 0070 00000000 	 .word .LANCHOR20
+ 1663              	 .section .text.xTaskRemoveFromUnorderedEventList,"ax",%progbits
+ 1664              	 .align 1
+ 1665              	 .global xTaskRemoveFromUnorderedEventList
+ 1666              	 .code 16
+ 1667              	 .thumb_func
+ 1669              	xTaskRemoveFromUnorderedEventList:
+ 1670 0000 38B5     	 push {r3,r4,r5,lr}
+ 1671 0002 164B     	 ldr r3,.L323
+ 1672 0004 1B68     	 ldr r3,[r3]
+ 1673 0006 002B     	 cmp r3,#0
+ 1674 0008 01D1     	 bne .L316
+ 1675              	
+ 1676 000a 72B6     	 cpsid i
+ 1677              	
+ 1678              	 .code 16
+ 1679              	.L317:
+ 1680 000c FEE7     	 b .L317
+ 1681              	.L316:
+ 1682 000e 8023     	 mov r3,#128
+ 1683 0010 C468     	 ldr r4,[r0,#12]
+ 1684 0012 1B06     	 lsl r3,r3,#24
+ 1685 0014 1943     	 orr r1,r3
+ 1686 0016 0160     	 str r1,[r0]
+ 1687 0018 002C     	 cmp r4,#0
+ 1688 001a 01D1     	 bne .L318
+ 1689              	
+ 1690 001c 72B6     	 cpsid i
+ 1691              	
+ 1692              	 .code 16
+ 1693              	.L319:
+ 1694 001e FEE7     	 b .L319
+ 1695              	.L318:
+ 1696 0020 251D     	 add r5,r4,#4
+ 1697 0022 FFF7FEFF 	 bl uxListRemove
+ 1698 0026 281C     	 mov r0,r5
+ 1699 0028 FFF7FEFF 	 bl uxListRemove
+ 1700 002c 0C4B     	 ldr r3,.L323+4
+ 1701 002e E06A     	 ldr r0,[r4,#44]
+ 1702 0030 1A68     	 ldr r2,[r3]
+ 1703 0032 9042     	 cmp r0,r2
+ 1704 0034 00D9     	 bls .L320
+ 1705 0036 1860     	 str r0,[r3]
+ 1706              	.L320:
+ 1707 0038 1423     	 mov r3,#20
+ 1708 003a 5843     	 mul r0,r3
+ 1709 003c 094B     	 ldr r3,.L323+8
+ 1710 003e 291C     	 mov r1,r5
+ 1711 0040 1818     	 add r0,r3,r0
+ 1712 0042 FFF7FEFF 	 bl vListInsertEnd
+ 1713 0046 084B     	 ldr r3,.L323+12
+ 1714 0048 E26A     	 ldr r2,[r4,#44]
+ 1715 004a 1B68     	 ldr r3,[r3]
+ 1716 004c 0020     	 mov r0,#0
+ 1717 004e DB6A     	 ldr r3,[r3,#44]
+ 1718 0050 9A42     	 cmp r2,r3
+ 1719 0052 02D9     	 bls .L321
+ 1720 0054 054B     	 ldr r3,.L323+16
+ 1721 0056 0130     	 add r0,r0,#1
+ 1722 0058 1860     	 str r0,[r3]
+ 1723              	.L321:
+ 1724              	 
+ 1725 005a 38BD     	 pop {r3,r4,r5,pc}
+ 1726              	.L324:
+ 1727              	 .align 2
+ 1728              	.L323:
+ 1729 005c 00000000 	 .word .LANCHOR16
+ 1730 0060 00000000 	 .word .LANCHOR14
+ 1731 0064 00000000 	 .word .LANCHOR8
+ 1732 0068 00000000 	 .word .LANCHOR5
+ 1733 006c 00000000 	 .word .LANCHOR20
+ 1735              	 .section .text.vTaskSetTimeOutState,"ax",%progbits
+ 1736              	 .align 1
+ 1737              	 .global vTaskSetTimeOutState
+ 1738              	 .code 16
+ 1739              	 .thumb_func
+ 1741              	vTaskSetTimeOutState:
+ 1742 0000 0028     	 cmp r0,#0
+ 1743 0002 01D1     	 bne .L326
+ 1744              	
+ 1745 0004 72B6     	 cpsid i
+ 1746              	
+ 1747              	 .code 16
+ 1748              	.L327:
+ 1749 0006 FEE7     	 b .L327
+ 1750              	.L326:
+ 1751 0008 034B     	 ldr r3,.L328
+ 1752              	 
+ 1753 000a 1B68     	 ldr r3,[r3]
+ 1754 000c 0360     	 str r3,[r0]
+ 1755 000e 034B     	 ldr r3,.L328+4
+ 1756 0010 1B68     	 ldr r3,[r3]
+ 1757 0012 4360     	 str r3,[r0,#4]
+ 1758 0014 7047     	 bx lr
+ 1759              	.L329:
+ 1760 0016 C046     	 .align 2
+ 1761              	.L328:
+ 1762 0018 00000000 	 .word .LANCHOR18
+ 1763 001c 00000000 	 .word .LANCHOR4
+ 1765              	 .section .text.xTaskCheckForTimeOut,"ax",%progbits
+ 1766              	 .align 1
+ 1767              	 .global xTaskCheckForTimeOut
+ 1768              	 .code 16
+ 1769              	 .thumb_func
+ 1771              	xTaskCheckForTimeOut:
+ 1772 0000 70B5     	 push {r4,r5,r6,lr}
+ 1773 0002 0028     	 cmp r0,#0
+ 1774 0004 01D1     	 bne .L331
+ 1775              	
+ 1776 0006 72B6     	 cpsid i
+ 1777              	
+ 1778              	 .code 16
+ 1779              	.L332:
+ 1780 0008 FEE7     	 b .L332
+ 1781              	.L331:
+ 1782 000a 0029     	 cmp r1,#0
+ 1783 000c 01D1     	 bne .L333
+ 1784              	
+ 1785 000e 72B6     	 cpsid i
+ 1786              	
+ 1787              	 .code 16
+ 1788              	.L334:
+ 1789 0010 FEE7     	 b .L334
+ 1790              	.L333:
+ 1791 0012 0D1C     	 mov r5,r1
+ 1792 0014 041C     	 mov r4,r0
+ 1793 0016 FFF7FEFF 	 bl vPortEnterCritical
+ 1794 001a 0F4B     	 ldr r3,.L340
+ 1795 001c 0026     	 mov r6,#0
+ 1796 001e 1968     	 ldr r1,[r3]
+ 1797 0020 2B68     	 ldr r3,[r5]
+ 1798 0022 5A1C     	 add r2,r3,#1
+ 1799 0024 13D0     	 beq .L335
+ 1800 0026 0D4A     	 ldr r2,.L340+4
+ 1801 0028 2668     	 ldr r6,[r4]
+ 1802 002a 1068     	 ldr r0,[r2]
+ 1803 002c 6268     	 ldr r2,[r4,#4]
+ 1804 002e B042     	 cmp r0,r6
+ 1805 0030 02D0     	 beq .L336
+ 1806 0032 0126     	 mov r6,#1
+ 1807 0034 9142     	 cmp r1,r2
+ 1808 0036 0AD2     	 bcs .L335
+ 1809              	.L336:
+ 1810 0038 881A     	 sub r0,r1,r2
+ 1811 003a 0126     	 mov r6,#1
+ 1812 003c 9842     	 cmp r0,r3
+ 1813 003e 06D2     	 bcs .L335
+ 1814 0040 521A     	 sub r2,r2,r1
+ 1815 0042 D318     	 add r3,r2,r3
+ 1816 0044 2B60     	 str r3,[r5]
+ 1817 0046 201C     	 mov r0,r4
+ 1818 0048 FFF7FEFF 	 bl vTaskSetTimeOutState
+ 1819 004c 0026     	 mov r6,#0
+ 1820              	.L335:
+ 1821 004e FFF7FEFF 	 bl vPortExitCritical
+ 1822              	 
+ 1823 0052 301C     	 mov r0,r6
+ 1824 0054 70BD     	 pop {r4,r5,r6,pc}
+ 1825              	.L341:
+ 1826 0056 C046     	 .align 2
+ 1827              	.L340:
+ 1828 0058 00000000 	 .word .LANCHOR4
+ 1829 005c 00000000 	 .word .LANCHOR18
+ 1831              	 .section .text.vTaskMissedYield,"ax",%progbits
+ 1832              	 .align 1
+ 1833              	 .global vTaskMissedYield
+ 1834              	 .code 16
+ 1835              	 .thumb_func
+ 1837              	vTaskMissedYield:
+ 1838 0000 0122     	 mov r2,#1
+ 1839 0002 014B     	 ldr r3,.L343
+ 1840              	 
+ 1841 0004 1A60     	 str r2,[r3]
+ 1842 0006 7047     	 bx lr
+ 1843              	.L344:
+ 1844              	 .align 2
+ 1845              	.L343:
+ 1846 0008 00000000 	 .word .LANCHOR20
+ 1848              	 .section .text.xTaskGetCurrentTaskHandle,"ax",%progbits
+ 1849              	 .align 1
+ 1850              	 .global xTaskGetCurrentTaskHandle
+ 1851              	 .code 16
+ 1852              	 .thumb_func
+ 1854              	xTaskGetCurrentTaskHandle:
+ 1855 0000 014B     	 ldr r3,.L346
+ 1856              	 
+ 1857 0002 1868     	 ldr r0,[r3]
+ 1858 0004 7047     	 bx lr
+ 1859              	.L347:
+ 1860 0006 C046     	 .align 2
+ 1861              	.L346:
+ 1862 0008 00000000 	 .word .LANCHOR5
+ 1864              	 .section .text.vTaskPriorityInherit,"ax",%progbits
+ 1865              	 .align 1
+ 1866              	 .global vTaskPriorityInherit
+ 1867              	 .code 16
+ 1868              	 .thumb_func
+ 1870              	vTaskPriorityInherit:
+ 1871 0000 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+ 1872 0002 0028     	 cmp r0,#0
+ 1873 0004 2BD0     	 beq .L348
+ 1874 0006 164D     	 ldr r5,.L359
+ 1875 0008 C16A     	 ldr r1,[r0,#44]
+ 1876 000a 2B68     	 ldr r3,[r5]
+ 1877 000c DB6A     	 ldr r3,[r3,#44]
+ 1878 000e 9942     	 cmp r1,r3
+ 1879 0010 25D2     	 bcs .L348
+ 1880 0012 8369     	 ldr r3,[r0,#24]
+ 1881 0014 002B     	 cmp r3,#0
+ 1882 0016 04DB     	 blt .L350
+ 1883 0018 0522     	 mov r2,#5
+ 1884 001a 2B68     	 ldr r3,[r5]
+ 1885 001c DB6A     	 ldr r3,[r3,#44]
+ 1886 001e D21A     	 sub r2,r2,r3
+ 1887 0020 8261     	 str r2,[r0,#24]
+ 1888              	.L350:
+ 1889 0022 1423     	 mov r3,#20
+ 1890 0024 4B43     	 mul r3,r1
+ 1891 0026 0F4E     	 ldr r6,.L359+4
+ 1892 0028 4269     	 ldr r2,[r0,#20]
+ 1893 002a F318     	 add r3,r6,r3
+ 1894 002c 9A42     	 cmp r2,r3
+ 1895 002e 13D1     	 bne .L358
+ 1896 0030 041C     	 mov r4,r0
+ 1897 0032 071D     	 add r7,r0,#4
+ 1898 0034 381C     	 mov r0,r7
+ 1899 0036 FFF7FEFF 	 bl uxListRemove
+ 1900 003a 2B68     	 ldr r3,[r5]
+ 1901 003c D86A     	 ldr r0,[r3,#44]
+ 1902 003e 0A4B     	 ldr r3,.L359+8
+ 1903 0040 E062     	 str r0,[r4,#44]
+ 1904 0042 1A68     	 ldr r2,[r3]
+ 1905 0044 9042     	 cmp r0,r2
+ 1906 0046 00D9     	 bls .L354
+ 1907 0048 1860     	 str r0,[r3]
+ 1908              	.L354:
+ 1909 004a 1423     	 mov r3,#20
+ 1910 004c 5843     	 mul r0,r3
+ 1911 004e 391C     	 mov r1,r7
+ 1912 0050 3018     	 add r0,r6,r0
+ 1913 0052 FFF7FEFF 	 bl vListInsertEnd
+ 1914 0056 02E0     	 b .L348
+ 1915              	.L358:
+ 1916 0058 2B68     	 ldr r3,[r5]
+ 1917 005a DB6A     	 ldr r3,[r3,#44]
+ 1918 005c C362     	 str r3,[r0,#44]
+ 1919              	.L348:
+ 1920              	 
+ 1921 005e F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 1922              	.L360:
+ 1923              	 .align 2
+ 1924              	.L359:
+ 1925 0060 00000000 	 .word .LANCHOR5
+ 1926 0064 00000000 	 .word .LANCHOR8
+ 1927 0068 00000000 	 .word .LANCHOR14
+ 1929              	 .section .text.xTaskPriorityDisinherit,"ax",%progbits
+ 1930              	 .align 1
+ 1931              	 .global xTaskPriorityDisinherit
+ 1932              	 .code 16
+ 1933              	 .thumb_func
+ 1935              	xTaskPriorityDisinherit:
+ 1936 0000 38B5     	 push {r3,r4,r5,lr}
+ 1937 0002 0028     	 cmp r0,#0
+ 1938 0004 01D1     	 bne .L362
+ 1939              	.L368:
+ 1940 0006 0020     	 mov r0,#0
+ 1941 0008 29E0     	 b .L363
+ 1942              	.L362:
+ 1943 000a 154B     	 ldr r3,.L370
+ 1944 000c 1B68     	 ldr r3,[r3]
+ 1945 000e 9842     	 cmp r0,r3
+ 1946 0010 01D0     	 beq .L364
+ 1947              	
+ 1948 0012 72B6     	 cpsid i
+ 1949              	
+ 1950              	 .code 16
+ 1951              	.L365:
+ 1952 0014 FEE7     	 b .L365
+ 1953              	.L364:
+ 1954 0016 036C     	 ldr r3,[r0,#64]
+ 1955 0018 002B     	 cmp r3,#0
+ 1956 001a 01D1     	 bne .L366
+ 1957              	
+ 1958 001c 72B6     	 cpsid i
+ 1959              	
+ 1960              	 .code 16
+ 1961              	.L367:
+ 1962 001e FEE7     	 b .L367
+ 1963              	.L366:
+ 1964 0020 C26A     	 ldr r2,[r0,#44]
+ 1965 0022 C16B     	 ldr r1,[r0,#60]
+ 1966 0024 013B     	 sub r3,r3,#1
+ 1967 0026 0364     	 str r3,[r0,#64]
+ 1968 0028 8A42     	 cmp r2,r1
+ 1969 002a ECD0     	 beq .L368
+ 1970 002c 002B     	 cmp r3,#0
+ 1971 002e EAD1     	 bne .L368
+ 1972 0030 041C     	 mov r4,r0
+ 1973 0032 051D     	 add r5,r0,#4
+ 1974 0034 281C     	 mov r0,r5
+ 1975 0036 FFF7FEFF 	 bl uxListRemove
+ 1976 003a 0523     	 mov r3,#5
+ 1977 003c E06B     	 ldr r0,[r4,#60]
+ 1978 003e 1B1A     	 sub r3,r3,r0
+ 1979 0040 A361     	 str r3,[r4,#24]
+ 1980 0042 084B     	 ldr r3,.L370+4
+ 1981 0044 E062     	 str r0,[r4,#44]
+ 1982 0046 1A68     	 ldr r2,[r3]
+ 1983 0048 9042     	 cmp r0,r2
+ 1984 004a 00D9     	 bls .L369
+ 1985 004c 1860     	 str r0,[r3]
+ 1986              	.L369:
+ 1987 004e 1423     	 mov r3,#20
+ 1988 0050 5843     	 mul r0,r3
+ 1989 0052 054B     	 ldr r3,.L370+8
+ 1990 0054 291C     	 mov r1,r5
+ 1991 0056 1818     	 add r0,r3,r0
+ 1992 0058 FFF7FEFF 	 bl vListInsertEnd
+ 1993 005c 0120     	 mov r0,#1
+ 1994              	.L363:
+ 1995              	 
+ 1996 005e 38BD     	 pop {r3,r4,r5,pc}
+ 1997              	.L371:
+ 1998              	 .align 2
+ 1999              	.L370:
+ 2000 0060 00000000 	 .word .LANCHOR5
+ 2001 0064 00000000 	 .word .LANCHOR14
+ 2002 0068 00000000 	 .word .LANCHOR8
+ 2004              	 .section .text.uxTaskResetEventItemValue,"ax",%progbits
+ 2005              	 .align 1
+ 2006              	 .global uxTaskResetEventItemValue
+ 2007              	 .code 16
+ 2008              	 .thumb_func
+ 2010              	uxTaskResetEventItemValue:
+ 2011 0000 044B     	 ldr r3,.L373
+ 2012              	 
+ 2013 0002 1A68     	 ldr r2,[r3]
+ 2014 0004 9069     	 ldr r0,[r2,#24]
+ 2015 0006 1A68     	 ldr r2,[r3]
+ 2016 0008 1B68     	 ldr r3,[r3]
+ 2017 000a D96A     	 ldr r1,[r3,#44]
+ 2018 000c 0523     	 mov r3,#5
+ 2019 000e 5B1A     	 sub r3,r3,r1
+ 2020 0010 9361     	 str r3,[r2,#24]
+ 2021 0012 7047     	 bx lr
+ 2022              	.L374:
+ 2023              	 .align 2
+ 2024              	.L373:
+ 2025 0014 00000000 	 .word .LANCHOR5
+ 2027              	 .section .text.pvTaskIncrementMutexHeldCount,"ax",%progbits
+ 2028              	 .align 1
+ 2029              	 .global pvTaskIncrementMutexHeldCount
+ 2030              	 .code 16
+ 2031              	 .thumb_func
+ 2033              	pvTaskIncrementMutexHeldCount:
+ 2034 0000 044B     	 ldr r3,.L380
+ 2035 0002 1A68     	 ldr r2,[r3]
+ 2036 0004 002A     	 cmp r2,#0
+ 2037 0006 03D0     	 beq .L376
+ 2038 0008 1968     	 ldr r1,[r3]
+ 2039 000a 0A6C     	 ldr r2,[r1,#64]
+ 2040 000c 0132     	 add r2,r2,#1
+ 2041 000e 0A64     	 str r2,[r1,#64]
+ 2042              	.L376:
+ 2043 0010 1868     	 ldr r0,[r3]
+ 2044              	 
+ 2045 0012 7047     	 bx lr
+ 2046              	.L381:
+ 2047              	 .align 2
+ 2048              	.L380:
+ 2049 0014 00000000 	 .word .LANCHOR5
+ 2051              	 .section .text.ulTaskNotifyTake,"ax",%progbits
+ 2052              	 .align 1
+ 2053              	 .global ulTaskNotifyTake
+ 2054              	 .code 16
+ 2055              	 .thumb_func
+ 2057              	ulTaskNotifyTake:
+ 2058 0000 70B5     	 push {r4,r5,r6,lr}
+ 2059 0002 061C     	 mov r6,r0
+ 2060 0004 0D1C     	 mov r5,r1
+ 2061 0006 FFF7FEFF 	 bl vPortEnterCritical
+ 2062 000a 134C     	 ldr r4,.L395
+ 2063 000c 2368     	 ldr r3,[r4]
+ 2064 000e 5B6C     	 ldr r3,[r3,#68]
+ 2065 0010 002B     	 cmp r3,#0
+ 2066 0012 0AD1     	 bne .L384
+ 2067 0014 0121     	 mov r1,#1
+ 2068 0016 2368     	 ldr r3,[r4]
+ 2069 0018 4833     	 add r3,r3,#72
+ 2070 001a 1970     	 strb r1,[r3]
+ 2071 001c 002D     	 cmp r5,#0
+ 2072 001e 04D0     	 beq .L384
+ 2073 0020 281C     	 mov r0,r5
+ 2074 0022 FFF7FEFF 	 bl prvAddCurrentTaskToDelayedList
+ 2075 0026 FFF7FEFF 	 bl vPortYield
+ 2076              	.L384:
+ 2077 002a FFF7FEFF 	 bl vPortExitCritical
+ 2078 002e FFF7FEFF 	 bl vPortEnterCritical
+ 2079 0032 2368     	 ldr r3,[r4]
+ 2080 0034 5D6C     	 ldr r5,[r3,#68]
+ 2081 0036 002D     	 cmp r5,#0
+ 2082 0038 05D0     	 beq .L386
+ 2083 003a 2368     	 ldr r3,[r4]
+ 2084 003c 0022     	 mov r2,#0
+ 2085 003e 002E     	 cmp r6,#0
+ 2086 0040 00D1     	 bne .L394
+ 2087 0042 6A1E     	 sub r2,r5,#1
+ 2088              	.L394:
+ 2089 0044 5A64     	 str r2,[r3,#68]
+ 2090              	.L386:
+ 2091 0046 0022     	 mov r2,#0
+ 2092 0048 2368     	 ldr r3,[r4]
+ 2093              	 
+ 2094 004a 4833     	 add r3,r3,#72
+ 2095 004c 1A70     	 strb r2,[r3]
+ 2096 004e FFF7FEFF 	 bl vPortExitCritical
+ 2097 0052 281C     	 mov r0,r5
+ 2098 0054 70BD     	 pop {r4,r5,r6,pc}
+ 2099              	.L396:
+ 2100 0056 C046     	 .align 2
+ 2101              	.L395:
+ 2102 0058 00000000 	 .word .LANCHOR5
+ 2104              	 .section .text.xTaskNotifyWait,"ax",%progbits
+ 2105              	 .align 1
+ 2106              	 .global xTaskNotifyWait
+ 2107              	 .code 16
+ 2108              	 .thumb_func
+ 2110              	xTaskNotifyWait:
+ 2111 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 2112 0002 1E1C     	 mov r6,r3
+ 2113 0004 0190     	 str r0,[sp,#4]
+ 2114 0006 0F1C     	 mov r7,r1
+ 2115 0008 151C     	 mov r5,r2
+ 2116 000a FFF7FEFF 	 bl vPortEnterCritical
+ 2117 000e 194C     	 ldr r4,.L410
+ 2118 0010 2368     	 ldr r3,[r4]
+ 2119 0012 4833     	 add r3,r3,#72
+ 2120 0014 1B78     	 ldrb r3,[r3]
+ 2121 0016 022B     	 cmp r3,#2
+ 2122 0018 0FD0     	 beq .L399
+ 2123 001a 2268     	 ldr r2,[r4]
+ 2124 001c 0199     	 ldr r1,[sp,#4]
+ 2125 001e 536C     	 ldr r3,[r2,#68]
+ 2126 0020 8B43     	 bic r3,r1
+ 2127 0022 0121     	 mov r1,#1
+ 2128 0024 5364     	 str r3,[r2,#68]
+ 2129 0026 2368     	 ldr r3,[r4]
+ 2130 0028 4833     	 add r3,r3,#72
+ 2131 002a 1970     	 strb r1,[r3]
+ 2132 002c 002E     	 cmp r6,#0
+ 2133 002e 04D0     	 beq .L399
+ 2134 0030 301C     	 mov r0,r6
+ 2135 0032 FFF7FEFF 	 bl prvAddCurrentTaskToDelayedList
+ 2136 0036 FFF7FEFF 	 bl vPortYield
+ 2137              	.L399:
+ 2138 003a FFF7FEFF 	 bl vPortExitCritical
+ 2139 003e FFF7FEFF 	 bl vPortEnterCritical
+ 2140 0042 002D     	 cmp r5,#0
+ 2141 0044 02D0     	 beq .L401
+ 2142 0046 2368     	 ldr r3,[r4]
+ 2143 0048 5B6C     	 ldr r3,[r3,#68]
+ 2144 004a 2B60     	 str r3,[r5]
+ 2145              	.L401:
+ 2146 004c 2368     	 ldr r3,[r4]
+ 2147 004e 0025     	 mov r5,#0
+ 2148 0050 4833     	 add r3,r3,#72
+ 2149 0052 1B78     	 ldrb r3,[r3]
+ 2150 0054 012B     	 cmp r3,#1
+ 2151 0056 04D0     	 beq .L402
+ 2152 0058 2268     	 ldr r2,[r4]
+ 2153 005a 0135     	 add r5,r5,#1
+ 2154 005c 536C     	 ldr r3,[r2,#68]
+ 2155 005e BB43     	 bic r3,r7
+ 2156 0060 5364     	 str r3,[r2,#68]
+ 2157              	.L402:
+ 2158 0062 0022     	 mov r2,#0
+ 2159 0064 2368     	 ldr r3,[r4]
+ 2160              	 
+ 2161 0066 4833     	 add r3,r3,#72
+ 2162 0068 1A70     	 strb r2,[r3]
+ 2163 006a FFF7FEFF 	 bl vPortExitCritical
+ 2164 006e 281C     	 mov r0,r5
+ 2165 0070 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 2166              	.L411:
+ 2167 0072 C046     	 .align 2
+ 2168              	.L410:
+ 2169 0074 00000000 	 .word .LANCHOR5
+ 2171              	 .section .text.xTaskGenericNotify,"ax",%progbits
+ 2172              	 .align 1
+ 2173              	 .global xTaskGenericNotify
+ 2174              	 .code 16
+ 2175              	 .thumb_func
+ 2177              	xTaskGenericNotify:
+ 2178 0000 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+ 2179 0002 0028     	 cmp r0,#0
+ 2180 0004 01D1     	 bne .L413
+ 2181              	
+ 2182 0006 72B6     	 cpsid i
+ 2183              	
+ 2184              	 .code 16
+ 2185              	.L414:
+ 2186 0008 FEE7     	 b .L414
+ 2187              	.L413:
+ 2188 000a 1F1C     	 mov r7,r3
+ 2189 000c 161C     	 mov r6,r2
+ 2190 000e 0D1C     	 mov r5,r1
+ 2191 0010 041C     	 mov r4,r0
+ 2192 0012 FFF7FEFF 	 bl vPortEnterCritical
+ 2193 0016 002F     	 cmp r7,#0
+ 2194 0018 01D0     	 beq .L415
+ 2195 001a 636C     	 ldr r3,[r4,#68]
+ 2196 001c 3B60     	 str r3,[r7]
+ 2197              	.L415:
+ 2198 001e 221C     	 mov r2,r4
+ 2199 0020 0221     	 mov r1,#2
+ 2200 0022 4832     	 add r2,r2,#72
+ 2201 0024 1378     	 ldrb r3,[r2]
+ 2202 0026 701E     	 sub r0,r6,#1
+ 2203 0028 DBB2     	 uxtb r3,r3
+ 2204 002a 1170     	 strb r1,[r2]
+ 2205 002c 0328     	 cmp r0,#3
+ 2206 002e 0DD8     	 bhi .L416
+ 2207 0030 FFF7FEFF 	 bl __gnu_thumb1_case_uqi
+ 2208              	.L418:
+ 2209 0034 02       	 .byte (.L417-.L418)/2
+ 2210 0035 05       	 .byte (.L419-.L418)/2
+ 2211 0036 0B       	 .byte (.L432-.L418)/2
+ 2212 0037 09       	 .byte (.L421-.L418)/2
+ 2213              	 .p2align 1
+ 2214              	.L417:
+ 2215 0038 616C     	 ldr r1,[r4,#68]
+ 2216 003a 0D43     	 orr r5,r1
+ 2217 003c 05E0     	 b .L432
+ 2218              	.L419:
+ 2219 003e 626C     	 ldr r2,[r4,#68]
+ 2220 0040 0132     	 add r2,r2,#1
+ 2221 0042 6264     	 str r2,[r4,#68]
+ 2222 0044 02E0     	 b .L416
+ 2223              	.L421:
+ 2224 0046 022B     	 cmp r3,#2
+ 2225 0048 22D0     	 beq .L428
+ 2226              	.L432:
+ 2227 004a 6564     	 str r5,[r4,#68]
+ 2228              	.L416:
+ 2229 004c 012B     	 cmp r3,#1
+ 2230 004e 1DD1     	 bne .L433
+ 2231 0050 251D     	 add r5,r4,#4
+ 2232 0052 281C     	 mov r0,r5
+ 2233 0054 FFF7FEFF 	 bl uxListRemove
+ 2234 0058 104B     	 ldr r3,.L434
+ 2235 005a E06A     	 ldr r0,[r4,#44]
+ 2236 005c 1A68     	 ldr r2,[r3]
+ 2237 005e 9042     	 cmp r0,r2
+ 2238 0060 00D9     	 bls .L424
+ 2239 0062 1860     	 str r0,[r3]
+ 2240              	.L424:
+ 2241 0064 1423     	 mov r3,#20
+ 2242 0066 5843     	 mul r0,r3
+ 2243 0068 0D4B     	 ldr r3,.L434+4
+ 2244 006a 291C     	 mov r1,r5
+ 2245 006c 1818     	 add r0,r3,r0
+ 2246 006e FFF7FEFF 	 bl vListInsertEnd
+ 2247 0072 A36A     	 ldr r3,[r4,#40]
+ 2248 0074 002B     	 cmp r3,#0
+ 2249 0076 01D0     	 beq .L425
+ 2250              	
+ 2251 0078 72B6     	 cpsid i
+ 2252              	
+ 2253              	 .code 16
+ 2254              	.L426:
+ 2255 007a FEE7     	 b .L426
+ 2256              	.L425:
+ 2257 007c 094B     	 ldr r3,.L434+8
+ 2258 007e E26A     	 ldr r2,[r4,#44]
+ 2259 0080 1B68     	 ldr r3,[r3]
+ 2260 0082 DB6A     	 ldr r3,[r3,#44]
+ 2261 0084 9A42     	 cmp r2,r3
+ 2262 0086 01D9     	 bls .L433
+ 2263 0088 FFF7FEFF 	 bl vPortYield
+ 2264              	.L433:
+ 2265 008c 0124     	 mov r4,#1
+ 2266 008e 00E0     	 b .L422
+ 2267              	.L428:
+ 2268 0090 0024     	 mov r4,#0
+ 2269              	.L422:
+ 2270 0092 FFF7FEFF 	 bl vPortExitCritical
+ 2271              	 
+ 2272 0096 201C     	 mov r0,r4
+ 2273 0098 F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 2274              	.L435:
+ 2275 009a C046     	 .align 2
+ 2276              	.L434:
+ 2277 009c 00000000 	 .word .LANCHOR14
+ 2278 00a0 00000000 	 .word .LANCHOR8
+ 2279 00a4 00000000 	 .word .LANCHOR5
+ 2281              	 .section .text.xTaskGenericNotifyFromISR,"ax",%progbits
+ 2282              	 .align 1
+ 2283              	 .global xTaskGenericNotifyFromISR
+ 2284              	 .code 16
+ 2285              	 .thumb_func
+ 2287              	xTaskGenericNotifyFromISR:
+ 2288 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 2289 0002 0028     	 cmp r0,#0
+ 2290 0004 01D1     	 bne .L437
+ 2291              	
+ 2292 0006 72B6     	 cpsid i
+ 2293              	
+ 2294              	 .code 16
+ 2295              	.L438:
+ 2296 0008 FEE7     	 b .L438
+ 2297              	.L437:
+ 2298 000a 1E1C     	 mov r6,r3
+ 2299 000c 0192     	 str r2,[sp,#4]
+ 2300 000e 0D1C     	 mov r5,r1
+ 2301 0010 041C     	 mov r4,r0
+ 2302 0012 FFF7FEFF 	 bl ulSetInterruptMaskFromISR
+ 2303 0016 071C     	 mov r7,r0
+ 2304 0018 002E     	 cmp r6,#0
+ 2305 001a 01D0     	 beq .L439
+ 2306 001c 636C     	 ldr r3,[r4,#68]
+ 2307 001e 3360     	 str r3,[r6]
+ 2308              	.L439:
+ 2309 0020 221C     	 mov r2,r4
+ 2310 0022 0221     	 mov r1,#2
+ 2311 0024 4832     	 add r2,r2,#72
+ 2312 0026 0198     	 ldr r0,[sp,#4]
+ 2313 0028 1378     	 ldrb r3,[r2]
+ 2314 002a 0138     	 sub r0,r0,#1
+ 2315 002c DBB2     	 uxtb r3,r3
+ 2316 002e 1170     	 strb r1,[r2]
+ 2317 0030 0328     	 cmp r0,#3
+ 2318 0032 0DD8     	 bhi .L440
+ 2319 0034 FFF7FEFF 	 bl __gnu_thumb1_case_uqi
+ 2320              	.L442:
+ 2321 0038 02       	 .byte (.L441-.L442)/2
+ 2322 0039 05       	 .byte (.L443-.L442)/2
+ 2323 003a 0B       	 .byte (.L459-.L442)/2
+ 2324 003b 09       	 .byte (.L445-.L442)/2
+ 2325              	 .p2align 1
+ 2326              	.L441:
+ 2327 003c 616C     	 ldr r1,[r4,#68]
+ 2328 003e 0D43     	 orr r5,r1
+ 2329 0040 05E0     	 b .L459
+ 2330              	.L443:
+ 2331 0042 626C     	 ldr r2,[r4,#68]
+ 2332 0044 0132     	 add r2,r2,#1
+ 2333 0046 6264     	 str r2,[r4,#68]
+ 2334 0048 02E0     	 b .L440
+ 2335              	.L445:
+ 2336 004a 022B     	 cmp r3,#2
+ 2337 004c 2FD0     	 beq .L455
+ 2338              	.L459:
+ 2339 004e 6564     	 str r5,[r4,#68]
+ 2340              	.L440:
+ 2341 0050 012B     	 cmp r3,#1
+ 2342 0052 01D0     	 beq .L447
+ 2343              	.L453:
+ 2344 0054 0124     	 mov r4,#1
+ 2345 0056 2BE0     	 b .L446
+ 2346              	.L447:
+ 2347 0058 A36A     	 ldr r3,[r4,#40]
+ 2348 005a 002B     	 cmp r3,#0
+ 2349 005c 01D0     	 beq .L448
+ 2350              	
+ 2351 005e 72B6     	 cpsid i
+ 2352              	
+ 2353              	 .code 16
+ 2354              	.L449:
+ 2355 0060 FEE7     	 b .L449
+ 2356              	.L448:
+ 2357 0062 164B     	 ldr r3,.L462
+ 2358 0064 1B68     	 ldr r3,[r3]
+ 2359 0066 002B     	 cmp r3,#0
+ 2360 0068 0FD1     	 bne .L450
+ 2361 006a 251D     	 add r5,r4,#4
+ 2362 006c 281C     	 mov r0,r5
+ 2363 006e FFF7FEFF 	 bl uxListRemove
+ 2364 0072 134B     	 ldr r3,.L462+4
+ 2365 0074 E06A     	 ldr r0,[r4,#44]
+ 2366 0076 1A68     	 ldr r2,[r3]
+ 2367 0078 9042     	 cmp r0,r2
+ 2368 007a 00D9     	 bls .L451
+ 2369 007c 1860     	 str r0,[r3]
+ 2370              	.L451:
+ 2371 007e 1423     	 mov r3,#20
+ 2372 0080 5843     	 mul r0,r3
+ 2373 0082 104B     	 ldr r3,.L462+8
+ 2374 0084 291C     	 mov r1,r5
+ 2375 0086 1818     	 add r0,r3,r0
+ 2376 0088 02E0     	 b .L460
+ 2377              	.L450:
+ 2378 008a 211C     	 mov r1,r4
+ 2379 008c 0E48     	 ldr r0,.L462+12
+ 2380 008e 1831     	 add r1,r1,#24
+ 2381              	.L460:
+ 2382 0090 FFF7FEFF 	 bl vListInsertEnd
+ 2383 0094 0D4B     	 ldr r3,.L462+16
+ 2384 0096 E26A     	 ldr r2,[r4,#44]
+ 2385 0098 1B68     	 ldr r3,[r3]
+ 2386 009a DB6A     	 ldr r3,[r3,#44]
+ 2387 009c 9A42     	 cmp r2,r3
+ 2388 009e D9D9     	 bls .L453
+ 2389 00a0 089B     	 ldr r3,[sp,#32]
+ 2390 00a2 0124     	 mov r4,#1
+ 2391 00a4 002B     	 cmp r3,#0
+ 2392 00a6 00D1     	 bne .L461
+ 2393 00a8 094B     	 ldr r3,.L462+20
+ 2394              	.L461:
+ 2395 00aa 1C60     	 str r4,[r3]
+ 2396 00ac 00E0     	 b .L446
+ 2397              	.L455:
+ 2398 00ae 0024     	 mov r4,#0
+ 2399              	.L446:
+ 2400 00b0 381C     	 mov r0,r7
+ 2401 00b2 FFF7FEFF 	 bl vClearInterruptMaskFromISR
+ 2402              	 
+ 2403 00b6 201C     	 mov r0,r4
+ 2404 00b8 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 2405              	.L463:
+ 2406 00ba C046     	 .align 2
+ 2407              	.L462:
+ 2408 00bc 00000000 	 .word .LANCHOR16
+ 2409 00c0 00000000 	 .word .LANCHOR14
+ 2410 00c4 00000000 	 .word .LANCHOR8
+ 2411 00c8 00000000 	 .word .LANCHOR1
+ 2412 00cc 00000000 	 .word .LANCHOR5
+ 2413 00d0 00000000 	 .word .LANCHOR20
+ 2415              	 .section .text.vTaskNotifyGiveFromISR,"ax",%progbits
+ 2416              	 .align 1
+ 2417              	 .global vTaskNotifyGiveFromISR
+ 2418              	 .code 16
+ 2419              	 .thumb_func
+ 2421              	vTaskNotifyGiveFromISR:
+ 2422 0000 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+ 2423 0002 0028     	 cmp r0,#0
+ 2424 0004 01D1     	 bne .L465
+ 2425              	
+ 2426 0006 72B6     	 cpsid i
+ 2427              	
+ 2428              	 .code 16
+ 2429              	.L466:
+ 2430 0008 FEE7     	 b .L466
+ 2431              	.L465:
+ 2432 000a 041C     	 mov r4,r0
+ 2433 000c 0D1C     	 mov r5,r1
+ 2434 000e FFF7FEFF 	 bl ulSetInterruptMaskFromISR
+ 2435 0012 231C     	 mov r3,r4
+ 2436 0014 0221     	 mov r1,#2
+ 2437 0016 4833     	 add r3,r3,#72
+ 2438 0018 1A78     	 ldrb r2,[r3]
+ 2439 001a 1970     	 strb r1,[r3]
+ 2440 001c 636C     	 ldr r3,[r4,#68]
+ 2441 001e 071C     	 mov r7,r0
+ 2442 0020 0133     	 add r3,r3,#1
+ 2443 0022 6364     	 str r3,[r4,#68]
+ 2444 0024 012A     	 cmp r2,#1
+ 2445 0026 2AD1     	 bne .L468
+ 2446 0028 A36A     	 ldr r3,[r4,#40]
+ 2447 002a 002B     	 cmp r3,#0
+ 2448 002c 01D0     	 beq .L469
+ 2449              	
+ 2450 002e 72B6     	 cpsid i
+ 2451              	
+ 2452              	 .code 16
+ 2453              	.L470:
+ 2454 0030 FEE7     	 b .L470
+ 2455              	.L469:
+ 2456 0032 154B     	 ldr r3,.L477
+ 2457 0034 1B68     	 ldr r3,[r3]
+ 2458 0036 002B     	 cmp r3,#0
+ 2459 0038 0FD1     	 bne .L471
+ 2460 003a 261D     	 add r6,r4,#4
+ 2461 003c 301C     	 mov r0,r6
+ 2462 003e FFF7FEFF 	 bl uxListRemove
+ 2463 0042 124B     	 ldr r3,.L477+4
+ 2464 0044 E06A     	 ldr r0,[r4,#44]
+ 2465 0046 1A68     	 ldr r2,[r3]
+ 2466 0048 9042     	 cmp r0,r2
+ 2467 004a 00D9     	 bls .L472
+ 2468 004c 1860     	 str r0,[r3]
+ 2469              	.L472:
+ 2470 004e 1423     	 mov r3,#20
+ 2471 0050 5843     	 mul r0,r3
+ 2472 0052 0F4B     	 ldr r3,.L477+8
+ 2473 0054 311C     	 mov r1,r6
+ 2474 0056 1818     	 add r0,r3,r0
+ 2475 0058 02E0     	 b .L476
+ 2476              	.L471:
+ 2477 005a 211C     	 mov r1,r4
+ 2478 005c 0D48     	 ldr r0,.L477+12
+ 2479 005e 1831     	 add r1,r1,#24
+ 2480              	.L476:
+ 2481 0060 FFF7FEFF 	 bl vListInsertEnd
+ 2482 0064 0C4B     	 ldr r3,.L477+16
+ 2483 0066 E26A     	 ldr r2,[r4,#44]
+ 2484 0068 1B68     	 ldr r3,[r3]
+ 2485 006a DB6A     	 ldr r3,[r3,#44]
+ 2486 006c 9A42     	 cmp r2,r3
+ 2487 006e 06D9     	 bls .L468
+ 2488 0070 0123     	 mov r3,#1
+ 2489 0072 002D     	 cmp r5,#0
+ 2490 0074 01D0     	 beq .L475
+ 2491 0076 2B60     	 str r3,[r5]
+ 2492 0078 01E0     	 b .L468
+ 2493              	.L475:
+ 2494 007a 084A     	 ldr r2,.L477+20
+ 2495 007c 1360     	 str r3,[r2]
+ 2496              	.L468:
+ 2497 007e 381C     	 mov r0,r7
+ 2498 0080 FFF7FEFF 	 bl vClearInterruptMaskFromISR
+ 2499              	 
+ 2500 0084 F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 2501              	.L478:
+ 2502 0086 C046     	 .align 2
+ 2503              	.L477:
+ 2504 0088 00000000 	 .word .LANCHOR16
+ 2505 008c 00000000 	 .word .LANCHOR14
+ 2506 0090 00000000 	 .word .LANCHOR8
+ 2507 0094 00000000 	 .word .LANCHOR1
+ 2508 0098 00000000 	 .word .LANCHOR5
+ 2509 009c 00000000 	 .word .LANCHOR20
+ 2511              	 .section .text.xTaskNotifyStateClear,"ax",%progbits
+ 2512              	 .align 1
+ 2513              	 .global xTaskNotifyStateClear
+ 2514              	 .code 16
+ 2515              	 .thumb_func
+ 2517              	xTaskNotifyStateClear:
+ 2518 0000 38B5     	 push {r3,r4,r5,lr}
+ 2519 0002 041E     	 sub r4,r0,#0
+ 2520 0004 01D1     	 bne .L480
+ 2521 0006 074B     	 ldr r3,.L483
+ 2522 0008 1C68     	 ldr r4,[r3]
+ 2523              	.L480:
+ 2524 000a 4834     	 add r4,r4,#72
+ 2525 000c FFF7FEFF 	 bl vPortEnterCritical
+ 2526 0010 2378     	 ldrb r3,[r4]
+ 2527 0012 0025     	 mov r5,#0
+ 2528 0014 022B     	 cmp r3,#2
+ 2529 0016 01D1     	 bne .L481
+ 2530 0018 2570     	 strb r5,[r4]
+ 2531 001a 0135     	 add r5,r5,#1
+ 2532              	.L481:
+ 2533 001c FFF7FEFF 	 bl vPortExitCritical
+ 2534              	 
+ 2535 0020 281C     	 mov r0,r5
+ 2536 0022 38BD     	 pop {r3,r4,r5,pc}
+ 2537              	.L484:
+ 2538              	 .align 2
+ 2539              	.L483:
+ 2540 0024 00000000 	 .word .LANCHOR5
+ 2542              	 .global pxCurrentTCB
+ 2543              	 .section .bss.xNumOfOverflows,"aw",%nobits
+ 2544              	 .align 2
+ 2545              	 .set .LANCHOR18,.+0
+ 2548              	xNumOfOverflows:
+ 2549 0000 00000000 	 .space 4
+ 2550              	 .section .bss.pxDelayedTaskList,"aw",%nobits
+ 2551              	 .align 2
+ 2552              	 .set .LANCHOR2,.+0
+ 2555              	pxDelayedTaskList:
+ 2556 0000 00000000 	 .space 4
+ 2557              	 .section .bss.xSchedulerRunning,"aw",%nobits
+ 2558              	 .align 2
+ 2559              	 .set .LANCHOR12,.+0
+ 2562              	xSchedulerRunning:
+ 2563 0000 00000000 	 .space 4
+ 2564              	 .section .bss.uxSchedulerSuspended,"aw",%nobits
+ 2565              	 .align 2
+ 2566              	 .set .LANCHOR16,.+0
+ 2569              	uxSchedulerSuspended:
+ 2570 0000 00000000 	 .space 4
+ 2571              	 .section .bss.xDelayedTaskList1,"aw",%nobits
+ 2572              	 .align 2
+ 2573              	 .set .LANCHOR9,.+0
+ 2576              	xDelayedTaskList1:
+ 2577 0000 00000000 	 .space 20
+ 2577      00000000 
+ 2577      00000000 
+ 2577      00000000 
+ 2577      00000000 
+ 2578              	 .section .bss.pxOverflowDelayedTaskList,"aw",%nobits
+ 2579              	 .align 2
+ 2580              	 .set .LANCHOR6,.+0
+ 2583              	pxOverflowDelayedTaskList:
+ 2584 0000 00000000 	 .space 4
+ 2585              	 .section .bss.uxPendedTicks,"aw",%nobits
+ 2586              	 .align 2
+ 2587              	 .set .LANCHOR19,.+0
+ 2590              	uxPendedTicks:
+ 2591 0000 00000000 	 .space 4
+ 2592              	 .section .bss.pxReadyTasksLists,"aw",%nobits
+ 2593              	 .align 2
+ 2594              	 .set .LANCHOR8,.+0
+ 2597              	pxReadyTasksLists:
+ 2598 0000 00000000 	 .space 100
+ 2598      00000000 
+ 2598      00000000 
+ 2598      00000000 
+ 2598      00000000 
+ 2599              	 .section .bss.xTasksWaitingTermination,"aw",%nobits
+ 2600              	 .align 2
+ 2601              	 .set .LANCHOR11,.+0
+ 2604              	xTasksWaitingTermination:
+ 2605 0000 00000000 	 .space 20
+ 2605      00000000 
+ 2605      00000000 
+ 2605      00000000 
+ 2605      00000000 
+ 2606              	 .section .bss.uxDeletedTasksWaitingCleanUp,"aw",%nobits
+ 2607              	 .align 2
+ 2608              	 .set .LANCHOR15,.+0
+ 2611              	uxDeletedTasksWaitingCleanUp:
+ 2612 0000 00000000 	 .space 4
+ 2613              	 .section .bss.pxCurrentTCB,"aw",%nobits
+ 2614              	 .align 2
+ 2615              	 .set .LANCHOR5,.+0
+ 2618              	pxCurrentTCB:
+ 2619 0000 00000000 	 .space 4
+ 2620              	 .section .bss.xPendingReadyList,"aw",%nobits
+ 2621              	 .align 2
+ 2622              	 .set .LANCHOR1,.+0
+ 2625              	xPendingReadyList:
+ 2626 0000 00000000 	 .space 20
+ 2626      00000000 
+ 2626      00000000 
+ 2626      00000000 
+ 2626      00000000 
+ 2627              	 .section .rodata.str1.1,"aMS",%progbits,1
+ 2628              	.LC51:
+ 2629 0000 49444C45 	 .ascii "IDLE\000"
+ 2629      00
+ 2630              	 .section .bss.xTickCount,"aw",%nobits
+ 2631              	 .align 2
+ 2632              	 .set .LANCHOR4,.+0
+ 2635              	xTickCount:
+ 2636 0000 00000000 	 .space 4
+ 2637              	 .section .bss.xNextTaskUnblockTime,"aw",%nobits
+ 2638              	 .align 2
+ 2639              	 .set .LANCHOR3,.+0
+ 2642              	xNextTaskUnblockTime:
+ 2643 0000 00000000 	 .space 4
+ 2644              	 .section .bss.uxTaskNumber,"aw",%nobits
+ 2645              	 .align 2
+ 2646              	 .set .LANCHOR13,.+0
+ 2649              	uxTaskNumber:
+ 2650 0000 00000000 	 .space 4
+ 2651              	 .section .bss.uxCurrentNumberOfTasks,"aw",%nobits
+ 2652              	 .align 2
+ 2653              	 .set .LANCHOR7,.+0
+ 2656              	uxCurrentNumberOfTasks:
+ 2657 0000 00000000 	 .space 4
+ 2658              	 .section .bss.xDelayedTaskList2,"aw",%nobits
+ 2659              	 .align 2
+ 2660              	 .set .LANCHOR10,.+0
+ 2663              	xDelayedTaskList2:
+ 2664 0000 00000000 	 .space 20
+ 2664      00000000 
+ 2664      00000000 
+ 2664      00000000 
+ 2664      00000000 
+ 2665              	 .section .bss.xIdleTaskHandle,"aw",%nobits
+ 2666              	 .align 2
+ 2667              	 .set .LANCHOR17,.+0
+ 2670              	xIdleTaskHandle:
+ 2671 0000 00000000 	 .space 4
+ 2672              	 .section .bss.xSuspendedTaskList,"aw",%nobits
+ 2673              	 .align 2
+ 2674              	 .set .LANCHOR0,.+0
+ 2677              	xSuspendedTaskList:
+ 2678 0000 00000000 	 .space 20
+ 2678      00000000 
+ 2678      00000000 
+ 2678      00000000 
+ 2678      00000000 
+ 2679              	 .section .bss.uxTopReadyPriority,"aw",%nobits
+ 2680              	 .align 2
+ 2681              	 .set .LANCHOR14,.+0
+ 2684              	uxTopReadyPriority:
+ 2685 0000 00000000 	 .space 4
+ 2686              	 .section .bss.xYieldPending,"aw",%nobits
+ 2687              	 .align 2
+ 2688              	 .set .LANCHOR20,.+0
+ 2691              	xYieldPending:
+ 2692 0000 00000000 	 .space 4
+ 2693              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 tasks.c
+    {standard input}:15     .text.prvTaskIsTaskSuspended:00000000 $t
+    {standard input}:19     .text.prvTaskIsTaskSuspended:00000000 prvTaskIsTaskSuspended
+    {standard input}:49     .text.prvTaskIsTaskSuspended:00000024 $d
+    {standard input}:53     .text.prvResetNextTaskUnblockTime:00000000 $t
+    {standard input}:57     .text.prvResetNextTaskUnblockTime:00000000 prvResetNextTaskUnblockTime
+    {standard input}:79     .text.prvResetNextTaskUnblockTime:00000020 $d
+    {standard input}:83     .text.prvAddCurrentTaskToDelayedList:00000000 $t
+    {standard input}:87     .text.prvAddCurrentTaskToDelayedList:00000000 prvAddCurrentTaskToDelayedList
+    {standard input}:136    .text.prvAddCurrentTaskToDelayedList:0000005c $d
+    {standard input}:144    .text.xTaskCreate:00000000 $t
+    {standard input}:149    .text.xTaskCreate:00000000 xTaskCreate
+    {standard input}:319    .text.xTaskCreate:00000150 $d
+    {standard input}:334    .text.vTaskDelete:00000000 $t
+    {standard input}:339    .text.vTaskDelete:00000000 vTaskDelete
+    {standard input}:410    .text.vTaskDelete:00000084 $d
+    {standard input}:419    .text.eTaskGetState:00000000 $t
+    {standard input}:424    .text.eTaskGetState:00000000 eTaskGetState
+    {standard input}:477    .text.eTaskGetState:00000058 $d
+    {standard input}:484    .text.uxTaskPriorityGet:00000000 $t
+    {standard input}:489    .text.uxTaskPriorityGet:00000000 uxTaskPriorityGet
+    {standard input}:506    .text.uxTaskPriorityGet:0000001c $d
+    {standard input}:509    .text.uxTaskPriorityGetFromISR:00000000 $t
+    {standard input}:514    .text.uxTaskPriorityGetFromISR:00000000 uxTaskPriorityGetFromISR
+    {standard input}:531    .text.uxTaskPriorityGetFromISR:0000001c $d
+    {standard input}:534    .text.vTaskPrioritySet:00000000 $t
+    {standard input}:539    .text.vTaskPrioritySet:00000000 vTaskPrioritySet
+    {standard input}:628    .text.vTaskPrioritySet:00000098 $d
+    {standard input}:633    .text.vTaskResume:00000000 $t
+    {standard input}:638    .text.vTaskResume:00000000 vTaskResume
+    {standard input}:689    .text.vTaskResume:00000058 $d
+    {standard input}:694    .text.xTaskResumeFromISR:00000000 $t
+    {standard input}:699    .text.xTaskResumeFromISR:00000000 xTaskResumeFromISR
+    {standard input}:759    .text.xTaskResumeFromISR:00000068 $d
+    {standard input}:766    .text.vTaskStartScheduler:00000000 $t
+    {standard input}:771    .text.vTaskStartScheduler:00000000 vTaskStartScheduler
+    {standard input}:813    .text.vTaskStartScheduler:0000003c $d
+    {standard input}:1318   .text.prvIdleTask:00000000 prvIdleTask
+    {standard input}:821    .text.vTaskEndScheduler:00000000 $t
+    {standard input}:826    .text.vTaskEndScheduler:00000000 vTaskEndScheduler
+    {standard input}:841    .text.vTaskEndScheduler:00000010 $d
+    {standard input}:844    .text.vTaskSuspendAll:00000000 $t
+    {standard input}:849    .text.vTaskSuspendAll:00000000 vTaskSuspendAll
+    {standard input}:859    .text.vTaskSuspendAll:0000000c $d
+    {standard input}:862    .text.xTaskGetTickCount:00000000 $t
+    {standard input}:867    .text.xTaskGetTickCount:00000000 xTaskGetTickCount
+    {standard input}:875    .text.xTaskGetTickCount:00000008 $d
+    {standard input}:878    .text.xTaskGetTickCountFromISR:00000000 $t
+    {standard input}:883    .text.xTaskGetTickCountFromISR:00000000 xTaskGetTickCountFromISR
+    {standard input}:891    .text.xTaskGetTickCountFromISR:00000008 $d
+    {standard input}:894    .text.uxTaskGetNumberOfTasks:00000000 $t
+    {standard input}:899    .text.uxTaskGetNumberOfTasks:00000000 uxTaskGetNumberOfTasks
+    {standard input}:907    .text.uxTaskGetNumberOfTasks:00000008 $d
+    {standard input}:910    .text.pcTaskGetName:00000000 $t
+    {standard input}:915    .text.pcTaskGetName:00000000 pcTaskGetName
+    {standard input}:935    .text.pcTaskGetName:00000014 $d
+    {standard input}:938    .text.xTaskIncrementTick:00000000 $t
+    {standard input}:943    .text.xTaskIncrementTick:00000000 xTaskIncrementTick
+    {standard input}:1066   .text.xTaskIncrementTick:000000d4 $d
+    {standard input}:1079   .text.xTaskResumeAll:00000000 $t
+    {standard input}:1084   .text.xTaskResumeAll:00000000 xTaskResumeAll
+    {standard input}:1185   .text.xTaskResumeAll:000000b4 $d
+    {standard input}:1195   .text.vTaskDelayUntil:00000000 $t
+    {standard input}:1200   .text.vTaskDelayUntil:00000000 vTaskDelayUntil
+    {standard input}:1270   .text.vTaskDelayUntil:00000064 $d
+    {standard input}:1274   .text.vTaskDelay:00000000 $t
+    {standard input}:1279   .text.vTaskDelay:00000000 vTaskDelay
+    {standard input}:1311   .text.vTaskDelay:00000030 $d
+    {standard input}:1314   .text.prvIdleTask:00000000 $t
+    {standard input}:1359   .text.prvIdleTask:00000058 $d
+    {standard input}:1365   .text.vTaskSwitchContext:00000000 $t
+    {standard input}:1370   .text.vTaskSwitchContext:00000000 vTaskSwitchContext
+    {standard input}:1428   .text.vTaskSwitchContext:00000058 $d
+    {standard input}:1435   .text.vTaskSuspend:00000000 $t
+    {standard input}:1440   .text.vTaskSuspend:00000000 vTaskSuspend
+    {standard input}:1508   .text.vTaskSuspend:0000007c $d
+    {standard input}:1515   .text.vTaskPlaceOnEventList:00000000 $t
+    {standard input}:1520   .text.vTaskPlaceOnEventList:00000000 vTaskPlaceOnEventList
+    {standard input}:1544   .text.vTaskPlaceOnEventList:00000020 $d
+    {standard input}:1547   .text.vTaskPlaceOnUnorderedEventList:00000000 $t
+    {standard input}:1552   .text.vTaskPlaceOnUnorderedEventList:00000000 vTaskPlaceOnUnorderedEventList
+    {standard input}:1592   .text.vTaskPlaceOnUnorderedEventList:00000038 $d
+    {standard input}:1596   .text.xTaskRemoveFromEventList:00000000 $t
+    {standard input}:1601   .text.xTaskRemoveFromEventList:00000000 xTaskRemoveFromEventList
+    {standard input}:1656   .text.xTaskRemoveFromEventList:0000005c $d
+    {standard input}:1664   .text.xTaskRemoveFromUnorderedEventList:00000000 $t
+    {standard input}:1669   .text.xTaskRemoveFromUnorderedEventList:00000000 xTaskRemoveFromUnorderedEventList
+    {standard input}:1729   .text.xTaskRemoveFromUnorderedEventList:0000005c $d
+    {standard input}:1736   .text.vTaskSetTimeOutState:00000000 $t
+    {standard input}:1741   .text.vTaskSetTimeOutState:00000000 vTaskSetTimeOutState
+    {standard input}:1762   .text.vTaskSetTimeOutState:00000018 $d
+    {standard input}:1766   .text.xTaskCheckForTimeOut:00000000 $t
+    {standard input}:1771   .text.xTaskCheckForTimeOut:00000000 xTaskCheckForTimeOut
+    {standard input}:1828   .text.xTaskCheckForTimeOut:00000058 $d
+    {standard input}:1832   .text.vTaskMissedYield:00000000 $t
+    {standard input}:1837   .text.vTaskMissedYield:00000000 vTaskMissedYield
+    {standard input}:1846   .text.vTaskMissedYield:00000008 $d
+    {standard input}:1849   .text.xTaskGetCurrentTaskHandle:00000000 $t
+    {standard input}:1854   .text.xTaskGetCurrentTaskHandle:00000000 xTaskGetCurrentTaskHandle
+    {standard input}:1862   .text.xTaskGetCurrentTaskHandle:00000008 $d
+    {standard input}:1865   .text.vTaskPriorityInherit:00000000 $t
+    {standard input}:1870   .text.vTaskPriorityInherit:00000000 vTaskPriorityInherit
+    {standard input}:1925   .text.vTaskPriorityInherit:00000060 $d
+    {standard input}:1930   .text.xTaskPriorityDisinherit:00000000 $t
+    {standard input}:1935   .text.xTaskPriorityDisinherit:00000000 xTaskPriorityDisinherit
+    {standard input}:2000   .text.xTaskPriorityDisinherit:00000060 $d
+    {standard input}:2005   .text.uxTaskResetEventItemValue:00000000 $t
+    {standard input}:2010   .text.uxTaskResetEventItemValue:00000000 uxTaskResetEventItemValue
+    {standard input}:2025   .text.uxTaskResetEventItemValue:00000014 $d
+    {standard input}:2028   .text.pvTaskIncrementMutexHeldCount:00000000 $t
+    {standard input}:2033   .text.pvTaskIncrementMutexHeldCount:00000000 pvTaskIncrementMutexHeldCount
+    {standard input}:2049   .text.pvTaskIncrementMutexHeldCount:00000014 $d
+    {standard input}:2052   .text.ulTaskNotifyTake:00000000 $t
+    {standard input}:2057   .text.ulTaskNotifyTake:00000000 ulTaskNotifyTake
+    {standard input}:2102   .text.ulTaskNotifyTake:00000058 $d
+    {standard input}:2105   .text.xTaskNotifyWait:00000000 $t
+    {standard input}:2110   .text.xTaskNotifyWait:00000000 xTaskNotifyWait
+    {standard input}:2169   .text.xTaskNotifyWait:00000074 $d
+    {standard input}:2172   .text.xTaskGenericNotify:00000000 $t
+    {standard input}:2177   .text.xTaskGenericNotify:00000000 xTaskGenericNotify
+    {standard input}:2209   .text.xTaskGenericNotify:00000034 $d
+    {standard input}:2213   .text.xTaskGenericNotify:00000038 $t
+    {standard input}:2277   .text.xTaskGenericNotify:0000009c $d
+    {standard input}:2282   .text.xTaskGenericNotifyFromISR:00000000 $t
+    {standard input}:2287   .text.xTaskGenericNotifyFromISR:00000000 xTaskGenericNotifyFromISR
+    {standard input}:2321   .text.xTaskGenericNotifyFromISR:00000038 $d
+    {standard input}:2325   .text.xTaskGenericNotifyFromISR:0000003c $t
+    {standard input}:2408   .text.xTaskGenericNotifyFromISR:000000bc $d
+    {standard input}:2416   .text.vTaskNotifyGiveFromISR:00000000 $t
+    {standard input}:2421   .text.vTaskNotifyGiveFromISR:00000000 vTaskNotifyGiveFromISR
+    {standard input}:2504   .text.vTaskNotifyGiveFromISR:00000088 $d
+    {standard input}:2512   .text.xTaskNotifyStateClear:00000000 $t
+    {standard input}:2517   .text.xTaskNotifyStateClear:00000000 xTaskNotifyStateClear
+    {standard input}:2540   .text.xTaskNotifyStateClear:00000024 $d
+    {standard input}:2618   .bss.pxCurrentTCB:00000000 pxCurrentTCB
+    {standard input}:2544   .bss.xNumOfOverflows:00000000 $d
+    {standard input}:2548   .bss.xNumOfOverflows:00000000 xNumOfOverflows
+    {standard input}:2551   .bss.pxDelayedTaskList:00000000 $d
+    {standard input}:2555   .bss.pxDelayedTaskList:00000000 pxDelayedTaskList
+    {standard input}:2558   .bss.xSchedulerRunning:00000000 $d
+    {standard input}:2562   .bss.xSchedulerRunning:00000000 xSchedulerRunning
+    {standard input}:2565   .bss.uxSchedulerSuspended:00000000 $d
+    {standard input}:2569   .bss.uxSchedulerSuspended:00000000 uxSchedulerSuspended
+    {standard input}:2572   .bss.xDelayedTaskList1:00000000 $d
+    {standard input}:2576   .bss.xDelayedTaskList1:00000000 xDelayedTaskList1
+    {standard input}:2579   .bss.pxOverflowDelayedTaskList:00000000 $d
+    {standard input}:2583   .bss.pxOverflowDelayedTaskList:00000000 pxOverflowDelayedTaskList
+    {standard input}:2586   .bss.uxPendedTicks:00000000 $d
+    {standard input}:2590   .bss.uxPendedTicks:00000000 uxPendedTicks
+    {standard input}:2593   .bss.pxReadyTasksLists:00000000 $d
+    {standard input}:2597   .bss.pxReadyTasksLists:00000000 pxReadyTasksLists
+    {standard input}:2600   .bss.xTasksWaitingTermination:00000000 $d
+    {standard input}:2604   .bss.xTasksWaitingTermination:00000000 xTasksWaitingTermination
+    {standard input}:2607   .bss.uxDeletedTasksWaitingCleanUp:00000000 $d
+    {standard input}:2611   .bss.uxDeletedTasksWaitingCleanUp:00000000 uxDeletedTasksWaitingCleanUp
+    {standard input}:2614   .bss.pxCurrentTCB:00000000 $d
+    {standard input}:2621   .bss.xPendingReadyList:00000000 $d
+    {standard input}:2625   .bss.xPendingReadyList:00000000 xPendingReadyList
+    {standard input}:2631   .bss.xTickCount:00000000 $d
+    {standard input}:2635   .bss.xTickCount:00000000 xTickCount
+    {standard input}:2638   .bss.xNextTaskUnblockTime:00000000 $d
+    {standard input}:2642   .bss.xNextTaskUnblockTime:00000000 xNextTaskUnblockTime
+    {standard input}:2645   .bss.uxTaskNumber:00000000 $d
+    {standard input}:2649   .bss.uxTaskNumber:00000000 uxTaskNumber
+    {standard input}:2652   .bss.uxCurrentNumberOfTasks:00000000 $d
+    {standard input}:2656   .bss.uxCurrentNumberOfTasks:00000000 uxCurrentNumberOfTasks
+    {standard input}:2659   .bss.xDelayedTaskList2:00000000 $d
+    {standard input}:2663   .bss.xDelayedTaskList2:00000000 xDelayedTaskList2
+    {standard input}:2666   .bss.xIdleTaskHandle:00000000 $d
+    {standard input}:2670   .bss.xIdleTaskHandle:00000000 xIdleTaskHandle
+    {standard input}:2673   .bss.xSuspendedTaskList:00000000 $d
+    {standard input}:2677   .bss.xSuspendedTaskList:00000000 xSuspendedTaskList
+    {standard input}:2680   .bss.uxTopReadyPriority:00000000 $d
+    {standard input}:2684   .bss.uxTopReadyPriority:00000000 uxTopReadyPriority
+    {standard input}:2687   .bss.xYieldPending:00000000 $d
+    {standard input}:2691   .bss.xYieldPending:00000000 xYieldPending
+
+UNDEFINED SYMBOLS
+uxListRemove
+vListInsertEnd
+vListInsert
+pvPortMalloc
+vPortFree
+vListInitialiseItem
+pxPortInitialiseStack
+vPortEnterCritical
+vListInitialise
+vPortExitCritical
+vPortYield
+ulSetInterruptMaskFromISR
+vClearInterruptMaskFromISR
+xPortStartScheduler
+vPortEndScheduler
+__gnu_thumb1_case_uqi

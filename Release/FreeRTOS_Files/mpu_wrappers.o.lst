@@ -1,0 +1,1133 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "mpu_wrappers.c"
+  14              	 .section .text.MPU_xTaskCreateRestricted,"ax",%progbits
+  15              	 .align 1
+  16              	 .global MPU_xTaskCreateRestricted
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	MPU_xTaskCreateRestricted:
+  21 0000 70B5     	 push {r4,r5,r6,lr}
+  22 0002 061C     	 mov r6,r0
+  23 0004 0C1C     	 mov r4,r1
+  24 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+  25 000a 211C     	 mov r1,r4
+  26 000c 051C     	 mov r5,r0
+  27 000e 301C     	 mov r0,r6
+  28 0010 FFF7FEFF 	 bl xTaskCreateRestricted
+  29 0014 041C     	 mov r4,r0
+  30 0016 281C     	 mov r0,r5
+  31 0018 FFF7FEFF 	 bl vPortResetPrivilege
+  32              	 
+  33 001c 201C     	 mov r0,r4
+  34 001e 70BD     	 pop {r4,r5,r6,pc}
+  36              	 .section .text.MPU_xTaskCreate,"ax",%progbits
+  37              	 .align 1
+  38              	 .global MPU_xTaskCreate
+  39              	 .code 16
+  40              	 .thumb_func
+  42              	MPU_xTaskCreate:
+  43 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+  44 0002 85B0     	 sub sp,sp,#20
+  45 0004 071C     	 mov r7,r0
+  46 0006 0E1C     	 mov r6,r1
+  47 0008 151C     	 mov r5,r2
+  48 000a 0393     	 str r3,[sp,#12]
+  49 000c FFF7FEFF 	 bl xPortRaisePrivilege
+  50 0010 0A9B     	 ldr r3,[sp,#40]
+  51 0012 2A1C     	 mov r2,r5
+  52 0014 0093     	 str r3,[sp]
+  53 0016 0B9B     	 ldr r3,[sp,#44]
+  54 0018 041C     	 mov r4,r0
+  55 001a 0193     	 str r3,[sp,#4]
+  56 001c 311C     	 mov r1,r6
+  57 001e 039B     	 ldr r3,[sp,#12]
+  58 0020 381C     	 mov r0,r7
+  59 0022 FFF7FEFF 	 bl xTaskCreate
+  60 0026 051C     	 mov r5,r0
+  61 0028 201C     	 mov r0,r4
+  62 002a FFF7FEFF 	 bl vPortResetPrivilege
+  63 002e 281C     	 mov r0,r5
+  64 0030 05B0     	 add sp,sp,#20
+  65              	 
+  66 0032 F0BD     	 pop {r4,r5,r6,r7,pc}
+  68              	 .section .text.MPU_vTaskAllocateMPURegions,"ax",%progbits
+  69              	 .align 1
+  70              	 .global MPU_vTaskAllocateMPURegions
+  71              	 .code 16
+  72              	 .thumb_func
+  74              	MPU_vTaskAllocateMPURegions:
+  75 0000 70B5     	 push {r4,r5,r6,lr}
+  76 0002 061C     	 mov r6,r0
+  77 0004 0D1C     	 mov r5,r1
+  78 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+  79 000a 041C     	 mov r4,r0
+  80 000c 291C     	 mov r1,r5
+  81 000e 301C     	 mov r0,r6
+  82 0010 FFF7FEFF 	 bl vTaskAllocateMPURegions
+  83 0014 201C     	 mov r0,r4
+  84 0016 FFF7FEFF 	 bl vPortResetPrivilege
+  85              	 
+  86 001a 70BD     	 pop {r4,r5,r6,pc}
+  88              	 .section .text.MPU_vTaskDelete,"ax",%progbits
+  89              	 .align 1
+  90              	 .global MPU_vTaskDelete
+  91              	 .code 16
+  92              	 .thumb_func
+  94              	MPU_vTaskDelete:
+  95 0000 38B5     	 push {r3,r4,r5,lr}
+  96 0002 051C     	 mov r5,r0
+  97 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+  98 0008 041C     	 mov r4,r0
+  99 000a 281C     	 mov r0,r5
+ 100 000c FFF7FEFF 	 bl vTaskDelete
+ 101 0010 201C     	 mov r0,r4
+ 102 0012 FFF7FEFF 	 bl vPortResetPrivilege
+ 103              	 
+ 104 0016 38BD     	 pop {r3,r4,r5,pc}
+ 106              	 .section .text.MPU_vTaskDelayUntil,"ax",%progbits
+ 107              	 .align 1
+ 108              	 .global MPU_vTaskDelayUntil
+ 109              	 .code 16
+ 110              	 .thumb_func
+ 112              	MPU_vTaskDelayUntil:
+ 113 0000 70B5     	 push {r4,r5,r6,lr}
+ 114 0002 061C     	 mov r6,r0
+ 115 0004 0D1C     	 mov r5,r1
+ 116 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 117 000a 041C     	 mov r4,r0
+ 118 000c 291C     	 mov r1,r5
+ 119 000e 301C     	 mov r0,r6
+ 120 0010 FFF7FEFF 	 bl vTaskDelayUntil
+ 121 0014 201C     	 mov r0,r4
+ 122 0016 FFF7FEFF 	 bl vPortResetPrivilege
+ 123              	 
+ 124 001a 70BD     	 pop {r4,r5,r6,pc}
+ 126              	 .section .text.MPU_vTaskDelay,"ax",%progbits
+ 127              	 .align 1
+ 128              	 .global MPU_vTaskDelay
+ 129              	 .code 16
+ 130              	 .thumb_func
+ 132              	MPU_vTaskDelay:
+ 133 0000 38B5     	 push {r3,r4,r5,lr}
+ 134 0002 051C     	 mov r5,r0
+ 135 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 136 0008 041C     	 mov r4,r0
+ 137 000a 281C     	 mov r0,r5
+ 138 000c FFF7FEFF 	 bl vTaskDelay
+ 139 0010 201C     	 mov r0,r4
+ 140 0012 FFF7FEFF 	 bl vPortResetPrivilege
+ 141              	 
+ 142 0016 38BD     	 pop {r3,r4,r5,pc}
+ 144              	 .section .text.MPU_uxTaskPriorityGet,"ax",%progbits
+ 145              	 .align 1
+ 146              	 .global MPU_uxTaskPriorityGet
+ 147              	 .code 16
+ 148              	 .thumb_func
+ 150              	MPU_uxTaskPriorityGet:
+ 151 0000 38B5     	 push {r3,r4,r5,lr}
+ 152 0002 041C     	 mov r4,r0
+ 153 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 154 0008 051C     	 mov r5,r0
+ 155 000a 201C     	 mov r0,r4
+ 156 000c FFF7FEFF 	 bl uxTaskPriorityGet
+ 157 0010 041C     	 mov r4,r0
+ 158 0012 281C     	 mov r0,r5
+ 159 0014 FFF7FEFF 	 bl vPortResetPrivilege
+ 160              	 
+ 161 0018 201C     	 mov r0,r4
+ 162 001a 38BD     	 pop {r3,r4,r5,pc}
+ 164              	 .section .text.MPU_vTaskPrioritySet,"ax",%progbits
+ 165              	 .align 1
+ 166              	 .global MPU_vTaskPrioritySet
+ 167              	 .code 16
+ 168              	 .thumb_func
+ 170              	MPU_vTaskPrioritySet:
+ 171 0000 70B5     	 push {r4,r5,r6,lr}
+ 172 0002 061C     	 mov r6,r0
+ 173 0004 0D1C     	 mov r5,r1
+ 174 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 175 000a 041C     	 mov r4,r0
+ 176 000c 291C     	 mov r1,r5
+ 177 000e 301C     	 mov r0,r6
+ 178 0010 FFF7FEFF 	 bl vTaskPrioritySet
+ 179 0014 201C     	 mov r0,r4
+ 180 0016 FFF7FEFF 	 bl vPortResetPrivilege
+ 181              	 
+ 182 001a 70BD     	 pop {r4,r5,r6,pc}
+ 184              	 .section .text.MPU_eTaskGetState,"ax",%progbits
+ 185              	 .align 1
+ 186              	 .global MPU_eTaskGetState
+ 187              	 .code 16
+ 188              	 .thumb_func
+ 190              	MPU_eTaskGetState:
+ 191 0000 38B5     	 push {r3,r4,r5,lr}
+ 192 0002 041C     	 mov r4,r0
+ 193 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 194 0008 051C     	 mov r5,r0
+ 195 000a 201C     	 mov r0,r4
+ 196 000c FFF7FEFF 	 bl eTaskGetState
+ 197 0010 041C     	 mov r4,r0
+ 198 0012 281C     	 mov r0,r5
+ 199 0014 FFF7FEFF 	 bl vPortResetPrivilege
+ 200              	 
+ 201 0018 201C     	 mov r0,r4
+ 202 001a 38BD     	 pop {r3,r4,r5,pc}
+ 204              	 .section .text.MPU_vTaskSuspend,"ax",%progbits
+ 205              	 .align 1
+ 206              	 .global MPU_vTaskSuspend
+ 207              	 .code 16
+ 208              	 .thumb_func
+ 210              	MPU_vTaskSuspend:
+ 211 0000 38B5     	 push {r3,r4,r5,lr}
+ 212 0002 051C     	 mov r5,r0
+ 213 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 214 0008 041C     	 mov r4,r0
+ 215 000a 281C     	 mov r0,r5
+ 216 000c FFF7FEFF 	 bl vTaskSuspend
+ 217 0010 201C     	 mov r0,r4
+ 218 0012 FFF7FEFF 	 bl vPortResetPrivilege
+ 219              	 
+ 220 0016 38BD     	 pop {r3,r4,r5,pc}
+ 222              	 .section .text.MPU_vTaskResume,"ax",%progbits
+ 223              	 .align 1
+ 224              	 .global MPU_vTaskResume
+ 225              	 .code 16
+ 226              	 .thumb_func
+ 228              	MPU_vTaskResume:
+ 229 0000 38B5     	 push {r3,r4,r5,lr}
+ 230 0002 051C     	 mov r5,r0
+ 231 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 232 0008 041C     	 mov r4,r0
+ 233 000a 281C     	 mov r0,r5
+ 234 000c FFF7FEFF 	 bl vTaskResume
+ 235 0010 201C     	 mov r0,r4
+ 236 0012 FFF7FEFF 	 bl vPortResetPrivilege
+ 237              	 
+ 238 0016 38BD     	 pop {r3,r4,r5,pc}
+ 240              	 .section .text.MPU_vTaskSuspendAll,"ax",%progbits
+ 241              	 .align 1
+ 242              	 .global MPU_vTaskSuspendAll
+ 243              	 .code 16
+ 244              	 .thumb_func
+ 246              	MPU_vTaskSuspendAll:
+ 247 0000 10B5     	 push {r4,lr}
+ 248 0002 FFF7FEFF 	 bl xPortRaisePrivilege
+ 249 0006 041C     	 mov r4,r0
+ 250 0008 FFF7FEFF 	 bl vTaskSuspendAll
+ 251 000c 201C     	 mov r0,r4
+ 252 000e FFF7FEFF 	 bl vPortResetPrivilege
+ 253              	 
+ 254 0012 10BD     	 pop {r4,pc}
+ 256              	 .section .text.MPU_xTaskResumeAll,"ax",%progbits
+ 257              	 .align 1
+ 258              	 .global MPU_xTaskResumeAll
+ 259              	 .code 16
+ 260              	 .thumb_func
+ 262              	MPU_xTaskResumeAll:
+ 263 0000 38B5     	 push {r3,r4,r5,lr}
+ 264 0002 FFF7FEFF 	 bl xPortRaisePrivilege
+ 265 0006 051C     	 mov r5,r0
+ 266 0008 FFF7FEFF 	 bl xTaskResumeAll
+ 267 000c 041C     	 mov r4,r0
+ 268 000e 281C     	 mov r0,r5
+ 269 0010 FFF7FEFF 	 bl vPortResetPrivilege
+ 270              	 
+ 271 0014 201C     	 mov r0,r4
+ 272 0016 38BD     	 pop {r3,r4,r5,pc}
+ 274              	 .section .text.MPU_xTaskGetTickCount,"ax",%progbits
+ 275              	 .align 1
+ 276              	 .global MPU_xTaskGetTickCount
+ 277              	 .code 16
+ 278              	 .thumb_func
+ 280              	MPU_xTaskGetTickCount:
+ 281 0000 38B5     	 push {r3,r4,r5,lr}
+ 282 0002 FFF7FEFF 	 bl xPortRaisePrivilege
+ 283 0006 051C     	 mov r5,r0
+ 284 0008 FFF7FEFF 	 bl xTaskGetTickCount
+ 285 000c 041C     	 mov r4,r0
+ 286 000e 281C     	 mov r0,r5
+ 287 0010 FFF7FEFF 	 bl vPortResetPrivilege
+ 288              	 
+ 289 0014 201C     	 mov r0,r4
+ 290 0016 38BD     	 pop {r3,r4,r5,pc}
+ 292              	 .section .text.MPU_uxTaskGetNumberOfTasks,"ax",%progbits
+ 293              	 .align 1
+ 294              	 .global MPU_uxTaskGetNumberOfTasks
+ 295              	 .code 16
+ 296              	 .thumb_func
+ 298              	MPU_uxTaskGetNumberOfTasks:
+ 299 0000 38B5     	 push {r3,r4,r5,lr}
+ 300 0002 FFF7FEFF 	 bl xPortRaisePrivilege
+ 301 0006 051C     	 mov r5,r0
+ 302 0008 FFF7FEFF 	 bl uxTaskGetNumberOfTasks
+ 303 000c 041C     	 mov r4,r0
+ 304 000e 281C     	 mov r0,r5
+ 305 0010 FFF7FEFF 	 bl vPortResetPrivilege
+ 306              	 
+ 307 0014 201C     	 mov r0,r4
+ 308 0016 38BD     	 pop {r3,r4,r5,pc}
+ 310              	 .section .text.MPU_pcTaskGetName,"ax",%progbits
+ 311              	 .align 1
+ 312              	 .global MPU_pcTaskGetName
+ 313              	 .code 16
+ 314              	 .thumb_func
+ 316              	MPU_pcTaskGetName:
+ 317 0000 38B5     	 push {r3,r4,r5,lr}
+ 318 0002 041C     	 mov r4,r0
+ 319 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 320 0008 051C     	 mov r5,r0
+ 321 000a 201C     	 mov r0,r4
+ 322 000c FFF7FEFF 	 bl pcTaskGetName
+ 323 0010 041C     	 mov r4,r0
+ 324 0012 281C     	 mov r0,r5
+ 325 0014 FFF7FEFF 	 bl vPortResetPrivilege
+ 326              	 
+ 327 0018 201C     	 mov r0,r4
+ 328 001a 38BD     	 pop {r3,r4,r5,pc}
+ 330              	 .section .text.MPU_vTaskSetTimeOutState,"ax",%progbits
+ 331              	 .align 1
+ 332              	 .global MPU_vTaskSetTimeOutState
+ 333              	 .code 16
+ 334              	 .thumb_func
+ 336              	MPU_vTaskSetTimeOutState:
+ 337 0000 38B5     	 push {r3,r4,r5,lr}
+ 338 0002 051C     	 mov r5,r0
+ 339 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 340 0008 041C     	 mov r4,r0
+ 341 000a 281C     	 mov r0,r5
+ 342 000c FFF7FEFF 	 bl vTaskSetTimeOutState
+ 343 0010 201C     	 mov r0,r4
+ 344 0012 FFF7FEFF 	 bl vPortResetPrivilege
+ 345              	 
+ 346 0016 38BD     	 pop {r3,r4,r5,pc}
+ 348              	 .section .text.MPU_xTaskCheckForTimeOut,"ax",%progbits
+ 349              	 .align 1
+ 350              	 .global MPU_xTaskCheckForTimeOut
+ 351              	 .code 16
+ 352              	 .thumb_func
+ 354              	MPU_xTaskCheckForTimeOut:
+ 355 0000 70B5     	 push {r4,r5,r6,lr}
+ 356 0002 061C     	 mov r6,r0
+ 357 0004 0C1C     	 mov r4,r1
+ 358 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 359 000a 211C     	 mov r1,r4
+ 360 000c 051C     	 mov r5,r0
+ 361 000e 301C     	 mov r0,r6
+ 362 0010 FFF7FEFF 	 bl xTaskCheckForTimeOut
+ 363 0014 041C     	 mov r4,r0
+ 364 0016 281C     	 mov r0,r5
+ 365 0018 FFF7FEFF 	 bl vPortResetPrivilege
+ 366              	 
+ 367 001c 201C     	 mov r0,r4
+ 368 001e 70BD     	 pop {r4,r5,r6,pc}
+ 370              	 .section .text.MPU_xTaskGenericNotify,"ax",%progbits
+ 371              	 .align 1
+ 372              	 .global MPU_xTaskGenericNotify
+ 373              	 .code 16
+ 374              	 .thumb_func
+ 376              	MPU_xTaskGenericNotify:
+ 377 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 378 0002 071C     	 mov r7,r0
+ 379 0004 0E1C     	 mov r6,r1
+ 380 0006 151C     	 mov r5,r2
+ 381 0008 0193     	 str r3,[sp,#4]
+ 382 000a FFF7FEFF 	 bl xPortRaisePrivilege
+ 383 000e 311C     	 mov r1,r6
+ 384 0010 2A1C     	 mov r2,r5
+ 385 0012 041C     	 mov r4,r0
+ 386 0014 019B     	 ldr r3,[sp,#4]
+ 387 0016 381C     	 mov r0,r7
+ 388 0018 FFF7FEFF 	 bl xTaskGenericNotify
+ 389 001c 051C     	 mov r5,r0
+ 390 001e 201C     	 mov r0,r4
+ 391 0020 FFF7FEFF 	 bl vPortResetPrivilege
+ 392              	 
+ 393 0024 281C     	 mov r0,r5
+ 394 0026 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 396              	 .section .text.MPU_xTaskNotifyWait,"ax",%progbits
+ 397              	 .align 1
+ 398              	 .global MPU_xTaskNotifyWait
+ 399              	 .code 16
+ 400              	 .thumb_func
+ 402              	MPU_xTaskNotifyWait:
+ 403 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 404 0002 071C     	 mov r7,r0
+ 405 0004 0E1C     	 mov r6,r1
+ 406 0006 151C     	 mov r5,r2
+ 407 0008 0193     	 str r3,[sp,#4]
+ 408 000a FFF7FEFF 	 bl xPortRaisePrivilege
+ 409 000e 311C     	 mov r1,r6
+ 410 0010 2A1C     	 mov r2,r5
+ 411 0012 041C     	 mov r4,r0
+ 412 0014 019B     	 ldr r3,[sp,#4]
+ 413 0016 381C     	 mov r0,r7
+ 414 0018 FFF7FEFF 	 bl xTaskNotifyWait
+ 415 001c 051C     	 mov r5,r0
+ 416 001e 201C     	 mov r0,r4
+ 417 0020 FFF7FEFF 	 bl vPortResetPrivilege
+ 418              	 
+ 419 0024 281C     	 mov r0,r5
+ 420 0026 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 422              	 .section .text.MPU_ulTaskNotifyTake,"ax",%progbits
+ 423              	 .align 1
+ 424              	 .global MPU_ulTaskNotifyTake
+ 425              	 .code 16
+ 426              	 .thumb_func
+ 428              	MPU_ulTaskNotifyTake:
+ 429 0000 70B5     	 push {r4,r5,r6,lr}
+ 430 0002 061C     	 mov r6,r0
+ 431 0004 0C1C     	 mov r4,r1
+ 432 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 433 000a 211C     	 mov r1,r4
+ 434 000c 051C     	 mov r5,r0
+ 435 000e 301C     	 mov r0,r6
+ 436 0010 FFF7FEFF 	 bl ulTaskNotifyTake
+ 437 0014 041C     	 mov r4,r0
+ 438 0016 281C     	 mov r0,r5
+ 439 0018 FFF7FEFF 	 bl vPortResetPrivilege
+ 440              	 
+ 441 001c 201C     	 mov r0,r4
+ 442 001e 70BD     	 pop {r4,r5,r6,pc}
+ 444              	 .section .text.MPU_xTaskNotifyStateClear,"ax",%progbits
+ 445              	 .align 1
+ 446              	 .global MPU_xTaskNotifyStateClear
+ 447              	 .code 16
+ 448              	 .thumb_func
+ 450              	MPU_xTaskNotifyStateClear:
+ 451 0000 38B5     	 push {r3,r4,r5,lr}
+ 452 0002 041C     	 mov r4,r0
+ 453 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 454 0008 051C     	 mov r5,r0
+ 455 000a 201C     	 mov r0,r4
+ 456 000c FFF7FEFF 	 bl xTaskNotifyStateClear
+ 457 0010 041C     	 mov r4,r0
+ 458 0012 281C     	 mov r0,r5
+ 459 0014 FFF7FEFF 	 bl vPortResetPrivilege
+ 460              	 
+ 461 0018 201C     	 mov r0,r4
+ 462 001a 38BD     	 pop {r3,r4,r5,pc}
+ 464              	 .section .text.MPU_xQueueGenericCreate,"ax",%progbits
+ 465              	 .align 1
+ 466              	 .global MPU_xQueueGenericCreate
+ 467              	 .code 16
+ 468              	 .thumb_func
+ 470              	MPU_xQueueGenericCreate:
+ 471 0000 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+ 472 0002 071C     	 mov r7,r0
+ 473 0004 0E1C     	 mov r6,r1
+ 474 0006 141C     	 mov r4,r2
+ 475 0008 FFF7FEFF 	 bl xPortRaisePrivilege
+ 476 000c 311C     	 mov r1,r6
+ 477 000e 051C     	 mov r5,r0
+ 478 0010 221C     	 mov r2,r4
+ 479 0012 381C     	 mov r0,r7
+ 480 0014 FFF7FEFF 	 bl xQueueGenericCreate
+ 481 0018 041C     	 mov r4,r0
+ 482 001a 281C     	 mov r0,r5
+ 483 001c FFF7FEFF 	 bl vPortResetPrivilege
+ 484              	 
+ 485 0020 201C     	 mov r0,r4
+ 486 0022 F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 488              	 .section .text.MPU_xQueueGenericReset,"ax",%progbits
+ 489              	 .align 1
+ 490              	 .global MPU_xQueueGenericReset
+ 491              	 .code 16
+ 492              	 .thumb_func
+ 494              	MPU_xQueueGenericReset:
+ 495 0000 70B5     	 push {r4,r5,r6,lr}
+ 496 0002 061C     	 mov r6,r0
+ 497 0004 0C1C     	 mov r4,r1
+ 498 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 499 000a 211C     	 mov r1,r4
+ 500 000c 051C     	 mov r5,r0
+ 501 000e 301C     	 mov r0,r6
+ 502 0010 FFF7FEFF 	 bl xQueueGenericReset
+ 503 0014 041C     	 mov r4,r0
+ 504 0016 281C     	 mov r0,r5
+ 505 0018 FFF7FEFF 	 bl vPortResetPrivilege
+ 506              	 
+ 507 001c 201C     	 mov r0,r4
+ 508 001e 70BD     	 pop {r4,r5,r6,pc}
+ 510              	 .section .text.MPU_xQueueGenericSend,"ax",%progbits
+ 511              	 .align 1
+ 512              	 .global MPU_xQueueGenericSend
+ 513              	 .code 16
+ 514              	 .thumb_func
+ 516              	MPU_xQueueGenericSend:
+ 517 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 518 0002 071C     	 mov r7,r0
+ 519 0004 0E1C     	 mov r6,r1
+ 520 0006 151C     	 mov r5,r2
+ 521 0008 0193     	 str r3,[sp,#4]
+ 522 000a FFF7FEFF 	 bl xPortRaisePrivilege
+ 523 000e 311C     	 mov r1,r6
+ 524 0010 2A1C     	 mov r2,r5
+ 525 0012 041C     	 mov r4,r0
+ 526 0014 019B     	 ldr r3,[sp,#4]
+ 527 0016 381C     	 mov r0,r7
+ 528 0018 FFF7FEFF 	 bl xQueueGenericSend
+ 529 001c 051C     	 mov r5,r0
+ 530 001e 201C     	 mov r0,r4
+ 531 0020 FFF7FEFF 	 bl vPortResetPrivilege
+ 532              	 
+ 533 0024 281C     	 mov r0,r5
+ 534 0026 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 536              	 .section .text.MPU_uxQueueMessagesWaiting,"ax",%progbits
+ 537              	 .align 1
+ 538              	 .global MPU_uxQueueMessagesWaiting
+ 539              	 .code 16
+ 540              	 .thumb_func
+ 542              	MPU_uxQueueMessagesWaiting:
+ 543 0000 38B5     	 push {r3,r4,r5,lr}
+ 544 0002 041C     	 mov r4,r0
+ 545 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 546 0008 051C     	 mov r5,r0
+ 547 000a 201C     	 mov r0,r4
+ 548 000c FFF7FEFF 	 bl uxQueueMessagesWaiting
+ 549 0010 041C     	 mov r4,r0
+ 550 0012 281C     	 mov r0,r5
+ 551 0014 FFF7FEFF 	 bl vPortResetPrivilege
+ 552              	 
+ 553 0018 201C     	 mov r0,r4
+ 554 001a 38BD     	 pop {r3,r4,r5,pc}
+ 556              	 .section .text.MPU_uxQueueSpacesAvailable,"ax",%progbits
+ 557              	 .align 1
+ 558              	 .global MPU_uxQueueSpacesAvailable
+ 559              	 .code 16
+ 560              	 .thumb_func
+ 562              	MPU_uxQueueSpacesAvailable:
+ 563 0000 38B5     	 push {r3,r4,r5,lr}
+ 564 0002 041C     	 mov r4,r0
+ 565 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 566 0008 051C     	 mov r5,r0
+ 567 000a 201C     	 mov r0,r4
+ 568 000c FFF7FEFF 	 bl uxQueueSpacesAvailable
+ 569 0010 041C     	 mov r4,r0
+ 570 0012 281C     	 mov r0,r5
+ 571 0014 FFF7FEFF 	 bl vPortResetPrivilege
+ 572              	 
+ 573 0018 201C     	 mov r0,r4
+ 574 001a 38BD     	 pop {r3,r4,r5,pc}
+ 576              	 .section .text.MPU_xQueueGenericReceive,"ax",%progbits
+ 577              	 .align 1
+ 578              	 .global MPU_xQueueGenericReceive
+ 579              	 .code 16
+ 580              	 .thumb_func
+ 582              	MPU_xQueueGenericReceive:
+ 583 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 584 0002 071C     	 mov r7,r0
+ 585 0004 0E1C     	 mov r6,r1
+ 586 0006 151C     	 mov r5,r2
+ 587 0008 0193     	 str r3,[sp,#4]
+ 588 000a FFF7FEFF 	 bl xPortRaisePrivilege
+ 589 000e 311C     	 mov r1,r6
+ 590 0010 2A1C     	 mov r2,r5
+ 591 0012 041C     	 mov r4,r0
+ 592 0014 019B     	 ldr r3,[sp,#4]
+ 593 0016 381C     	 mov r0,r7
+ 594 0018 FFF7FEFF 	 bl xQueueGenericReceive
+ 595 001c 051C     	 mov r5,r0
+ 596 001e 201C     	 mov r0,r4
+ 597 0020 FFF7FEFF 	 bl vPortResetPrivilege
+ 598              	 
+ 599 0024 281C     	 mov r0,r5
+ 600 0026 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 602              	 .section .text.MPU_xQueuePeekFromISR,"ax",%progbits
+ 603              	 .align 1
+ 604              	 .global MPU_xQueuePeekFromISR
+ 605              	 .code 16
+ 606              	 .thumb_func
+ 608              	MPU_xQueuePeekFromISR:
+ 609 0000 70B5     	 push {r4,r5,r6,lr}
+ 610 0002 061C     	 mov r6,r0
+ 611 0004 0C1C     	 mov r4,r1
+ 612 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 613 000a 211C     	 mov r1,r4
+ 614 000c 051C     	 mov r5,r0
+ 615 000e 301C     	 mov r0,r6
+ 616 0010 FFF7FEFF 	 bl xQueuePeekFromISR
+ 617 0014 041C     	 mov r4,r0
+ 618 0016 281C     	 mov r0,r5
+ 619 0018 FFF7FEFF 	 bl vPortResetPrivilege
+ 620              	 
+ 621 001c 201C     	 mov r0,r4
+ 622 001e 70BD     	 pop {r4,r5,r6,pc}
+ 624              	 .section .text.MPU_xQueueGetMutexHolder,"ax",%progbits
+ 625              	 .align 1
+ 626              	 .global MPU_xQueueGetMutexHolder
+ 627              	 .code 16
+ 628              	 .thumb_func
+ 630              	MPU_xQueueGetMutexHolder:
+ 631 0000 38B5     	 push {r3,r4,r5,lr}
+ 632 0002 041C     	 mov r4,r0
+ 633 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 634 0008 051C     	 mov r5,r0
+ 635 000a 201C     	 mov r0,r4
+ 636 000c FFF7FEFF 	 bl xQueueGetMutexHolder
+ 637 0010 041C     	 mov r4,r0
+ 638 0012 281C     	 mov r0,r5
+ 639 0014 FFF7FEFF 	 bl vPortResetPrivilege
+ 640              	 
+ 641 0018 201C     	 mov r0,r4
+ 642 001a 38BD     	 pop {r3,r4,r5,pc}
+ 644              	 .section .text.MPU_xQueueCreateMutex,"ax",%progbits
+ 645              	 .align 1
+ 646              	 .global MPU_xQueueCreateMutex
+ 647              	 .code 16
+ 648              	 .thumb_func
+ 650              	MPU_xQueueCreateMutex:
+ 651 0000 38B5     	 push {r3,r4,r5,lr}
+ 652 0002 041C     	 mov r4,r0
+ 653 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 654 0008 051C     	 mov r5,r0
+ 655 000a 201C     	 mov r0,r4
+ 656 000c FFF7FEFF 	 bl xQueueCreateMutex
+ 657 0010 041C     	 mov r4,r0
+ 658 0012 281C     	 mov r0,r5
+ 659 0014 FFF7FEFF 	 bl vPortResetPrivilege
+ 660              	 
+ 661 0018 201C     	 mov r0,r4
+ 662 001a 38BD     	 pop {r3,r4,r5,pc}
+ 664              	 .section .text.MPU_xQueueTakeMutexRecursive,"ax",%progbits
+ 665              	 .align 1
+ 666              	 .global MPU_xQueueTakeMutexRecursive
+ 667              	 .code 16
+ 668              	 .thumb_func
+ 670              	MPU_xQueueTakeMutexRecursive:
+ 671 0000 70B5     	 push {r4,r5,r6,lr}
+ 672 0002 061C     	 mov r6,r0
+ 673 0004 0C1C     	 mov r4,r1
+ 674 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 675 000a 211C     	 mov r1,r4
+ 676 000c 051C     	 mov r5,r0
+ 677 000e 301C     	 mov r0,r6
+ 678 0010 FFF7FEFF 	 bl xQueueTakeMutexRecursive
+ 679 0014 041C     	 mov r4,r0
+ 680 0016 281C     	 mov r0,r5
+ 681 0018 FFF7FEFF 	 bl vPortResetPrivilege
+ 682              	 
+ 683 001c 201C     	 mov r0,r4
+ 684 001e 70BD     	 pop {r4,r5,r6,pc}
+ 686              	 .section .text.MPU_xQueueGiveMutexRecursive,"ax",%progbits
+ 687              	 .align 1
+ 688              	 .global MPU_xQueueGiveMutexRecursive
+ 689              	 .code 16
+ 690              	 .thumb_func
+ 692              	MPU_xQueueGiveMutexRecursive:
+ 693 0000 38B5     	 push {r3,r4,r5,lr}
+ 694 0002 041C     	 mov r4,r0
+ 695 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 696 0008 051C     	 mov r5,r0
+ 697 000a 201C     	 mov r0,r4
+ 698 000c FFF7FEFF 	 bl xQueueGiveMutexRecursive
+ 699 0010 041C     	 mov r4,r0
+ 700 0012 281C     	 mov r0,r5
+ 701 0014 FFF7FEFF 	 bl vPortResetPrivilege
+ 702              	 
+ 703 0018 201C     	 mov r0,r4
+ 704 001a 38BD     	 pop {r3,r4,r5,pc}
+ 706              	 .section .text.MPU_xQueueCreateSet,"ax",%progbits
+ 707              	 .align 1
+ 708              	 .global MPU_xQueueCreateSet
+ 709              	 .code 16
+ 710              	 .thumb_func
+ 712              	MPU_xQueueCreateSet:
+ 713 0000 38B5     	 push {r3,r4,r5,lr}
+ 714 0002 041C     	 mov r4,r0
+ 715 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 716 0008 051C     	 mov r5,r0
+ 717 000a 201C     	 mov r0,r4
+ 718 000c FFF7FEFF 	 bl xQueueCreateSet
+ 719 0010 041C     	 mov r4,r0
+ 720 0012 281C     	 mov r0,r5
+ 721 0014 FFF7FEFF 	 bl vPortResetPrivilege
+ 722              	 
+ 723 0018 201C     	 mov r0,r4
+ 724 001a 38BD     	 pop {r3,r4,r5,pc}
+ 726              	 .section .text.MPU_xQueueSelectFromSet,"ax",%progbits
+ 727              	 .align 1
+ 728              	 .global MPU_xQueueSelectFromSet
+ 729              	 .code 16
+ 730              	 .thumb_func
+ 732              	MPU_xQueueSelectFromSet:
+ 733 0000 70B5     	 push {r4,r5,r6,lr}
+ 734 0002 061C     	 mov r6,r0
+ 735 0004 0C1C     	 mov r4,r1
+ 736 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 737 000a 211C     	 mov r1,r4
+ 738 000c 051C     	 mov r5,r0
+ 739 000e 301C     	 mov r0,r6
+ 740 0010 FFF7FEFF 	 bl xQueueSelectFromSet
+ 741 0014 041C     	 mov r4,r0
+ 742 0016 281C     	 mov r0,r5
+ 743 0018 FFF7FEFF 	 bl vPortResetPrivilege
+ 744              	 
+ 745 001c 201C     	 mov r0,r4
+ 746 001e 70BD     	 pop {r4,r5,r6,pc}
+ 748              	 .section .text.MPU_xQueueAddToSet,"ax",%progbits
+ 749              	 .align 1
+ 750              	 .global MPU_xQueueAddToSet
+ 751              	 .code 16
+ 752              	 .thumb_func
+ 754              	MPU_xQueueAddToSet:
+ 755 0000 70B5     	 push {r4,r5,r6,lr}
+ 756 0002 061C     	 mov r6,r0
+ 757 0004 0C1C     	 mov r4,r1
+ 758 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 759 000a 211C     	 mov r1,r4
+ 760 000c 051C     	 mov r5,r0
+ 761 000e 301C     	 mov r0,r6
+ 762 0010 FFF7FEFF 	 bl xQueueAddToSet
+ 763 0014 041C     	 mov r4,r0
+ 764 0016 281C     	 mov r0,r5
+ 765 0018 FFF7FEFF 	 bl vPortResetPrivilege
+ 766              	 
+ 767 001c 201C     	 mov r0,r4
+ 768 001e 70BD     	 pop {r4,r5,r6,pc}
+ 770              	 .section .text.MPU_xQueueRemoveFromSet,"ax",%progbits
+ 771              	 .align 1
+ 772              	 .global MPU_xQueueRemoveFromSet
+ 773              	 .code 16
+ 774              	 .thumb_func
+ 776              	MPU_xQueueRemoveFromSet:
+ 777 0000 70B5     	 push {r4,r5,r6,lr}
+ 778 0002 061C     	 mov r6,r0
+ 779 0004 0C1C     	 mov r4,r1
+ 780 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 781 000a 211C     	 mov r1,r4
+ 782 000c 051C     	 mov r5,r0
+ 783 000e 301C     	 mov r0,r6
+ 784 0010 FFF7FEFF 	 bl xQueueRemoveFromSet
+ 785 0014 041C     	 mov r4,r0
+ 786 0016 281C     	 mov r0,r5
+ 787 0018 FFF7FEFF 	 bl vPortResetPrivilege
+ 788              	 
+ 789 001c 201C     	 mov r0,r4
+ 790 001e 70BD     	 pop {r4,r5,r6,pc}
+ 792              	 .section .text.MPU_vQueueAddToRegistry,"ax",%progbits
+ 793              	 .align 1
+ 794              	 .global MPU_vQueueAddToRegistry
+ 795              	 .code 16
+ 796              	 .thumb_func
+ 798              	MPU_vQueueAddToRegistry:
+ 799 0000 70B5     	 push {r4,r5,r6,lr}
+ 800 0002 061C     	 mov r6,r0
+ 801 0004 0D1C     	 mov r5,r1
+ 802 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 803 000a 041C     	 mov r4,r0
+ 804 000c 291C     	 mov r1,r5
+ 805 000e 301C     	 mov r0,r6
+ 806 0010 FFF7FEFF 	 bl vQueueAddToRegistry
+ 807 0014 201C     	 mov r0,r4
+ 808 0016 FFF7FEFF 	 bl vPortResetPrivilege
+ 809              	 
+ 810 001a 70BD     	 pop {r4,r5,r6,pc}
+ 812              	 .section .text.MPU_vQueueUnregisterQueue,"ax",%progbits
+ 813              	 .align 1
+ 814              	 .global MPU_vQueueUnregisterQueue
+ 815              	 .code 16
+ 816              	 .thumb_func
+ 818              	MPU_vQueueUnregisterQueue:
+ 819 0000 38B5     	 push {r3,r4,r5,lr}
+ 820 0002 051C     	 mov r5,r0
+ 821 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 822 0008 041C     	 mov r4,r0
+ 823 000a 281C     	 mov r0,r5
+ 824 000c FFF7FEFF 	 bl vQueueUnregisterQueue
+ 825 0010 201C     	 mov r0,r4
+ 826 0012 FFF7FEFF 	 bl vPortResetPrivilege
+ 827              	 
+ 828 0016 38BD     	 pop {r3,r4,r5,pc}
+ 830              	 .section .text.MPU_pcQueueGetName,"ax",%progbits
+ 831              	 .align 1
+ 832              	 .global MPU_pcQueueGetName
+ 833              	 .code 16
+ 834              	 .thumb_func
+ 836              	MPU_pcQueueGetName:
+ 837 0000 38B5     	 push {r3,r4,r5,lr}
+ 838 0002 041C     	 mov r4,r0
+ 839 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 840 0008 051C     	 mov r5,r0
+ 841 000a 201C     	 mov r0,r4
+ 842 000c FFF7FEFF 	 bl pcQueueGetName
+ 843 0010 041C     	 mov r4,r0
+ 844 0012 281C     	 mov r0,r5
+ 845 0014 FFF7FEFF 	 bl vPortResetPrivilege
+ 846              	 
+ 847 0018 201C     	 mov r0,r4
+ 848 001a 38BD     	 pop {r3,r4,r5,pc}
+ 850              	 .section .text.MPU_vQueueDelete,"ax",%progbits
+ 851              	 .align 1
+ 852              	 .global MPU_vQueueDelete
+ 853              	 .code 16
+ 854              	 .thumb_func
+ 856              	MPU_vQueueDelete:
+ 857 0000 38B5     	 push {r3,r4,r5,lr}
+ 858 0002 051C     	 mov r5,r0
+ 859 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 860 0008 041C     	 mov r4,r0
+ 861 000a 281C     	 mov r0,r5
+ 862 000c FFF7FEFF 	 bl vQueueDelete
+ 863 0010 201C     	 mov r0,r4
+ 864 0012 FFF7FEFF 	 bl vPortResetPrivilege
+ 865              	 
+ 866 0016 38BD     	 pop {r3,r4,r5,pc}
+ 868              	 .section .text.MPU_pvPortMalloc,"ax",%progbits
+ 869              	 .align 1
+ 870              	 .global MPU_pvPortMalloc
+ 871              	 .code 16
+ 872              	 .thumb_func
+ 874              	MPU_pvPortMalloc:
+ 875 0000 38B5     	 push {r3,r4,r5,lr}
+ 876 0002 041C     	 mov r4,r0
+ 877 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 878 0008 051C     	 mov r5,r0
+ 879 000a 201C     	 mov r0,r4
+ 880 000c FFF7FEFF 	 bl pvPortMalloc
+ 881 0010 041C     	 mov r4,r0
+ 882 0012 281C     	 mov r0,r5
+ 883 0014 FFF7FEFF 	 bl vPortResetPrivilege
+ 884              	 
+ 885 0018 201C     	 mov r0,r4
+ 886 001a 38BD     	 pop {r3,r4,r5,pc}
+ 888              	 .section .text.MPU_vPortFree,"ax",%progbits
+ 889              	 .align 1
+ 890              	 .global MPU_vPortFree
+ 891              	 .code 16
+ 892              	 .thumb_func
+ 894              	MPU_vPortFree:
+ 895 0000 38B5     	 push {r3,r4,r5,lr}
+ 896 0002 051C     	 mov r5,r0
+ 897 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 898 0008 041C     	 mov r4,r0
+ 899 000a 281C     	 mov r0,r5
+ 900 000c FFF7FEFF 	 bl vPortFree
+ 901 0010 201C     	 mov r0,r4
+ 902 0012 FFF7FEFF 	 bl vPortResetPrivilege
+ 903              	 
+ 904 0016 38BD     	 pop {r3,r4,r5,pc}
+ 906              	 .section .text.MPU_vPortInitialiseBlocks,"ax",%progbits
+ 907              	 .align 1
+ 908              	 .global MPU_vPortInitialiseBlocks
+ 909              	 .code 16
+ 910              	 .thumb_func
+ 912              	MPU_vPortInitialiseBlocks:
+ 913 0000 10B5     	 push {r4,lr}
+ 914 0002 FFF7FEFF 	 bl xPortRaisePrivilege
+ 915 0006 041C     	 mov r4,r0
+ 916 0008 FFF7FEFF 	 bl vPortInitialiseBlocks
+ 917 000c 201C     	 mov r0,r4
+ 918 000e FFF7FEFF 	 bl vPortResetPrivilege
+ 919              	 
+ 920 0012 10BD     	 pop {r4,pc}
+ 922              	 .section .text.MPU_xPortGetFreeHeapSize,"ax",%progbits
+ 923              	 .align 1
+ 924              	 .global MPU_xPortGetFreeHeapSize
+ 925              	 .code 16
+ 926              	 .thumb_func
+ 928              	MPU_xPortGetFreeHeapSize:
+ 929 0000 38B5     	 push {r3,r4,r5,lr}
+ 930 0002 FFF7FEFF 	 bl xPortRaisePrivilege
+ 931 0006 051C     	 mov r5,r0
+ 932 0008 FFF7FEFF 	 bl xPortGetFreeHeapSize
+ 933 000c 041C     	 mov r4,r0
+ 934 000e 281C     	 mov r0,r5
+ 935 0010 FFF7FEFF 	 bl vPortResetPrivilege
+ 936              	 
+ 937 0014 201C     	 mov r0,r4
+ 938 0016 38BD     	 pop {r3,r4,r5,pc}
+ 940              	 .section .text.MPU_xEventGroupCreate,"ax",%progbits
+ 941              	 .align 1
+ 942              	 .global MPU_xEventGroupCreate
+ 943              	 .code 16
+ 944              	 .thumb_func
+ 946              	MPU_xEventGroupCreate:
+ 947 0000 38B5     	 push {r3,r4,r5,lr}
+ 948 0002 FFF7FEFF 	 bl xPortRaisePrivilege
+ 949 0006 051C     	 mov r5,r0
+ 950 0008 FFF7FEFF 	 bl xEventGroupCreate
+ 951 000c 041C     	 mov r4,r0
+ 952 000e 281C     	 mov r0,r5
+ 953 0010 FFF7FEFF 	 bl vPortResetPrivilege
+ 954              	 
+ 955 0014 201C     	 mov r0,r4
+ 956 0016 38BD     	 pop {r3,r4,r5,pc}
+ 958              	 .section .text.MPU_xEventGroupWaitBits,"ax",%progbits
+ 959              	 .align 1
+ 960              	 .global MPU_xEventGroupWaitBits
+ 961              	 .code 16
+ 962              	 .thumb_func
+ 964              	MPU_xEventGroupWaitBits:
+ 965 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 966 0002 85B0     	 sub sp,sp,#20
+ 967 0004 071C     	 mov r7,r0
+ 968 0006 0E1C     	 mov r6,r1
+ 969 0008 151C     	 mov r5,r2
+ 970 000a 0393     	 str r3,[sp,#12]
+ 971 000c FFF7FEFF 	 bl xPortRaisePrivilege
+ 972 0010 0A9B     	 ldr r3,[sp,#40]
+ 973 0012 2A1C     	 mov r2,r5
+ 974 0014 041C     	 mov r4,r0
+ 975 0016 0093     	 str r3,[sp]
+ 976 0018 311C     	 mov r1,r6
+ 977 001a 039B     	 ldr r3,[sp,#12]
+ 978 001c 381C     	 mov r0,r7
+ 979 001e FFF7FEFF 	 bl xEventGroupWaitBits
+ 980 0022 051C     	 mov r5,r0
+ 981 0024 201C     	 mov r0,r4
+ 982 0026 FFF7FEFF 	 bl vPortResetPrivilege
+ 983 002a 281C     	 mov r0,r5
+ 984 002c 05B0     	 add sp,sp,#20
+ 985              	 
+ 986 002e F0BD     	 pop {r4,r5,r6,r7,pc}
+ 988              	 .section .text.MPU_xEventGroupClearBits,"ax",%progbits
+ 989              	 .align 1
+ 990              	 .global MPU_xEventGroupClearBits
+ 991              	 .code 16
+ 992              	 .thumb_func
+ 994              	MPU_xEventGroupClearBits:
+ 995 0000 70B5     	 push {r4,r5,r6,lr}
+ 996 0002 061C     	 mov r6,r0
+ 997 0004 0C1C     	 mov r4,r1
+ 998 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 999 000a 211C     	 mov r1,r4
+ 1000 000c 051C     	 mov r5,r0
+ 1001 000e 301C     	 mov r0,r6
+ 1002 0010 FFF7FEFF 	 bl xEventGroupClearBits
+ 1003 0014 041C     	 mov r4,r0
+ 1004 0016 281C     	 mov r0,r5
+ 1005 0018 FFF7FEFF 	 bl vPortResetPrivilege
+ 1006              	 
+ 1007 001c 201C     	 mov r0,r4
+ 1008 001e 70BD     	 pop {r4,r5,r6,pc}
+ 1010              	 .section .text.MPU_xEventGroupSetBits,"ax",%progbits
+ 1011              	 .align 1
+ 1012              	 .global MPU_xEventGroupSetBits
+ 1013              	 .code 16
+ 1014              	 .thumb_func
+ 1016              	MPU_xEventGroupSetBits:
+ 1017 0000 70B5     	 push {r4,r5,r6,lr}
+ 1018 0002 061C     	 mov r6,r0
+ 1019 0004 0C1C     	 mov r4,r1
+ 1020 0006 FFF7FEFF 	 bl xPortRaisePrivilege
+ 1021 000a 211C     	 mov r1,r4
+ 1022 000c 051C     	 mov r5,r0
+ 1023 000e 301C     	 mov r0,r6
+ 1024 0010 FFF7FEFF 	 bl xEventGroupSetBits
+ 1025 0014 041C     	 mov r4,r0
+ 1026 0016 281C     	 mov r0,r5
+ 1027 0018 FFF7FEFF 	 bl vPortResetPrivilege
+ 1028              	 
+ 1029 001c 201C     	 mov r0,r4
+ 1030 001e 70BD     	 pop {r4,r5,r6,pc}
+ 1032              	 .section .text.MPU_xEventGroupSync,"ax",%progbits
+ 1033              	 .align 1
+ 1034              	 .global MPU_xEventGroupSync
+ 1035              	 .code 16
+ 1036              	 .thumb_func
+ 1038              	MPU_xEventGroupSync:
+ 1039 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 1040 0002 071C     	 mov r7,r0
+ 1041 0004 0E1C     	 mov r6,r1
+ 1042 0006 151C     	 mov r5,r2
+ 1043 0008 0193     	 str r3,[sp,#4]
+ 1044 000a FFF7FEFF 	 bl xPortRaisePrivilege
+ 1045 000e 311C     	 mov r1,r6
+ 1046 0010 2A1C     	 mov r2,r5
+ 1047 0012 041C     	 mov r4,r0
+ 1048 0014 019B     	 ldr r3,[sp,#4]
+ 1049 0016 381C     	 mov r0,r7
+ 1050 0018 FFF7FEFF 	 bl xEventGroupSync
+ 1051 001c 051C     	 mov r5,r0
+ 1052 001e 201C     	 mov r0,r4
+ 1053 0020 FFF7FEFF 	 bl vPortResetPrivilege
+ 1054              	 
+ 1055 0024 281C     	 mov r0,r5
+ 1056 0026 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 1058              	 .section .text.MPU_vEventGroupDelete,"ax",%progbits
+ 1059              	 .align 1
+ 1060              	 .global MPU_vEventGroupDelete
+ 1061              	 .code 16
+ 1062              	 .thumb_func
+ 1064              	MPU_vEventGroupDelete:
+ 1065 0000 38B5     	 push {r3,r4,r5,lr}
+ 1066 0002 051C     	 mov r5,r0
+ 1067 0004 FFF7FEFF 	 bl xPortRaisePrivilege
+ 1068 0008 041C     	 mov r4,r0
+ 1069 000a 281C     	 mov r0,r5
+ 1070 000c FFF7FEFF 	 bl vEventGroupDelete
+ 1071 0010 201C     	 mov r0,r4
+ 1072 0012 FFF7FEFF 	 bl vPortResetPrivilege
+ 1073              	 
+ 1074 0016 38BD     	 pop {r3,r4,r5,pc}
+ 1076              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 mpu_wrappers.c
+    {standard input}:15     .text.MPU_xTaskCreateRestricted:00000000 $t
+    {standard input}:20     .text.MPU_xTaskCreateRestricted:00000000 MPU_xTaskCreateRestricted
+    {standard input}:37     .text.MPU_xTaskCreate:00000000 $t
+    {standard input}:42     .text.MPU_xTaskCreate:00000000 MPU_xTaskCreate
+    {standard input}:69     .text.MPU_vTaskAllocateMPURegions:00000000 $t
+    {standard input}:74     .text.MPU_vTaskAllocateMPURegions:00000000 MPU_vTaskAllocateMPURegions
+    {standard input}:89     .text.MPU_vTaskDelete:00000000 $t
+    {standard input}:94     .text.MPU_vTaskDelete:00000000 MPU_vTaskDelete
+    {standard input}:107    .text.MPU_vTaskDelayUntil:00000000 $t
+    {standard input}:112    .text.MPU_vTaskDelayUntil:00000000 MPU_vTaskDelayUntil
+    {standard input}:127    .text.MPU_vTaskDelay:00000000 $t
+    {standard input}:132    .text.MPU_vTaskDelay:00000000 MPU_vTaskDelay
+    {standard input}:145    .text.MPU_uxTaskPriorityGet:00000000 $t
+    {standard input}:150    .text.MPU_uxTaskPriorityGet:00000000 MPU_uxTaskPriorityGet
+    {standard input}:165    .text.MPU_vTaskPrioritySet:00000000 $t
+    {standard input}:170    .text.MPU_vTaskPrioritySet:00000000 MPU_vTaskPrioritySet
+    {standard input}:185    .text.MPU_eTaskGetState:00000000 $t
+    {standard input}:190    .text.MPU_eTaskGetState:00000000 MPU_eTaskGetState
+    {standard input}:205    .text.MPU_vTaskSuspend:00000000 $t
+    {standard input}:210    .text.MPU_vTaskSuspend:00000000 MPU_vTaskSuspend
+    {standard input}:223    .text.MPU_vTaskResume:00000000 $t
+    {standard input}:228    .text.MPU_vTaskResume:00000000 MPU_vTaskResume
+    {standard input}:241    .text.MPU_vTaskSuspendAll:00000000 $t
+    {standard input}:246    .text.MPU_vTaskSuspendAll:00000000 MPU_vTaskSuspendAll
+    {standard input}:257    .text.MPU_xTaskResumeAll:00000000 $t
+    {standard input}:262    .text.MPU_xTaskResumeAll:00000000 MPU_xTaskResumeAll
+    {standard input}:275    .text.MPU_xTaskGetTickCount:00000000 $t
+    {standard input}:280    .text.MPU_xTaskGetTickCount:00000000 MPU_xTaskGetTickCount
+    {standard input}:293    .text.MPU_uxTaskGetNumberOfTasks:00000000 $t
+    {standard input}:298    .text.MPU_uxTaskGetNumberOfTasks:00000000 MPU_uxTaskGetNumberOfTasks
+    {standard input}:311    .text.MPU_pcTaskGetName:00000000 $t
+    {standard input}:316    .text.MPU_pcTaskGetName:00000000 MPU_pcTaskGetName
+    {standard input}:331    .text.MPU_vTaskSetTimeOutState:00000000 $t
+    {standard input}:336    .text.MPU_vTaskSetTimeOutState:00000000 MPU_vTaskSetTimeOutState
+    {standard input}:349    .text.MPU_xTaskCheckForTimeOut:00000000 $t
+    {standard input}:354    .text.MPU_xTaskCheckForTimeOut:00000000 MPU_xTaskCheckForTimeOut
+    {standard input}:371    .text.MPU_xTaskGenericNotify:00000000 $t
+    {standard input}:376    .text.MPU_xTaskGenericNotify:00000000 MPU_xTaskGenericNotify
+    {standard input}:397    .text.MPU_xTaskNotifyWait:00000000 $t
+    {standard input}:402    .text.MPU_xTaskNotifyWait:00000000 MPU_xTaskNotifyWait
+    {standard input}:423    .text.MPU_ulTaskNotifyTake:00000000 $t
+    {standard input}:428    .text.MPU_ulTaskNotifyTake:00000000 MPU_ulTaskNotifyTake
+    {standard input}:445    .text.MPU_xTaskNotifyStateClear:00000000 $t
+    {standard input}:450    .text.MPU_xTaskNotifyStateClear:00000000 MPU_xTaskNotifyStateClear
+    {standard input}:465    .text.MPU_xQueueGenericCreate:00000000 $t
+    {standard input}:470    .text.MPU_xQueueGenericCreate:00000000 MPU_xQueueGenericCreate
+    {standard input}:489    .text.MPU_xQueueGenericReset:00000000 $t
+    {standard input}:494    .text.MPU_xQueueGenericReset:00000000 MPU_xQueueGenericReset
+    {standard input}:511    .text.MPU_xQueueGenericSend:00000000 $t
+    {standard input}:516    .text.MPU_xQueueGenericSend:00000000 MPU_xQueueGenericSend
+    {standard input}:537    .text.MPU_uxQueueMessagesWaiting:00000000 $t
+    {standard input}:542    .text.MPU_uxQueueMessagesWaiting:00000000 MPU_uxQueueMessagesWaiting
+    {standard input}:557    .text.MPU_uxQueueSpacesAvailable:00000000 $t
+    {standard input}:562    .text.MPU_uxQueueSpacesAvailable:00000000 MPU_uxQueueSpacesAvailable
+    {standard input}:577    .text.MPU_xQueueGenericReceive:00000000 $t
+    {standard input}:582    .text.MPU_xQueueGenericReceive:00000000 MPU_xQueueGenericReceive
+    {standard input}:603    .text.MPU_xQueuePeekFromISR:00000000 $t
+    {standard input}:608    .text.MPU_xQueuePeekFromISR:00000000 MPU_xQueuePeekFromISR
+    {standard input}:625    .text.MPU_xQueueGetMutexHolder:00000000 $t
+    {standard input}:630    .text.MPU_xQueueGetMutexHolder:00000000 MPU_xQueueGetMutexHolder
+    {standard input}:645    .text.MPU_xQueueCreateMutex:00000000 $t
+    {standard input}:650    .text.MPU_xQueueCreateMutex:00000000 MPU_xQueueCreateMutex
+    {standard input}:665    .text.MPU_xQueueTakeMutexRecursive:00000000 $t
+    {standard input}:670    .text.MPU_xQueueTakeMutexRecursive:00000000 MPU_xQueueTakeMutexRecursive
+    {standard input}:687    .text.MPU_xQueueGiveMutexRecursive:00000000 $t
+    {standard input}:692    .text.MPU_xQueueGiveMutexRecursive:00000000 MPU_xQueueGiveMutexRecursive
+    {standard input}:707    .text.MPU_xQueueCreateSet:00000000 $t
+    {standard input}:712    .text.MPU_xQueueCreateSet:00000000 MPU_xQueueCreateSet
+    {standard input}:727    .text.MPU_xQueueSelectFromSet:00000000 $t
+    {standard input}:732    .text.MPU_xQueueSelectFromSet:00000000 MPU_xQueueSelectFromSet
+    {standard input}:749    .text.MPU_xQueueAddToSet:00000000 $t
+    {standard input}:754    .text.MPU_xQueueAddToSet:00000000 MPU_xQueueAddToSet
+    {standard input}:771    .text.MPU_xQueueRemoveFromSet:00000000 $t
+    {standard input}:776    .text.MPU_xQueueRemoveFromSet:00000000 MPU_xQueueRemoveFromSet
+    {standard input}:793    .text.MPU_vQueueAddToRegistry:00000000 $t
+    {standard input}:798    .text.MPU_vQueueAddToRegistry:00000000 MPU_vQueueAddToRegistry
+    {standard input}:813    .text.MPU_vQueueUnregisterQueue:00000000 $t
+    {standard input}:818    .text.MPU_vQueueUnregisterQueue:00000000 MPU_vQueueUnregisterQueue
+    {standard input}:831    .text.MPU_pcQueueGetName:00000000 $t
+    {standard input}:836    .text.MPU_pcQueueGetName:00000000 MPU_pcQueueGetName
+    {standard input}:851    .text.MPU_vQueueDelete:00000000 $t
+    {standard input}:856    .text.MPU_vQueueDelete:00000000 MPU_vQueueDelete
+    {standard input}:869    .text.MPU_pvPortMalloc:00000000 $t
+    {standard input}:874    .text.MPU_pvPortMalloc:00000000 MPU_pvPortMalloc
+    {standard input}:889    .text.MPU_vPortFree:00000000 $t
+    {standard input}:894    .text.MPU_vPortFree:00000000 MPU_vPortFree
+    {standard input}:907    .text.MPU_vPortInitialiseBlocks:00000000 $t
+    {standard input}:912    .text.MPU_vPortInitialiseBlocks:00000000 MPU_vPortInitialiseBlocks
+    {standard input}:923    .text.MPU_xPortGetFreeHeapSize:00000000 $t
+    {standard input}:928    .text.MPU_xPortGetFreeHeapSize:00000000 MPU_xPortGetFreeHeapSize
+    {standard input}:941    .text.MPU_xEventGroupCreate:00000000 $t
+    {standard input}:946    .text.MPU_xEventGroupCreate:00000000 MPU_xEventGroupCreate
+    {standard input}:959    .text.MPU_xEventGroupWaitBits:00000000 $t
+    {standard input}:964    .text.MPU_xEventGroupWaitBits:00000000 MPU_xEventGroupWaitBits
+    {standard input}:989    .text.MPU_xEventGroupClearBits:00000000 $t
+    {standard input}:994    .text.MPU_xEventGroupClearBits:00000000 MPU_xEventGroupClearBits
+    {standard input}:1011   .text.MPU_xEventGroupSetBits:00000000 $t
+    {standard input}:1016   .text.MPU_xEventGroupSetBits:00000000 MPU_xEventGroupSetBits
+    {standard input}:1033   .text.MPU_xEventGroupSync:00000000 $t
+    {standard input}:1038   .text.MPU_xEventGroupSync:00000000 MPU_xEventGroupSync
+    {standard input}:1059   .text.MPU_vEventGroupDelete:00000000 $t
+    {standard input}:1064   .text.MPU_vEventGroupDelete:00000000 MPU_vEventGroupDelete
+
+UNDEFINED SYMBOLS
+xPortRaisePrivilege
+xTaskCreateRestricted
+vPortResetPrivilege
+xTaskCreate
+vTaskAllocateMPURegions
+vTaskDelete
+vTaskDelayUntil
+vTaskDelay
+uxTaskPriorityGet
+vTaskPrioritySet
+eTaskGetState
+vTaskSuspend
+vTaskResume
+vTaskSuspendAll
+xTaskResumeAll
+xTaskGetTickCount
+uxTaskGetNumberOfTasks
+pcTaskGetName
+vTaskSetTimeOutState
+xTaskCheckForTimeOut
+xTaskGenericNotify
+xTaskNotifyWait
+ulTaskNotifyTake
+xTaskNotifyStateClear
+xQueueGenericCreate
+xQueueGenericReset
+xQueueGenericSend
+uxQueueMessagesWaiting
+uxQueueSpacesAvailable
+xQueueGenericReceive
+xQueuePeekFromISR
+xQueueGetMutexHolder
+xQueueCreateMutex
+xQueueTakeMutexRecursive
+xQueueGiveMutexRecursive
+xQueueCreateSet
+xQueueSelectFromSet
+xQueueAddToSet
+xQueueRemoveFromSet
+vQueueAddToRegistry
+vQueueUnregisterQueue
+pcQueueGetName
+vQueueDelete
+pvPortMalloc
+vPortFree
+vPortInitialiseBlocks
+xPortGetFreeHeapSize
+xEventGroupCreate
+xEventGroupWaitBits
+xEventGroupClearBits
+xEventGroupSetBits
+xEventGroupSync
+vEventGroupDelete

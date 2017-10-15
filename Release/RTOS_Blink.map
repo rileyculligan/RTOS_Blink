@@ -1,0 +1,1759 @@
+Archive member included because of file (symbol)
+
+c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/armv6-m\libgcc.a(_thumb1_case_uqi.o)
+                              ./FreeRTOS_Files/tasks.o (__gnu_thumb1_case_uqi)
+c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-init.o)
+                              ./Startup/startup_XMC1300.o (__libc_init_array)
+c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memcpy.o)
+                              ./FreeRTOS_Files/queue.o (memcpy)
+
+Allocating common symbols
+Common symbol       size              file
+
+xQueueRegistry      0x40              ./FreeRTOS_Files/queue.o
+
+Discarded input sections
+
+ .text          0x00000000        0x0 ./Startup/startup_XMC1300.o
+ .data          0x00000000        0x0 ./Startup/startup_XMC1300.o
+ .bss           0x00000000        0x0 ./Startup/startup_XMC1300.o
+ .text          0x00000000        0x0 ./Startup/system_XMC1300.o
+ .data          0x00000000        0x0 ./Startup/system_XMC1300.o
+ .bss           0x00000000        0x0 ./Startup/system_XMC1300.o
+ .comment       0x00000000       0x71 ./Startup/system_XMC1300.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_eru.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_eru.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_eru.o
+ .text.XMC_ERU_Enable
+                0x00000000        0x2 ./Libraries/XMCLib/src/xmc1_eru.o
+ .text.XMC_ERU_Disable
+                0x00000000        0x2 ./Libraries/XMCLib/src/xmc1_eru.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc1_eru.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc1_eru.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_flash.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_flash.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_flash.o
+ .text.XMC_FLASH_ClearStatus
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc1_flash.o
+ .text.XMC_FLASH_GetStatus
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc1_flash.o
+ .text.XMC_FLASH_EnableEvent
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_flash.o
+ .text.XMC_FLASH_DisableEvent
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_flash.o
+ .text.XMC_FLASH_ErasePage
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc1_flash.o
+ .text.XMC_FLASH_ProgramVerifyPage
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc1_flash.o
+ .text.XMC_FLASH_WriteBlocks
+                0x00000000       0x5c ./Libraries/XMCLib/src/xmc1_flash.o
+ .text.XMC_FLASH_ErasePages
+                0x00000000       0x3c ./Libraries/XMCLib/src/xmc1_flash.o
+ .text.XMC_FLASH_VerifyBlocks
+                0x00000000       0x4c ./Libraries/XMCLib/src/xmc1_flash.o
+ .text.XMC_FLASH_ReadBlocks
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc1_flash.o
+ .text.XMC_FLASH_EraseSector
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc1_flash.o
+ .text.XMC_FLASH_ProgramPage
+                0x00000000        0x8 ./Libraries/XMCLib/src/xmc1_flash.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc1_flash.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc1_flash.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_gpio.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_gpio.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_gpio.o
+ .text.XMC_GPIO_Init
+                0x00000000       0x74 ./Libraries/XMCLib/src/xmc1_gpio.o
+ .text.XMC_GPIO_SetInputHysteresis
+                0x00000000       0x24 ./Libraries/XMCLib/src/xmc1_gpio.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc1_gpio.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc1_gpio.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_rtc.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_rtc.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_rtc.o
+ .text.XMC_RTC_Enable
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc1_rtc.o
+ .text.XMC_RTC_Disable
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc1_rtc.o
+ .text.XMC_RTC_SetDebugMode
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc1_rtc.o
+ .text.XMC_RTC_EnableEvent
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_rtc.o
+ .text.XMC_RTC_DisableEvent
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_rtc.o
+ .text.XMC_RTC_ClearEvent
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_rtc.o
+ .text.XMC_RTC_IsEnabled
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc1_rtc.o
+ .text.XMC_RTC_Init
+                0x00000000       0x4c ./Libraries/XMCLib/src/xmc1_rtc.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc1_rtc.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc1_rtc.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_scu.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_scu.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_INTERRUPT_EnableEvent
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_INTERRUPT_DisableEvent
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_INTERRUPT_TriggerEvent
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_INTERUPT_GetEventStatus
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_INTERRUPT_ClearEventStatus
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_LockProtectedBits
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_UnlockProtectedBits
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_SupplyMonitorInit
+                0x00000000       0x48 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_SetRawTempLimits
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_StartTempMeasurement
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_StopTempMeasurement
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_HighTemperature
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_LowTemperature
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_GetTemperature
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_CLOCK_Init
+                0x00000000       0xb8 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_CLOCK_SetRtcClockSource
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_CLOCK_SetFastPeripheralClockSource
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_CLOCK_GatePeripheralClock
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_CLOCK_UngatePeripheralClock
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_CLOCK_IsPeripheralClockGated
+                0x00000000       0x24 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_CLOCK_GetPeripheralClockFrequency
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_CLOCK_GetFastPeripheralClockFrequency
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_INTERRUPT_SetEventHandler
+                0x00000000       0x2c ./Libraries/XMCLib/src/xmc1_scu.o
+ .text.XMC_SCU_IRQHandler
+                0x00000000       0x4c ./Libraries/XMCLib/src/xmc1_scu.o
+ .bss.event_handler_list
+                0x00000000       0x80 ./Libraries/XMCLib/src/xmc1_scu.o
+ .data.event_masks
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc1_scu.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc1_scu.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc1_scu.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_usic.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_usic.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc1_usic.o
+ .text.XMC_USIC_Enable
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc1_usic.o
+ .text.XMC_USIC_Disable
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc1_usic.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc1_usic.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc1_usic.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_acmp.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_acmp.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_acmp.o
+ .text.XMC_ACMP_Init
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_acmp.o
+ .text.XMC_ACMP_SetInput
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_acmp.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_acmp.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_acmp.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_bccu.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_bccu.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_GlobalInit
+                0x00000000       0x1a ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConfigGlobalTrigger
+                0x00000000       0x16 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_SelectTrapInput
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_SetTrapEdge
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConfigSuspendMode
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_SetFlickerWDThreshold
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_SetFastClockPrescaler
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_SetDimClockPrescaler
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_SelectBitClock
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConcurrentEnableChannels
+                0x00000000        0x8 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConcurrentDisableChannels
+                0x00000000        0x8 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConcurrentSetOutputPassiveLevel
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConcurrentEnableTrap
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConcurrentDisableTrap
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConcurrentConfigTrigger
+                0x00000000       0x22 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConcurrentStartLinearWalk
+                0x00000000        0x8 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConcurrentAbortLinearWalk
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConcurrentEnableDimmingEngine
+                0x00000000        0x4 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConcurrentDisableDimmingEngine
+                0x00000000        0x8 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConcurrentStartDimming
+                0x00000000        0x4 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_ConcurrentAbortDimming
+                0x00000000        0x6 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_SetGlobalDimmingLevel
+                0x00000000        0x4 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_EnableChannel
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_DisableChannel
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_SetOutputPassiveLevel
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_EnableTrap
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_DisableTrap
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_EnableChannelTrigger
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_DisableChannelTrigger
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_Init
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_ConfigTrigger
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_SetLinearWalkPrescaler
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_SetTargetIntensity
+                0x00000000        0x4 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_ReadIntensity
+                0x00000000        0x8 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_EnablePacker
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_SetPackerThreshold
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_SetPackerOffCompare
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_SetPackerOnCompare
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_DisablePacker
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_SetPackerOffCounter
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_SetPackerOnCounter
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_SelectDimEngine
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_EnableDimmingBypass
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_CH_DisableDimmingBypass
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_DIM_Init
+                0x00000000        0x6 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_DIM_SetTargetDimmingLevel
+                0x00000000        0x4 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_DIM_SetDimDivider
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text.XMC_BCCU_DIM_ConfigDimCurve
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_bccu.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_bccu.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_bccu.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SetModuleClock
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SetMultiChannelShadowTransferMode
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_CompareInit
+                0x00000000       0x2e ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_CaptureInit
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_StartConfig
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_StopConfig
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_LoadConfig
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_ModulationConfig
+                0x00000000       0x40 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_CountConfig
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_GateConfig
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_Capture0Config
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_Capture1Config
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_DirectionConfig
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_StatusBitOverrideConfig
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_TrapConfig
+                0x00000000       0x3c ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_ConfigureStatusBitOverrideEvent
+                0x00000000       0x74 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_ConfigureEvent
+                0x00000000       0x56 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_SetInput
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_SetTimerRepeatMode
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_SetTimerCountingMode
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_GetCaptureRegisterValue
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_GetLastCapturedTimerValue
+                0x00000000       0x3e ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_GetCapturedValueFromFifo
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_EnableDithering
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_SetPrescaler
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_EnableShadowTransfer
+                0x00000000        0x8 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_GetEvent
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_SetInterruptNode
+                0x00000000       0x30 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_SLICE_SetPassiveLevel
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_lUngateClock
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_EnableModule
+                0x00000000        0x8 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_Init
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_lGateClock
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text.XMC_CCU4_DisableModule
+                0x00000000        0x8 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .rodata.CSWTCH.31
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_ccu4.o
+ .rodata.CSWTCH.32
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_ccu4.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SetModuleClock
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_CompareInit
+                0x00000000       0x3a ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_CaptureInit
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_SetOutPath
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SetMultiChannelShadowTransferMode
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_StartConfig
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_StopConfig
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_LoadConfig
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_LoadSelector
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_ModulationConfig
+                0x00000000       0x50 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_CountConfig
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_GateConfig
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_Capture0Config
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_Capture1Config
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_DirectionConfig
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_StatusBitOverrideConfig
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_TrapConfig
+                0x00000000       0x3c ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_ConfigureStatusBitOverrideEvent
+                0x00000000       0x74 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_ConfigureEvent
+                0x00000000       0x56 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_SetInput
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_SetTimerRepeatMode
+                0x00000000       0x16 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_SetTimerCountingMode
+                0x00000000       0x16 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_SetTimerPeriodMatch
+                0x00000000        0x4 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_GetCaptureRegisterValue
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_GetLastCapturedTimerValue
+                0x00000000       0x3e ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_GetCapturedValueFromFifo
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_EnableDithering
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_SetPrescaler
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_SetTimerCompareMatch
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_GetTimerCompareMatch
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_EnableShadowTransfer
+                0x00000000        0x8 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_GetEvent
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_SetInterruptNode
+                0x00000000       0x30 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_SetPassiveLevel
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_DeadTimeInit
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_ConfigureDeadTime
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_SetDeadTimeValue
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_SetDeadTimePrescaler
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_SLICE_ConfigureStatusBitOutput
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_lUngateClock
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_EnableModule
+                0x00000000        0x8 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_Init
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_lGateClock
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text.XMC_CCU8_DisableModule
+                0x00000000        0x8 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .rodata.CSWTCH.37
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .rodata.CSWTCH.38
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_ccu8.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_ccu8.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_common.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_common.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_common.o
+ .text.XMC_LIST_Init
+                0x00000000        0x6 ./Libraries/XMCLib/src/xmc_common.o
+ .text.XMC_LIST_GetHead
+                0x00000000        0x4 ./Libraries/XMCLib/src/xmc_common.o
+ .text.XMC_LIST_GetTail
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc_common.o
+ .text.XMC_LIST_Add
+                0x00000000       0x1a ./Libraries/XMCLib/src/xmc_common.o
+ .text.XMC_LIST_Remove
+                0x00000000       0x2e ./Libraries/XMCLib/src/xmc_common.o
+ .text.XMC_LIST_Insert
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_common.o
+ .text.XMC_PRIOARRAY_Init
+                0x00000000       0x2c ./Libraries/XMCLib/src/xmc_common.o
+ .text.XMC_PRIOARRAY_Add
+                0x00000000       0x32 ./Libraries/XMCLib/src/xmc_common.o
+ .text.XMC_PRIOARRAY_Remove
+                0x00000000       0x1e ./Libraries/XMCLib/src/xmc_common.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_common.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_common.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_eru.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_eru.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_ETL_Init
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_OGU_Init
+                0x00000000       0x16 ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_ETL_SetInput
+                0x00000000       0x1a ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_ETL_SetSource
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_ETL_SetEdgeDetection
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_ETL_SetStatusFlagMode
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_ETL_EnableOutputTrigger
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_ETL_DisableOutputTrigger
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_OGU_EnablePatternDetection
+                0x00000000       0x24 ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_OGU_DisablePatternDetection
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_OGU_EnablePeripheralTrigger
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_OGU_DisablePeripheralTrigger
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_eru.o
+ .text.XMC_ERU_OGU_SetServiceRequestMode
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_eru.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_eru.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_eru.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_gpio.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_gpio.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_gpio.o
+ .text.XMC_GPIO_SetMode
+                0x00000000       0x24 ./Libraries/XMCLib/src/xmc_gpio.o
+ .text.XMC_GPIO_SetHardwareControl
+                0x00000000       0x1a ./Libraries/XMCLib/src/xmc_gpio.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_gpio.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_gpio.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_i2c.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_i2c.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_SetSlaveAddress
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_GetSlaveAddress
+                0x00000000       0x1a ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_SetBaudrate
+                0x00000000       0x34 ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_Init
+                0x00000000       0x34 ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_MasterStart
+                0x00000000       0x44 ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_MasterRepeatedStart
+                0x00000000       0x44 ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_MasterStop
+                0x00000000       0x3a ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_MasterTransmit
+                0x00000000       0x32 ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_SlaveTransmit
+                0x00000000       0x3c ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_MasterReceiveAck
+                0x00000000       0x3a ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_MasterReceiveNack
+                0x00000000       0x3a ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_GetReceivedData
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_Stop
+                0x00000000       0x16 ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_EnableEvent
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_i2c.o
+ .text.XMC_I2C_CH_DisableEvent
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_i2c.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_i2c.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_i2c.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_ledts.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_ledts.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_ledts.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_ledts.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_ledts.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_math.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_math.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_DIV_IsBusy
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_IsBusy
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_GetEventStatus
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_math.o
+ .text.__aeabi_idiv
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_math.o
+ .text.__aeabi_uidivmod
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_math.o
+ .text.__aeabi_idivmod
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_Cos
+                0x00000000       0x24 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_Sin
+                0x00000000       0x24 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_Tan
+                0x00000000       0x2c ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_ArcTan
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_Cosh
+                0x00000000       0x24 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_Sinh
+                0x00000000       0x24 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_Tanh
+                0x00000000       0x2c ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_CosNB
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_SinNB
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_TanNB
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_ArcTanNB
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_CoshNB
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_SinhNB
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_CORDIC_TanhNB
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_DIV_UnsignedDivNB
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_DIV_SignedDivNB
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_DIV_UnsignedModNB
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_math.o
+ .text.XMC_MATH_DIV_SignedModNB
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_math.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_math.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_pau.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_pau.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_pau.o
+ .text.XMC_PAU_EnablePeripheralAccess
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_pau.o
+ .text.XMC_PAU_DisablePeripheralAccess
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_pau.o
+ .text.XMC_PAU_IsPeripheralAccessEnabled
+                0x00000000       0x1a ./Libraries/XMCLib/src/xmc_pau.o
+ .text.XMC_PAU_IsPeripheralAvailable
+                0x00000000       0x1a ./Libraries/XMCLib/src/xmc_pau.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_pau.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_pau.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_posif.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_posif.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_posif.o
+ .text.XMC_POSIF_Enable
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_posif.o
+ .text.XMC_POSIF_Disable
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_posif.o
+ .text.XMC_POSIF_Init
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_posif.o
+ .text.XMC_POSIF_HSC_Init
+                0x00000000       0x1a ./Libraries/XMCLib/src/xmc_posif.o
+ .text.XMC_POSIF_QD_Init
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_posif.o
+ .text.XMC_POSIF_MCM_Init
+                0x00000000       0x1a ./Libraries/XMCLib/src/xmc_posif.o
+ .text.XMC_POSIF_SelectInputSource
+                0x00000000       0x34 ./Libraries/XMCLib/src/xmc_posif.o
+ .text.XMC_POSIF_SetInterruptNode
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_posif.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_posif.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_posif.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_prng.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_prng.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_prng.o
+ .text.XMC_PRNG_Init
+                0x00000000       0x74 ./Libraries/XMCLib/src/xmc_prng.o
+ .text.XMC_PRNG_DeInit
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_prng.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_prng.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_prng.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_rtc.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_rtc.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_rtc.o
+ .text.XMC_RTC_Start
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_rtc.o
+ .text.XMC_RTC_Stop
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_rtc.o
+ .text.XMC_RTC_SetPrescaler
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_rtc.o
+ .text.XMC_RTC_SetTime
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_rtc.o
+ .text.XMC_RTC_GetTime
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_rtc.o
+ .text.XMC_RTC_GetTimeStdFormat
+                0x00000000       0x54 ./Libraries/XMCLib/src/xmc_rtc.o
+ .text.XMC_RTC_SetAlarm
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_rtc.o
+ .text.XMC_RTC_GetAlarm
+                0x00000000       0x10 ./Libraries/XMCLib/src/xmc_rtc.o
+ .text.XMC_RTC_GetAlarmStdFormat
+                0x00000000       0x50 ./Libraries/XMCLib/src/xmc_rtc.o
+ .text.XMC_RTC_GetEventStatus
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_rtc.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_rtc.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_rtc.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_spi.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_spi.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_spi.o
+ .text.XMC_SPI_CH_Init
+                0x00000000       0x44 ./Libraries/XMCLib/src/xmc_spi.o
+ .text.XMC_SPI_CH_SetBaudrate
+                0x00000000       0x24 ./Libraries/XMCLib/src/xmc_spi.o
+ .text.XMC_SPI_CH_EnableSlaveSelect
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_spi.o
+ .text.XMC_SPI_CH_DisableSlaveSelect
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_spi.o
+ .text.XMC_SPI_CH_Transmit
+                0x00000000       0x3c ./Libraries/XMCLib/src/xmc_spi.o
+ .text.XMC_SPI_CH_GetReceivedData
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_spi.o
+ .text.XMC_SPI_CH_SetInterwordDelay
+                0x00000000       0xc0 ./Libraries/XMCLib/src/xmc_spi.o
+ .text.XMC_SPI_CH_Stop
+                0x00000000       0x16 ./Libraries/XMCLib/src/xmc_spi.o
+ .text.XMC_SPI_CH_EnableEvent
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_spi.o
+ .text.XMC_SPI_CH_DisableEvent
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_spi.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_spi.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_spi.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_uart.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_uart.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_uart.o
+ .text.XMC_UART_CH_Init
+                0x00000000       0x6e ./Libraries/XMCLib/src/xmc_uart.o
+ .text.XMC_UART_CH_SetBaudrate
+                0x00000000       0x2a ./Libraries/XMCLib/src/xmc_uart.o
+ .text.XMC_UART_CH_Transmit
+                0x00000000       0x2e ./Libraries/XMCLib/src/xmc_uart.o
+ .text.XMC_UART_CH_GetReceivedData
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_uart.o
+ .text.XMC_UART_CH_Stop
+                0x00000000       0x16 ./Libraries/XMCLib/src/xmc_uart.o
+ .text.XMC_UART_CH_EnableEvent
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_uart.o
+ .text.XMC_UART_CH_DisableEvent
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_uart.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_uart.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_uart.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_usic.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_usic.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_usic.o
+ .text.XMC_USIC_CH_Enable
+                0x00000000       0x34 ./Libraries/XMCLib/src/xmc_usic.o
+ .text.XMC_USIC_CH_Disable
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_usic.o
+ .text.XMC_USIC_CH_SetBaudrate
+                0x00000000       0x98 ./Libraries/XMCLib/src/xmc_usic.o
+ .text.XMC_USIC_CH_TXFIFO_Configure
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc_usic.o
+ .text.XMC_USIC_CH_RXFIFO_Configure
+                0x00000000       0x30 ./Libraries/XMCLib/src/xmc_usic.o
+ .text.XMC_USIC_CH_TXFIFO_SetSizeTriggerLimit
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc_usic.o
+ .text.XMC_USIC_CH_RXFIFO_SetSizeTriggerLimit
+                0x00000000       0x28 ./Libraries/XMCLib/src/xmc_usic.o
+ .text.XMC_USIC_CH_SetInterruptNodePointer
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc_usic.o
+ .text.XMC_USIC_CH_TXFIFO_SetInterruptNodePointer
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_usic.o
+ .text.XMC_USIC_CH_RXFIFO_SetInterruptNodePointer
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_usic.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_usic.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_usic.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_vadc.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_vadc.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_EnableModule
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_DisableModule
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_Init
+                0x00000000       0x36 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_InputClassInit
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_StartupCalibration
+                0x00000000       0x38 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SetBoundaries
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SetCompareValue
+                0x00000000       0x16 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_GetCompareResult
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_BindGroupToEMux
+                0x00000000       0x22 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SetResultEventInterruptNode
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_BackgroundSetReqSrcEventInterruptNode
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_InputClassInit
+                0x00000000       0x44 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_Init
+                0x00000000       0x82 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_SetPowerMode
+                0x00000000        0xe ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_SetSyncSlave
+                0x00000000       0x16 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_SetSyncMaster
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_CheckSlaveReadiness
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_IgnoreSlaveReadiness
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_EnableChannelSyncRequest
+                0x00000000       0x1e ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_DisableChannelSyncRequest
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_IsConverterBusy
+                0x00000000        0xa ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_SetBoundaries
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_TriggerServiceRequest
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_SetBoundaryEventInterruptNode
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SHS_Init
+                0x00000000       0x1e ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SHS_EnableAcceleratedMode
+                0x00000000       0x1e ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SHS_DisableAcceleratedMode
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SHS_SetShortSampleTime
+                0x00000000       0x24 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SHS_SetGainFactor
+                0x00000000       0x2a ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SHS_EnableGainAndOffsetCalibrations
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SHS_DisableGainAndOffsetCalibrations
+                0x00000000       0x1a ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SHS_GetOffsetCalibrationValue
+                0x00000000       0x1e ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SHS_SetOffsetCalibrationValue
+                0x00000000       0x4c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_SHS_SetSigmaDeltaLoop
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ScanInit
+                0x00000000       0x60 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ScanSelectTrigger
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ScanSelectTriggerEdge
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ScanSelectGating
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ScanSequenceAbort
+                0x00000000       0x44 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ScanGetNumChannelsPending
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ScanSetReqSrcEventInterruptNode
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_BackgroundInit
+                0x00000000       0x94 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_BackgroundSelectTrigger
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_BackgroundSelectTriggerEdge
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_BackgroundSelectGating
+                0x00000000       0x20 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_BackgroundAbortSequence
+                0x00000000       0x70 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GLOBAL_BackgroundGetNumChannelsPending
+                0x00000000       0x36 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_QueueInit
+                0x00000000       0x60 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_QueueSelectTrigger
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_QueueSelectTriggerEdge
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_QueueSelectGating
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_QueueGetLength
+                0x00000000       0x1e ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_QueueAbortSequence
+                0x00000000       0x44 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_QueueRemoveChannel
+                0x00000000       0x68 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_QueueGetNextChannel
+                0x00000000       0x24 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_QueueGetInterruptedChannel
+                0x00000000       0x16 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_QueueSetReqSrcEventInterruptNode
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ChannelInit
+                0x00000000       0x70 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_SetChannelAlias
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ChannelIsResultOutOfBounds
+                0x00000000       0x2a ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ChannelSetInputReference
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ChannelSetResultRegister
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ChannelGetResultRegister
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ChannelTriggerEvent
+                0x00000000       0x14 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ChannelSetEventInterruptNode
+                0x00000000       0x18 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ChannelTriggerEventGenCriteria
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_ChannelSetBoundarySelection
+                0x00000000       0x22 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_AddResultToFifo
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_SetResultFastCompareValue
+                0x00000000       0x16 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_GetFastCompareResult
+                0x00000000       0x12 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_SetResultInterruptNode
+                0x00000000       0x30 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_IsResultRegisterFifoHead
+                0x00000000       0x24 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_GetResultFifoTail
+                0x00000000       0x3c ./Libraries/XMCLib/src/xmc_vadc.o
+ .text.XMC_VADC_GROUP_GetResultFifoHead
+                0x00000000       0x2e ./Libraries/XMCLib/src/xmc_vadc.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_vadc.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_vadc.o
+ .text          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_wdt.o
+ .data          0x00000000        0x0 ./Libraries/XMCLib/src/xmc_wdt.o
+ .bss           0x00000000        0x0 ./Libraries/XMCLib/src/xmc_wdt.o
+ .text.XMC_WDT_Enable
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_wdt.o
+ .text.XMC_WDT_Disable
+                0x00000000        0xc ./Libraries/XMCLib/src/xmc_wdt.o
+ .text.XMC_WDT_Init
+                0x00000000       0x1c ./Libraries/XMCLib/src/xmc_wdt.o
+ .comment       0x00000000       0x71 ./Libraries/XMCLib/src/xmc_wdt.o
+ .ARM.attributes
+                0x00000000       0x31 ./Libraries/XMCLib/src/xmc_wdt.o
+ .text          0x00000000        0x0 ./Libraries/Newlib/syscalls.o
+ .data          0x00000000        0x0 ./Libraries/Newlib/syscalls.o
+ .bss           0x00000000        0x0 ./Libraries/Newlib/syscalls.o
+ .text._open    0x00000000        0x6 ./Libraries/Newlib/syscalls.o
+ .text._lseek   0x00000000        0x6 ./Libraries/Newlib/syscalls.o
+ .text._read    0x00000000        0x4 ./Libraries/Newlib/syscalls.o
+ .text._write   0x00000000        0x6 ./Libraries/Newlib/syscalls.o
+ .text._close   0x00000000        0x6 ./Libraries/Newlib/syscalls.o
+ .text._fstat   0x00000000        0x8 ./Libraries/Newlib/syscalls.o
+ .text._link    0x00000000        0xa ./Libraries/Newlib/syscalls.o
+ .text._unlink  0x00000000        0x6 ./Libraries/Newlib/syscalls.o
+ .text._sbrk    0x00000000       0x40 ./Libraries/Newlib/syscalls.o
+ .text._times   0x00000000        0x6 ./Libraries/Newlib/syscalls.o
+ .text._wait    0x00000000        0x6 ./Libraries/Newlib/syscalls.o
+ .text._kill    0x00000000        0x6 ./Libraries/Newlib/syscalls.o
+ .text._fork    0x00000000        0x6 ./Libraries/Newlib/syscalls.o
+ .text._getpid  0x00000000        0x6 ./Libraries/Newlib/syscalls.o
+ .text._exit    0x00000000        0x2 ./Libraries/Newlib/syscalls.o
+ .text._isatty  0x00000000        0x6 ./Libraries/Newlib/syscalls.o
+ .bss.heap.4702
+                0x00000000        0x4 ./Libraries/Newlib/syscalls.o
+ .bss.__dso_handle
+                0x00000000        0x4 ./Libraries/Newlib/syscalls.o
+ .bss.HeapBound.4701
+                0x00000000        0x4 ./Libraries/Newlib/syscalls.o
+ .comment       0x00000000       0x71 ./Libraries/Newlib/syscalls.o
+ .text          0x00000000        0x0 ./FreeRTOS_Files/croutine.o
+ .data          0x00000000        0x0 ./FreeRTOS_Files/croutine.o
+ .bss           0x00000000        0x0 ./FreeRTOS_Files/croutine.o
+ .comment       0x00000000       0x71 ./FreeRTOS_Files/croutine.o
+ .ARM.attributes
+                0x00000000       0x31 ./FreeRTOS_Files/croutine.o
+ .text          0x00000000        0x0 ./FreeRTOS_Files/event_groups.o
+ .data          0x00000000        0x0 ./FreeRTOS_Files/event_groups.o
+ .bss           0x00000000        0x0 ./FreeRTOS_Files/event_groups.o
+ .text.xEventGroupCreate
+                0x00000000       0x18 ./FreeRTOS_Files/event_groups.o
+ .text.xEventGroupWaitBits
+                0x00000000       0xc4 ./FreeRTOS_Files/event_groups.o
+ .text.xEventGroupClearBits
+                0x00000000       0x2a ./FreeRTOS_Files/event_groups.o
+ .text.xEventGroupGetBitsFromISR
+                0x00000000       0x12 ./FreeRTOS_Files/event_groups.o
+ .text.xEventGroupSetBits
+                0x00000000       0x6c ./FreeRTOS_Files/event_groups.o
+ .text.xEventGroupSync
+                0x00000000       0x98 ./FreeRTOS_Files/event_groups.o
+ .text.vEventGroupDelete
+                0x00000000       0x32 ./FreeRTOS_Files/event_groups.o
+ .text.vEventGroupSetBitsCallback
+                0x00000000        0x8 ./FreeRTOS_Files/event_groups.o
+ .text.vEventGroupClearBitsCallback
+                0x00000000        0x8 ./FreeRTOS_Files/event_groups.o
+ .comment       0x00000000       0x71 ./FreeRTOS_Files/event_groups.o
+ .ARM.attributes
+                0x00000000       0x31 ./FreeRTOS_Files/event_groups.o
+ .text          0x00000000        0x0 ./FreeRTOS_Files/heap_1.o
+ .data          0x00000000        0x0 ./FreeRTOS_Files/heap_1.o
+ .bss           0x00000000        0x0 ./FreeRTOS_Files/heap_1.o
+ .text.vPortInitialiseBlocks
+                0x00000000        0xc ./FreeRTOS_Files/heap_1.o
+ .text.xPortGetFreeHeapSize
+                0x00000000       0x14 ./FreeRTOS_Files/heap_1.o
+ .comment       0x00000000       0x71 ./FreeRTOS_Files/heap_1.o
+ .text          0x00000000        0x0 ./FreeRTOS_Files/list.o
+ .data          0x00000000        0x0 ./FreeRTOS_Files/list.o
+ .bss           0x00000000        0x0 ./FreeRTOS_Files/list.o
+ .comment       0x00000000       0x71 ./FreeRTOS_Files/list.o
+ .text          0x00000000        0x0 ./FreeRTOS_Files/mpu_wrappers.o
+ .data          0x00000000        0x0 ./FreeRTOS_Files/mpu_wrappers.o
+ .bss           0x00000000        0x0 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xTaskCreateRestricted
+                0x00000000       0x20 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xTaskCreate
+                0x00000000       0x34 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vTaskAllocateMPURegions
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vTaskDelete
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vTaskDelayUntil
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vTaskDelay
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_uxTaskPriorityGet
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vTaskPrioritySet
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_eTaskGetState
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vTaskSuspend
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vTaskResume
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vTaskSuspendAll
+                0x00000000       0x14 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xTaskResumeAll
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xTaskGetTickCount
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_uxTaskGetNumberOfTasks
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_pcTaskGetName
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vTaskSetTimeOutState
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xTaskCheckForTimeOut
+                0x00000000       0x20 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xTaskGenericNotify
+                0x00000000       0x28 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xTaskNotifyWait
+                0x00000000       0x28 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_ulTaskNotifyTake
+                0x00000000       0x20 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xTaskNotifyStateClear
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueueGenericCreate
+                0x00000000       0x24 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueueGenericReset
+                0x00000000       0x20 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueueGenericSend
+                0x00000000       0x28 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_uxQueueMessagesWaiting
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_uxQueueSpacesAvailable
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueueGenericReceive
+                0x00000000       0x28 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueuePeekFromISR
+                0x00000000       0x20 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueueGetMutexHolder
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueueCreateMutex
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueueTakeMutexRecursive
+                0x00000000       0x20 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueueGiveMutexRecursive
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueueCreateSet
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueueSelectFromSet
+                0x00000000       0x20 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueueAddToSet
+                0x00000000       0x20 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xQueueRemoveFromSet
+                0x00000000       0x20 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vQueueAddToRegistry
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vQueueUnregisterQueue
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_pcQueueGetName
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vQueueDelete
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_pvPortMalloc
+                0x00000000       0x1c ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vPortFree
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vPortInitialiseBlocks
+                0x00000000       0x14 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xPortGetFreeHeapSize
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xEventGroupCreate
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xEventGroupWaitBits
+                0x00000000       0x30 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xEventGroupClearBits
+                0x00000000       0x20 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xEventGroupSetBits
+                0x00000000       0x20 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_xEventGroupSync
+                0x00000000       0x28 ./FreeRTOS_Files/mpu_wrappers.o
+ .text.MPU_vEventGroupDelete
+                0x00000000       0x18 ./FreeRTOS_Files/mpu_wrappers.o
+ .comment       0x00000000       0x71 ./FreeRTOS_Files/mpu_wrappers.o
+ .ARM.attributes
+                0x00000000       0x31 ./FreeRTOS_Files/mpu_wrappers.o
+ .text          0x00000000        0x0 ./FreeRTOS_Files/port.o
+ .data          0x00000000        0x0 ./FreeRTOS_Files/port.o
+ .bss           0x00000000        0x0 ./FreeRTOS_Files/port.o
+ .text.vPortEndScheduler
+                0x00000000       0x18 ./FreeRTOS_Files/port.o
+ .comment       0x00000000       0x71 ./FreeRTOS_Files/port.o
+ .text          0x00000000        0x0 ./FreeRTOS_Files/queue.o
+ .data          0x00000000        0x0 ./FreeRTOS_Files/queue.o
+ .bss           0x00000000        0x0 ./FreeRTOS_Files/queue.o
+ .text.unlikely.prvCopyDataToQueue
+                0x00000000       0x70 ./FreeRTOS_Files/queue.o
+ .text.prvNotifyQueueSetContainer
+                0x00000000       0x5c ./FreeRTOS_Files/queue.o
+ .text.unlikely.prvCopyDataFromQueue
+                0x00000000       0x24 ./FreeRTOS_Files/queue.o
+ .text.prvUnlockQueue
+                0x00000000       0x80 ./FreeRTOS_Files/queue.o
+ .text.xQueueGenericReset
+                0x00000000       0x68 ./FreeRTOS_Files/queue.o
+ .text.xQueueGenericCreate
+                0x00000000       0x46 ./FreeRTOS_Files/queue.o
+ .text.xQueueGenericSend
+                0x00000000      0x11c ./FreeRTOS_Files/queue.o
+ .text.xQueueCreateMutex
+                0x00000000       0x24 ./FreeRTOS_Files/queue.o
+ .text.xQueueGenericSendFromISR
+                0x00000000       0xa0 ./FreeRTOS_Files/queue.o
+ .text.xQueueGiveFromISR
+                0x00000000       0x8c ./FreeRTOS_Files/queue.o
+ .text.xQueueGenericReceive
+                0x00000000      0x142 ./FreeRTOS_Files/queue.o
+ .text.xQueueReceiveFromISR
+                0x00000000       0x7e ./FreeRTOS_Files/queue.o
+ .text.xQueuePeekFromISR
+                0x00000000       0x4c ./FreeRTOS_Files/queue.o
+ .text.uxQueueMessagesWaiting
+                0x00000000       0x1a ./FreeRTOS_Files/queue.o
+ .text.uxQueueSpacesAvailable
+                0x00000000       0x1e ./FreeRTOS_Files/queue.o
+ .text.uxQueueMessagesWaitingFromISR
+                0x00000000        0xc ./FreeRTOS_Files/queue.o
+ .text.xQueueIsQueueEmptyFromISR
+                0x00000000       0x10 ./FreeRTOS_Files/queue.o
+ .text.xQueueIsQueueFullFromISR
+                0x00000000       0x14 ./FreeRTOS_Files/queue.o
+ .text.vQueueAddToRegistry
+                0x00000000       0x24 ./FreeRTOS_Files/queue.o
+ .text.pcQueueGetName
+                0x00000000       0x24 ./FreeRTOS_Files/queue.o
+ .text.vQueueUnregisterQueue
+                0x00000000       0x24 ./FreeRTOS_Files/queue.o
+ .text.vQueueDelete
+                0x00000000       0x18 ./FreeRTOS_Files/queue.o
+ .text.xQueueCreateSet
+                0x00000000        0xc ./FreeRTOS_Files/queue.o
+ .text.xQueueAddToSet
+                0x00000000       0x24 ./FreeRTOS_Files/queue.o
+ .text.xQueueRemoveFromSet
+                0x00000000       0x22 ./FreeRTOS_Files/queue.o
+ .text.xQueueSelectFromSet
+                0x00000000       0x12 ./FreeRTOS_Files/queue.o
+ .text.xQueueSelectFromSetFromISR
+                0x00000000       0x10 ./FreeRTOS_Files/queue.o
+ .comment       0x00000000       0x71 ./FreeRTOS_Files/queue.o
+ .ARM.attributes
+                0x00000000       0x31 ./FreeRTOS_Files/queue.o
+ COMMON         0x00000000       0x40 ./FreeRTOS_Files/queue.o
+ .text          0x00000000        0x0 ./FreeRTOS_Files/tasks.o
+ .data          0x00000000        0x0 ./FreeRTOS_Files/tasks.o
+ .bss           0x00000000        0x0 ./FreeRTOS_Files/tasks.o
+ .text.prvTaskIsTaskSuspended
+                0x00000000       0x2c ./FreeRTOS_Files/tasks.o
+ .text.vTaskDelete
+                0x00000000       0xa0 ./FreeRTOS_Files/tasks.o
+ .text.eTaskGetState
+                0x00000000       0x6c ./FreeRTOS_Files/tasks.o
+ .text.uxTaskPriorityGet
+                0x00000000       0x20 ./FreeRTOS_Files/tasks.o
+ .text.uxTaskPriorityGetFromISR
+                0x00000000       0x20 ./FreeRTOS_Files/tasks.o
+ .text.vTaskPrioritySet
+                0x00000000       0xa4 ./FreeRTOS_Files/tasks.o
+ .text.vTaskResume
+                0x00000000       0x64 ./FreeRTOS_Files/tasks.o
+ .text.xTaskResumeFromISR
+                0x00000000       0x7c ./FreeRTOS_Files/tasks.o
+ .text.vTaskEndScheduler
+                0x00000000       0x14 ./FreeRTOS_Files/tasks.o
+ .text.xTaskGetTickCount
+                0x00000000        0xc ./FreeRTOS_Files/tasks.o
+ .text.xTaskGetTickCountFromISR
+                0x00000000        0xc ./FreeRTOS_Files/tasks.o
+ .text.uxTaskGetNumberOfTasks
+                0x00000000        0xc ./FreeRTOS_Files/tasks.o
+ .text.pcTaskGetName
+                0x00000000       0x18 ./FreeRTOS_Files/tasks.o
+ .text.vTaskDelayUntil
+                0x00000000       0x6c ./FreeRTOS_Files/tasks.o
+ .text.vTaskSuspend
+                0x00000000       0x90 ./FreeRTOS_Files/tasks.o
+ .text.vTaskPlaceOnEventList
+                0x00000000       0x24 ./FreeRTOS_Files/tasks.o
+ .text.vTaskPlaceOnUnorderedEventList
+                0x00000000       0x40 ./FreeRTOS_Files/tasks.o
+ .text.xTaskRemoveFromEventList
+                0x00000000       0x74 ./FreeRTOS_Files/tasks.o
+ .text.xTaskRemoveFromUnorderedEventList
+                0x00000000       0x70 ./FreeRTOS_Files/tasks.o
+ .text.vTaskSetTimeOutState
+                0x00000000       0x20 ./FreeRTOS_Files/tasks.o
+ .text.xTaskCheckForTimeOut
+                0x00000000       0x60 ./FreeRTOS_Files/tasks.o
+ .text.vTaskMissedYield
+                0x00000000        0xc ./FreeRTOS_Files/tasks.o
+ .text.xTaskGetCurrentTaskHandle
+                0x00000000        0xc ./FreeRTOS_Files/tasks.o
+ .text.vTaskPriorityInherit
+                0x00000000       0x6c ./FreeRTOS_Files/tasks.o
+ .text.xTaskPriorityDisinherit
+                0x00000000       0x6c ./FreeRTOS_Files/tasks.o
+ .text.uxTaskResetEventItemValue
+                0x00000000       0x18 ./FreeRTOS_Files/tasks.o
+ .text.pvTaskIncrementMutexHeldCount
+                0x00000000       0x18 ./FreeRTOS_Files/tasks.o
+ .text.ulTaskNotifyTake
+                0x00000000       0x5c ./FreeRTOS_Files/tasks.o
+ .text.xTaskNotifyWait
+                0x00000000       0x78 ./FreeRTOS_Files/tasks.o
+ .text.xTaskGenericNotify
+                0x00000000       0xa8 ./FreeRTOS_Files/tasks.o
+ .text.xTaskGenericNotifyFromISR
+                0x00000000       0xd4 ./FreeRTOS_Files/tasks.o
+ .text.vTaskNotifyGiveFromISR
+                0x00000000       0xa0 ./FreeRTOS_Files/tasks.o
+ .text.xTaskNotifyStateClear
+                0x00000000       0x28 ./FreeRTOS_Files/tasks.o
+ .comment       0x00000000       0x71 ./FreeRTOS_Files/tasks.o
+ .text          0x00000000        0x0 ./FreeRTOS_Files/timers.o
+ .data          0x00000000        0x0 ./FreeRTOS_Files/timers.o
+ .bss           0x00000000        0x0 ./FreeRTOS_Files/timers.o
+ .comment       0x00000000       0x71 ./FreeRTOS_Files/timers.o
+ .ARM.attributes
+                0x00000000       0x31 ./FreeRTOS_Files/timers.o
+ .text          0x00000000        0x0 ./main.o
+ .data          0x00000000        0x0 ./main.o
+ .bss           0x00000000        0x0 ./main.o
+ .comment       0x00000000       0x71 ./main.o
+ .text          0x00000000       0x14 c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/armv6-m\libgcc.a(_thumb1_case_uqi.o)
+ .data          0x00000000        0x0 c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/armv6-m\libgcc.a(_thumb1_case_uqi.o)
+ .bss           0x00000000        0x0 c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/armv6-m\libgcc.a(_thumb1_case_uqi.o)
+ .ARM.attributes
+                0x00000000       0x1e c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/armv6-m\libgcc.a(_thumb1_case_uqi.o)
+ .text          0x00000000        0x0 c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-init.o)
+ .data          0x00000000        0x0 c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-init.o)
+ .bss           0x00000000        0x0 c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-init.o)
+ .text          0x00000000        0x0 c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memcpy.o)
+ .data          0x00000000        0x0 c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memcpy.o)
+ .bss           0x00000000        0x0 c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memcpy.o)
+ .text.memcpy   0x00000000       0x12 c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memcpy.o)
+ .debug_frame   0x00000000       0x28 c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memcpy.o)
+ .ARM.attributes
+                0x00000000       0x2c c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memcpy.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x10001000         0x00032000         xr
+SRAM             0x20000000         0x00004000         !xr
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./Startup/startup_XMC1300.o
+LOAD ./Startup/system_XMC1300.o
+LOAD ./Libraries/XMCLib/src/xmc1_eru.o
+LOAD ./Libraries/XMCLib/src/xmc1_flash.o
+LOAD ./Libraries/XMCLib/src/xmc1_gpio.o
+LOAD ./Libraries/XMCLib/src/xmc1_rtc.o
+LOAD ./Libraries/XMCLib/src/xmc1_scu.o
+LOAD ./Libraries/XMCLib/src/xmc1_usic.o
+LOAD ./Libraries/XMCLib/src/xmc_acmp.o
+LOAD ./Libraries/XMCLib/src/xmc_bccu.o
+LOAD ./Libraries/XMCLib/src/xmc_ccu4.o
+LOAD ./Libraries/XMCLib/src/xmc_ccu8.o
+LOAD ./Libraries/XMCLib/src/xmc_common.o
+LOAD ./Libraries/XMCLib/src/xmc_eru.o
+LOAD ./Libraries/XMCLib/src/xmc_gpio.o
+LOAD ./Libraries/XMCLib/src/xmc_i2c.o
+LOAD ./Libraries/XMCLib/src/xmc_ledts.o
+LOAD ./Libraries/XMCLib/src/xmc_math.o
+LOAD ./Libraries/XMCLib/src/xmc_pau.o
+LOAD ./Libraries/XMCLib/src/xmc_posif.o
+LOAD ./Libraries/XMCLib/src/xmc_prng.o
+LOAD ./Libraries/XMCLib/src/xmc_rtc.o
+LOAD ./Libraries/XMCLib/src/xmc_spi.o
+LOAD ./Libraries/XMCLib/src/xmc_uart.o
+LOAD ./Libraries/XMCLib/src/xmc_usic.o
+LOAD ./Libraries/XMCLib/src/xmc_vadc.o
+LOAD ./Libraries/XMCLib/src/xmc_wdt.o
+LOAD ./Libraries/Newlib/syscalls.o
+LOAD ./FreeRTOS_Files/croutine.o
+LOAD ./FreeRTOS_Files/event_groups.o
+LOAD ./FreeRTOS_Files/heap_1.o
+LOAD ./FreeRTOS_Files/list.o
+LOAD ./FreeRTOS_Files/mpu_wrappers.o
+LOAD ./FreeRTOS_Files/port.o
+LOAD ./FreeRTOS_Files/queue.o
+LOAD ./FreeRTOS_Files/tasks.o
+LOAD ./FreeRTOS_Files/timers.o
+LOAD ./main.o
+LOAD c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libm.a
+START GROUP
+LOAD c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/armv6-m\libgcc.a
+LOAD c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a
+END GROUP
+START GROUP
+LOAD c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/armv6-m\libgcc.a
+LOAD c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a
+END GROUP
+                0x00000400                stack_size = 0x400
+
+.text           0x10001000      0x99c
+                0x10001000                sText = .
+ *(.reset)
+ .reset         0x10001000       0x9c ./Startup/startup_XMC1300.o
+                0x10001000                __Vectors
+                0x10001018                Reset_Handler
+                0x10001098                USIC0_5_IRQHandler
+                0x10001098                POSIF0_0_IRQHandler
+                0x10001098                HardFault_Handler
+                0x10001098                VADC0_G1_1_IRQHandler
+                0x10001098                CCU40_2_IRQHandler
+                0x10001098                VADC0_C0_0_IRQHandler
+                0x10001098                ERU0_0_IRQHandler
+                0x10001098                CCU80_1_IRQHandler
+                0x10001098                USIC0_0_IRQHandler
+                0x10001098                ERU0_2_IRQHandler
+                0x10001098                BCCU0_0_IRQHandler
+                0x10001098                ERU0_3_IRQHandler
+                0x10001098                SCU_0_IRQHandler
+                0x10001098                VADC0_G0_1_IRQHandler
+                0x10001098                CCU40_0_IRQHandler
+                0x10001098                POSIF0_1_IRQHandler
+                0x10001098                VADC0_G0_0_IRQHandler
+                0x10001098                MATH0_0_IRQHandler
+                0x10001098                VADC0_C0_1_IRQHandler
+                0x10001098                USIC0_3_IRQHandler
+                0x10001098                VADC0_G1_0_IRQHandler
+                0x10001098                CCU80_0_IRQHandler
+                0x10001098                CCU40_1_IRQHandler
+                0x10001098                SCU_2_IRQHandler
+                0x10001098                USIC0_1_IRQHandler
+                0x10001098                CCU40_3_IRQHandler
+                0x10001098                USIC0_4_IRQHandler
+                0x10001098                SCU_1_IRQHandler
+                0x10001098                ERU0_1_IRQHandler
+                0x10001098                USIC0_2_IRQHandler
+                0x10001098                Default_handler
+ *(.text .text.* .gnu.linkonce.t.*)
+ .text.SystemCoreSetup
+                0x1000109c        0x2 ./Startup/system_XMC1300.o
+                0x1000109c                SystemCoreSetup
+ *fill*         0x1000109e        0x2 
+ .text.SystemCoreClockUpdate
+                0x100010a0       0x4c ./Startup/system_XMC1300.o
+                0x100010a0                SystemCoreClockUpdate
+ .text.SystemCoreClockSetup
+                0x100010ec        0x8 ./Startup/system_XMC1300.o
+                0x100010ec                SystemCoreClockSetup
+ .text.SystemInit
+                0x100010f4        0xc ./Startup/system_XMC1300.o
+                0x100010f4                SystemInit
+ .text.__aeabi_uidiv
+                0x10001100       0x1c ./Libraries/XMCLib/src/xmc_math.o
+                0x10001100                __aeabi_uidiv
+ .text._init    0x1000111c        0x2 ./Libraries/Newlib/syscalls.o
+                0x1000111c                _init
+ *fill*         0x1000111e        0x2 
+ .text.pvPortMalloc
+                0x10001120       0x54 ./FreeRTOS_Files/heap_1.o
+                0x10001120                pvPortMalloc
+ .text.vPortFree
+                0x10001174        0xa ./FreeRTOS_Files/heap_1.o
+                0x10001174                vPortFree
+ .text.vListInitialise
+                0x1000117e       0x16 ./FreeRTOS_Files/list.o
+                0x1000117e                vListInitialise
+ .text.vListInitialiseItem
+                0x10001194        0x6 ./FreeRTOS_Files/list.o
+                0x10001194                vListInitialiseItem
+ .text.vListInsertEnd
+                0x1000119a       0x18 ./FreeRTOS_Files/list.o
+                0x1000119a                vListInsertEnd
+ .text.vListInsert
+                0x100011b2       0x30 ./FreeRTOS_Files/list.o
+                0x100011b2                vListInsert
+ .text.uxListRemove
+                0x100011e2       0x20 ./FreeRTOS_Files/list.o
+                0x100011e2                uxListRemove
+ *fill*         0x10001202        0x2 
+ .text.prvTaskExitError
+                0x10001204       0x14 ./FreeRTOS_Files/port.o
+ *fill*         0x10001218        0x8 
+ .text.vPortStartFirstTask
+                0x10001220       0x40 ./FreeRTOS_Files/port.o
+ .text.pxPortInitialiseStack
+                0x10001260       0x20 ./FreeRTOS_Files/port.o
+                0x10001260                pxPortInitialiseStack
+ .text.SVC_Handler
+                0x10001280        0x2 ./FreeRTOS_Files/port.o
+                0x10001280                SVC_Handler
+ *fill*         0x10001282        0x2 
+ .text.xPortStartScheduler
+                0x10001284       0x48 ./FreeRTOS_Files/port.o
+                0x10001284                xPortStartScheduler
+ .text.vPortYield
+                0x100012cc       0x18 ./FreeRTOS_Files/port.o
+                0x100012cc                vPortYield
+ .text.vPortEnterCritical
+                0x100012e4       0x18 ./FreeRTOS_Files/port.o
+                0x100012e4                vPortEnterCritical
+ .text.vPortExitCritical
+                0x100012fc       0x1c ./FreeRTOS_Files/port.o
+                0x100012fc                vPortExitCritical
+ .text.ulSetInterruptMaskFromISR
+                0x10001318        0xa ./FreeRTOS_Files/port.o
+                0x10001318                ulSetInterruptMaskFromISR
+ .text.vClearInterruptMaskFromISR
+                0x10001322        0x6 ./FreeRTOS_Files/port.o
+                0x10001322                vClearInterruptMaskFromISR
+ *fill*         0x10001328        0x8 
+ .text.PendSV_Handler
+                0x10001330       0x50 ./FreeRTOS_Files/port.o
+                0x10001330                PendSV_Handler
+ .text.SysTick_Handler
+                0x10001380       0x24 ./FreeRTOS_Files/port.o
+                0x10001380                SysTick_Handler
+ .text.prvResetNextTaskUnblockTime
+                0x100013a4       0x28 ./FreeRTOS_Files/tasks.o
+ .text.prvAddCurrentTaskToDelayedList
+                0x100013cc       0x74 ./FreeRTOS_Files/tasks.o
+ .text.xTaskCreate
+                0x10001440      0x184 ./FreeRTOS_Files/tasks.o
+                0x10001440                xTaskCreate
+ .text.vTaskStartScheduler
+                0x100015c4       0x54 ./FreeRTOS_Files/tasks.o
+                0x100015c4                vTaskStartScheduler
+ .text.vTaskSuspendAll
+                0x10001618       0x10 ./FreeRTOS_Files/tasks.o
+                0x10001618                vTaskSuspendAll
+ .text.xTaskIncrementTick
+                0x10001628      0x100 ./FreeRTOS_Files/tasks.o
+                0x10001628                xTaskIncrementTick
+ .text.xTaskResumeAll
+                0x10001728       0xd4 ./FreeRTOS_Files/tasks.o
+                0x10001728                xTaskResumeAll
+ .text.vTaskDelay
+                0x100017fc       0x34 ./FreeRTOS_Files/tasks.o
+                0x100017fc                vTaskDelay
+ .text.prvIdleTask
+                0x10001830       0x68 ./FreeRTOS_Files/tasks.o
+ .text.vTaskSwitchContext
+                0x10001898       0x6c ./FreeRTOS_Files/tasks.o
+                0x10001898                vTaskSwitchContext
+ .text.LEDTask  0x10001904       0x28 ./main.o
+                0x10001904                LEDTask
+ .text.startup.main
+                0x1000192c       0x24 ./main.o
+                0x1000192c                main
+ .text.__libc_init_array
+                0x10001950       0x4c c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-init.o)
+                0x10001950                __libc_init_array
+ *(.glue*)
+ .glue_7        0x00000000        0x0 linker stubs
+ .glue_7t       0x00000000        0x0 linker stubs
+ *(.v4*)
+ .v4_bx         0x00000000        0x0 linker stubs
+ *(.vfp11_veneer)
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+ *(.init)
+                0x1000199c                __preinit_array_start = .
+ *(.preinit_array)
+                0x1000199c                __preinit_array_end = .
+                0x1000199c                __init_array_start = .
+ *(SORT(.init_array.*))
+ *(.init_array)
+                0x1000199c                __init_array_end = .
+ *crtbegin.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o) .ctors)
+ *(SORT(.ctors.*))
+ *crtend.o(.ctors)
+ *(.fini)
+                0x1000199c                __fini_array_start = .
+ *(.fini_array)
+ *(SORT(.fini_array.*))
+                0x1000199c                __fini_array_end = .
+ *crtbegin.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o) .dtors)
+ *(SORT(.dtors.*))
+ *crtend.o(.dtors)
+                0x1000199c                __extab_start = .
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x1000199c                . = ALIGN (0x4)
+                0x1000199c                __extab_end = ABSOLUTE (.)
+
+.iplt           0x1000199c        0x0
+ .iplt          0x00000000        0x0 ./Startup/startup_XMC1300.o
+
+.ARM.exidx      0x1000199c        0x0
+                0x1000199c                __exidx_start = .
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x1000199c                . = ALIGN (0x4)
+                0x1000199c                __exidx_end = ABSOLUTE (.)
+
+.rodata         0x1000199c        0x9
+ *(.rodata .rodata.*)
+ .rodata.str1.1
+                0x1000199c        0x5 ./FreeRTOS_Files/tasks.o
+ .rodata.str1.1
+                0x100019a1        0x4 ./main.o
+ *(.gnu.linkonce.r*)
+                0x100019b0                . = ALIGN (0x10)
+                0x100019b0                eROData = .
+
+.VENEER_Code    0x2000000c      0x138 load address 0x100019b0
+                0x2000000c                VeneerStart = .
+ *(.XmcVeneerCode)
+ .XmcVeneerCode
+                0x2000000c      0x138 ./Startup/startup_XMC1300.o
+                0x2000000c                HardFault_Veneer
+                0x2000002c                SVC_Veneer
+                0x20000038                PendSV_Veneer
+                0x2000003c                SysTick_Veneer
+                0x20000040                SCU_0_Veneer
+                0x20000044                SCU_1_Veneer
+                0x20000048                SCU_2_Veneer
+                0x2000004c                SCU_3_Veneer
+                0x20000050                SCU_4_Veneer
+                0x20000054                SCU_5_Veneer
+                0x20000058                SCU_6_Veneer
+                0x2000005c                MATH_Veneer
+                0x20000064                USIC0_0_Veneer
+                0x20000068                USIC0_1_Veneer
+                0x2000006c                USIC0_2_Veneer
+                0x20000070                USIC0_3_Veneer
+                0x20000074                USIC0_4_Veneer
+                0x20000078                USIC0_5_Veneer
+                0x2000007c                VADC0_C0_0_Veneer
+                0x20000080                VADC0_C0_1_Veneer
+                0x20000084                VADC0_G0_0_Veneer
+                0x20000088                VADC0_G0_1_Veneer
+                0x2000008c                VADC0_G1_0_Veneer
+                0x20000090                VADC0_G1_1_Veneer
+                0x20000094                CCU40_0_Veneer
+                0x20000098                CCU40_1_Veneer
+                0x2000009c                CCU40_2_Veneer
+                0x200000a0                CCU40_3_Veneer
+                0x200000a4                CCU80_0_Veneer
+                0x200000a8                CCU80_1_Veneer
+                0x200000ac                POSIF0_0_Veneer
+                0x200000b0                POSIF0_1_Veneer
+                0x200000bc                BCCU0_0_Veneer
+                0x20000144                . = ALIGN (0x4)
+                0x20000144                VeneerEnd = .
+                0x00000138                VeneerSize = (ABSOLUTE (VeneerEnd) - ABSOLUTE (VeneerStart))
+
+.rel.dyn        0x20000144        0x0 load address 0x10001ae8
+ .rel.iplt      0x00000000        0x0 ./Startup/startup_XMC1300.o
+
+Stack           0x20000144      0x404 load address 0x00000000
+                0x20000148                . = ALIGN (0x8)
+ *fill*         0x20000144        0x4 
+                0x20000548                . = (. + stack_size)
+ *fill*         0x20000148      0x400 
+                0x20000548                __initial_sp = .
+                0x10001ae8                DataLoadAddr = (eROData + VeneerSize)
+
+.data           0x20000548        0x4 load address 0x10001ae8
+                0x20000548                __data_start = .
+ *(.data)
+ *(.data*)
+ .data.uxCriticalNesting
+                0x20000548        0x4 ./FreeRTOS_Files/port.o
+ *(*.data)
+ *(.gnu.linkonce.d*)
+                0x2000054c                . = ALIGN (0x4)
+                0x2000054c                __data_end = .
+                0x00000004                __data_size = (__data_end - __data_start)
+
+.igot.plt       0x2000054c        0x0 load address 0x10001aec
+ .igot.plt      0x00000000        0x0 ./Startup/startup_XMC1300.o
+
+.ram_code       0x2000054c        0x0 load address 0x10001aec
+                0x2000054c                __ram_code_start = .
+ *(.ram_code)
+                0x2000054c                . = ALIGN (0x4)
+                0x2000054c                __ram_code_end = .
+                0x10001aec                __ram_code_load = LOADADDR (.ram_code)
+                0x00000000                __ram_code_size = (__ram_code_end - __ram_code_start)
+
+.bss            0x2000054c     0x2c0c load address 0x10001aec
+                0x2000054c                __bss_start = .
+ *(.bss)
+ *(.bss*)
+ .bss.FDIV.4919
+                0x2000054c        0x4 ./Startup/system_XMC1300.o
+ .bss.IDIV.4918
+                0x20000550        0x4 ./Startup/system_XMC1300.o
+ .bss.xNextFreeByte
+                0x20000554        0x4 ./FreeRTOS_Files/heap_1.o
+ .bss.ucHeap    0x20000558     0x2af8 ./FreeRTOS_Files/heap_1.o
+ .bss.pucAlignedHeap.5000
+                0x20003050        0x4 ./FreeRTOS_Files/heap_1.o
+ .bss.xNumOfOverflows
+                0x20003054        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.pxDelayedTaskList
+                0x20003058        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.xSchedulerRunning
+                0x2000305c        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.uxSchedulerSuspended
+                0x20003060        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.xDelayedTaskList1
+                0x20003064       0x14 ./FreeRTOS_Files/tasks.o
+ .bss.pxOverflowDelayedTaskList
+                0x20003078        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.uxPendedTicks
+                0x2000307c        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.pxReadyTasksLists
+                0x20003080       0x64 ./FreeRTOS_Files/tasks.o
+ .bss.xTasksWaitingTermination
+                0x200030e4       0x14 ./FreeRTOS_Files/tasks.o
+ .bss.uxDeletedTasksWaitingCleanUp
+                0x200030f8        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.pxCurrentTCB
+                0x200030fc        0x4 ./FreeRTOS_Files/tasks.o
+                0x200030fc                pxCurrentTCB
+ .bss.xPendingReadyList
+                0x20003100       0x14 ./FreeRTOS_Files/tasks.o
+ .bss.xTickCount
+                0x20003114        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.xNextTaskUnblockTime
+                0x20003118        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.uxTaskNumber
+                0x2000311c        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.uxCurrentNumberOfTasks
+                0x20003120        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.xDelayedTaskList2
+                0x20003124       0x14 ./FreeRTOS_Files/tasks.o
+ .bss.xIdleTaskHandle
+                0x20003138        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.xSuspendedTaskList
+                0x2000313c       0x14 ./FreeRTOS_Files/tasks.o
+ .bss.uxTopReadyPriority
+                0x20003150        0x4 ./FreeRTOS_Files/tasks.o
+ .bss.xYieldPending
+                0x20003154        0x4 ./FreeRTOS_Files/tasks.o
+ *(COMMON)
+ *(.gnu.linkonce.b*)
+                0x20003158                . = ALIGN (0x4)
+                0x20003158                __bss_end = .
+                0x20003158                . = ALIGN (0x8)
+                0x20003158                Heap_Bank1_Start = .
+                0x00002c0c                __bss_size = (__bss_end - __bss_start)
+
+.no_init        0x20003ffc        0x4 load address 0x1000559c
+                0x20003ffc                Heap_Bank1_End = .
+ *(.no_init)
+ .no_init       0x20003ffc        0x4 ./Startup/system_XMC1300.o
+                0x20003ffc                SystemCoreClock
+                0x00000ea4                Heap_Bank1_Size = (Heap_Bank1_End - Heap_Bank1_Start)
+
+/DISCARD/
+ *(.comment)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_info
+ *(.debug_info .gnu.linkonce.wi.*)
+
+.debug_abbrev
+ *(.debug_abbrev)
+
+.debug_line
+ *(.debug_line)
+
+.debug_frame    0x00000000       0x2c
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x2c c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-init.o)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_ranges
+ *(.debug_ranges)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.build_attributes
+                0x00000000      0x1d5
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x00000000       0x21 ./Startup/startup_XMC1300.o
+ .ARM.attributes
+                0x00000021       0x31 ./Startup/system_XMC1300.o
+ .ARM.attributes
+                0x00000052       0x31 ./Libraries/XMCLib/src/xmc_math.o
+ .ARM.attributes
+                0x00000083       0x31 ./Libraries/Newlib/syscalls.o
+ .ARM.attributes
+                0x000000b4       0x31 ./FreeRTOS_Files/heap_1.o
+ .ARM.attributes
+                0x000000e5       0x31 ./FreeRTOS_Files/list.o
+ .ARM.attributes
+                0x00000116       0x31 ./FreeRTOS_Files/port.o
+ .ARM.attributes
+                0x00000147       0x31 ./FreeRTOS_Files/tasks.o
+ .ARM.attributes
+                0x00000178       0x31 ./main.o
+ .ARM.attributes
+                0x000001a9       0x2c c:/davev4-64bit/dave-4.3.2/eclipse/arm-gcc-49/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-init.o)
+OUTPUT(RTOS_Blink.elf elf32-littlearm)

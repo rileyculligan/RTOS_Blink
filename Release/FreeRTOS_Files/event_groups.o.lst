@@ -1,0 +1,463 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "event_groups.c"
+  14              	 .section .text.xEventGroupCreate,"ax",%progbits
+  15              	 .align 1
+  16              	 .global xEventGroupCreate
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	xEventGroupCreate:
+  21 0000 10B5     	 push {r4,lr}
+  22 0002 1820     	 mov r0,#24
+  23 0004 FFF7FEFF 	 bl pvPortMalloc
+  24 0008 041E     	 sub r4,r0,#0
+  25 000a 03D0     	 beq .L2
+  26 000c 0023     	 mov r3,#0
+  27 000e 08C0     	 stmia r0!,{r3}
+  28 0010 FFF7FEFF 	 bl vListInitialise
+  29              	.L2:
+  30 0014 201C     	 mov r0,r4
+  31              	 
+  32 0016 10BD     	 pop {r4,pc}
+  34              	 .section .text.xEventGroupWaitBits,"ax",%progbits
+  35              	 .align 1
+  36              	 .global xEventGroupWaitBits
+  37              	 .code 16
+  38              	 .thumb_func
+  40              	xEventGroupWaitBits:
+  41 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+  42 0002 0028     	 cmp r0,#0
+  43 0004 01D1     	 bne .L8
+  44              	
+  45 0006 72B6     	 cpsid i
+  46              	
+  47              	 .code 16
+  48              	.L9:
+  49 0008 FEE7     	 b .L9
+  50              	.L8:
+  51 000a 0C0E     	 lsr r4,r1,#24
+  52 000c 01D0     	 beq .L10
+  53              	
+  54 000e 72B6     	 cpsid i
+  55              	
+  56              	 .code 16
+  57              	.L11:
+  58 0010 FEE7     	 b .L11
+  59              	.L10:
+  60 0012 0029     	 cmp r1,#0
+  61 0014 01D1     	 bne .L12
+  62              	
+  63 0016 72B6     	 cpsid i
+  64              	
+  65              	 .code 16
+  66              	.L13:
+  67 0018 FEE7     	 b .L13
+  68              	.L12:
+  69 001a 061C     	 mov r6,r0
+  70 001c 0193     	 str r3,[sp,#4]
+  71 001e 171C     	 mov r7,r2
+  72 0020 0D1C     	 mov r5,r1
+  73 0022 FFF7FEFF 	 bl vTaskSuspendAll
+  74 0026 3468     	 ldr r4,[r6]
+  75 0028 019A     	 ldr r2,[sp,#4]
+  76 002a 231C     	 mov r3,r4
+  77 002c 2B40     	 and r3,r5
+  78 002e 002A     	 cmp r2,#0
+  79 0030 02D1     	 bne .L14
+  80 0032 002B     	 cmp r3,#0
+  81 0034 02D1     	 bne .L15
+  82 0036 09E0     	 b .L16
+  83              	.L14:
+  84 0038 AB42     	 cmp r3,r5
+  85 003a 07D1     	 bne .L16
+  86              	.L15:
+  87 003c 002F     	 cmp r7,#0
+  88 003e 3DD0     	 beq .L41
+  89 0040 231C     	 mov r3,r4
+  90 0042 AB43     	 bic r3,r5
+  91 0044 3360     	 str r3,[r6]
+  92 0046 0023     	 mov r3,#0
+  93 0048 0893     	 str r3,[sp,#32]
+  94 004a 12E0     	 b .L17
+  95              	.L16:
+  96 004c 089B     	 ldr r3,[sp,#32]
+  97 004e 002B     	 cmp r3,#0
+  98 0050 0FD0     	 beq .L17
+  99 0052 391C     	 mov r1,r7
+ 100 0054 4B1E     	 sub r3,r1,#1
+ 101 0056 9941     	 sbc r1,r1,r3
+ 102 0058 019B     	 ldr r3,[sp,#4]
+ 103 005a 0906     	 lsl r1,r1,#24
+ 104 005c 002B     	 cmp r3,#0
+ 105 005e 02D0     	 beq .L19
+ 106 0060 8023     	 mov r3,#128
+ 107 0062 DB04     	 lsl r3,r3,#19
+ 108 0064 1943     	 orr r1,r3
+ 109              	.L19:
+ 110 0066 301D     	 add r0,r6,#4
+ 111 0068 2943     	 orr r1,r5
+ 112 006a 089A     	 ldr r2,[sp,#32]
+ 113 006c FFF7FEFF 	 bl vTaskPlaceOnUnorderedEventList
+ 114 0070 0024     	 mov r4,#0
+ 115              	.L17:
+ 116 0072 FFF7FEFF 	 bl xTaskResumeAll
+ 117 0076 089B     	 ldr r3,[sp,#32]
+ 118 0078 002B     	 cmp r3,#0
+ 119 007a 21D0     	 beq .L33
+ 120 007c 0028     	 cmp r0,#0
+ 121 007e 01D1     	 bne .L21
+ 122 0080 FFF7FEFF 	 bl vPortYield
+ 123              	.L21:
+ 124 0084 FFF7FEFF 	 bl uxTaskResetEventItemValue
+ 125 0088 041C     	 mov r4,r0
+ 126 008a 8301     	 lsl r3,r0,#6
+ 127 008c 13D4     	 bmi .L22
+ 128 008e FFF7FEFF 	 bl vPortEnterCritical
+ 129 0092 3468     	 ldr r4,[r6]
+ 130 0094 019A     	 ldr r2,[sp,#4]
+ 131 0096 231C     	 mov r3,r4
+ 132 0098 2B40     	 and r3,r5
+ 133 009a 002A     	 cmp r2,#0
+ 134 009c 02D1     	 bne .L23
+ 135 009e 002B     	 cmp r3,#0
+ 136 00a0 02D1     	 bne .L24
+ 137 00a2 06E0     	 b .L25
+ 138              	.L23:
+ 139 00a4 AB42     	 cmp r3,r5
+ 140 00a6 04D1     	 bne .L25
+ 141              	.L24:
+ 142 00a8 002F     	 cmp r7,#0
+ 143 00aa 02D0     	 beq .L25
+ 144 00ac 231C     	 mov r3,r4
+ 145 00ae AB43     	 bic r3,r5
+ 146 00b0 3360     	 str r3,[r6]
+ 147              	.L25:
+ 148 00b2 FFF7FEFF 	 bl vPortExitCritical
+ 149              	.L22:
+ 150 00b6 2402     	 lsl r4,r4,#8
+ 151 00b8 240A     	 lsr r4,r4,#8
+ 152 00ba 01E0     	 b .L33
+ 153              	.L41:
+ 154 00bc 0897     	 str r7,[sp,#32]
+ 155 00be D8E7     	 b .L17
+ 156              	.L33:
+ 157 00c0 201C     	 mov r0,r4
+ 158              	 
+ 159 00c2 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 161              	 .section .text.xEventGroupClearBits,"ax",%progbits
+ 162              	 .align 1
+ 163              	 .global xEventGroupClearBits
+ 164              	 .code 16
+ 165              	 .thumb_func
+ 167              	xEventGroupClearBits:
+ 168 0000 70B5     	 push {r4,r5,r6,lr}
+ 169 0002 0028     	 cmp r0,#0
+ 170 0004 01D1     	 bne .L43
+ 171              	
+ 172 0006 72B6     	 cpsid i
+ 173              	
+ 174              	 .code 16
+ 175              	.L44:
+ 176 0008 FEE7     	 b .L44
+ 177              	.L43:
+ 178 000a 0B0E     	 lsr r3,r1,#24
+ 179 000c 01D0     	 beq .L45
+ 180              	
+ 181 000e 72B6     	 cpsid i
+ 182              	
+ 183              	 .code 16
+ 184              	.L46:
+ 185 0010 FEE7     	 b .L46
+ 186              	.L45:
+ 187 0012 041C     	 mov r4,r0
+ 188 0014 0D1C     	 mov r5,r1
+ 189 0016 FFF7FEFF 	 bl vPortEnterCritical
+ 190 001a 2668     	 ldr r6,[r4]
+ 191              	 
+ 192 001c 331C     	 mov r3,r6
+ 193 001e AB43     	 bic r3,r5
+ 194 0020 2360     	 str r3,[r4]
+ 195 0022 FFF7FEFF 	 bl vPortExitCritical
+ 196 0026 301C     	 mov r0,r6
+ 197 0028 70BD     	 pop {r4,r5,r6,pc}
+ 199              	 .section .text.xEventGroupGetBitsFromISR,"ax",%progbits
+ 200              	 .align 1
+ 201              	 .global xEventGroupGetBitsFromISR
+ 202              	 .code 16
+ 203              	 .thumb_func
+ 205              	xEventGroupGetBitsFromISR:
+ 206 0000 10B5     	 push {r4,lr}
+ 207 0002 041C     	 mov r4,r0
+ 208 0004 FFF7FEFF 	 bl ulSetInterruptMaskFromISR
+ 209 0008 2468     	 ldr r4,[r4]
+ 210              	 
+ 211 000a FFF7FEFF 	 bl vClearInterruptMaskFromISR
+ 212 000e 201C     	 mov r0,r4
+ 213 0010 10BD     	 pop {r4,pc}
+ 215              	 .section .text.xEventGroupSetBits,"ax",%progbits
+ 216              	 .align 1
+ 217              	 .global xEventGroupSetBits
+ 218              	 .code 16
+ 219              	 .thumb_func
+ 221              	xEventGroupSetBits:
+ 222 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 223 0002 0028     	 cmp r0,#0
+ 224 0004 01D1     	 bne .L49
+ 225              	
+ 226 0006 72B6     	 cpsid i
+ 227              	
+ 228              	 .code 16
+ 229              	.L50:
+ 230 0008 FEE7     	 b .L50
+ 231              	.L49:
+ 232 000a 0D0E     	 lsr r5,r1,#24
+ 233 000c 2D06     	 lsl r5,r5,#24
+ 234 000e 01D0     	 beq .L51
+ 235              	
+ 236 0010 72B6     	 cpsid i
+ 237              	
+ 238              	 .code 16
+ 239              	.L52:
+ 240 0012 FEE7     	 b .L52
+ 241              	.L51:
+ 242 0014 061C     	 mov r6,r0
+ 243 0016 041C     	 mov r4,r0
+ 244 0018 0F1C     	 mov r7,r1
+ 245 001a 0C36     	 add r6,r6,#12
+ 246 001c 0196     	 str r6,[sp,#4]
+ 247 001e FFF7FEFF 	 bl vTaskSuspendAll
+ 248 0022 2368     	 ldr r3,[r4]
+ 249 0024 2069     	 ldr r0,[r4,#16]
+ 250 0026 1F43     	 orr r7,r3
+ 251 0028 2760     	 str r7,[r4]
+ 252              	.L53:
+ 253 002a 019B     	 ldr r3,[sp,#4]
+ 254 002c 2168     	 ldr r1,[r4]
+ 255 002e 9842     	 cmp r0,r3
+ 256 0030 16D0     	 beq .L62
+ 257 0032 0268     	 ldr r2,[r0]
+ 258 0034 4768     	 ldr r7,[r0,#4]
+ 259 0036 1302     	 lsl r3,r2,#8
+ 260 0038 1B0A     	 lsr r3,r3,#8
+ 261 003a 5601     	 lsl r6,r2,#5
+ 262 003c 02D4     	 bmi .L54
+ 263 003e 1942     	 tst r1,r3
+ 264 0040 04D1     	 bne .L55
+ 265 0042 0BE0     	 b .L56
+ 266              	.L54:
+ 267 0044 0E1C     	 mov r6,r1
+ 268 0046 1E40     	 and r6,r3
+ 269 0048 9E42     	 cmp r6,r3
+ 270 004a 07D1     	 bne .L56
+ 271              	.L55:
+ 272 004c D201     	 lsl r2,r2,#7
+ 273 004e 00D5     	 bpl .L59
+ 274 0050 1D43     	 orr r5,r3
+ 275              	.L59:
+ 276 0052 8023     	 mov r3,#128
+ 277 0054 9B04     	 lsl r3,r3,#18
+ 278 0056 1943     	 orr r1,r3
+ 279 0058 FFF7FEFF 	 bl xTaskRemoveFromUnorderedEventList
+ 280              	.L56:
+ 281 005c 381C     	 mov r0,r7
+ 282 005e E4E7     	 b .L53
+ 283              	.L62:
+ 284 0060 A943     	 bic r1,r5
+ 285 0062 2160     	 str r1,[r4]
+ 286 0064 FFF7FEFF 	 bl xTaskResumeAll
+ 287              	 
+ 288 0068 2068     	 ldr r0,[r4]
+ 289 006a FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 291              	 .section .text.xEventGroupSync,"ax",%progbits
+ 292              	 .align 1
+ 293              	 .global xEventGroupSync
+ 294              	 .code 16
+ 295              	 .thumb_func
+ 297              	xEventGroupSync:
+ 298 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 299 0002 1F1C     	 mov r7,r3
+ 300 0004 130E     	 lsr r3,r2,#24
+ 301 0006 1B06     	 lsl r3,r3,#24
+ 302 0008 061C     	 mov r6,r0
+ 303 000a 0C1C     	 mov r4,r1
+ 304 000c 151C     	 mov r5,r2
+ 305 000e 0093     	 str r3,[sp]
+ 306 0010 002B     	 cmp r3,#0
+ 307 0012 01D0     	 beq .L64
+ 308              	
+ 309 0014 72B6     	 cpsid i
+ 310              	
+ 311              	 .code 16
+ 312              	.L65:
+ 313 0016 FEE7     	 b .L65
+ 314              	.L64:
+ 315 0018 002A     	 cmp r2,#0
+ 316 001a 01D1     	 bne .L66
+ 317              	
+ 318 001c 72B6     	 cpsid i
+ 319              	
+ 320              	 .code 16
+ 321              	.L67:
+ 322 001e FEE7     	 b .L67
+ 323              	.L66:
+ 324 0020 FFF7FEFF 	 bl vTaskSuspendAll
+ 325 0024 3368     	 ldr r3,[r6]
+ 326 0026 211C     	 mov r1,r4
+ 327 0028 301C     	 mov r0,r6
+ 328 002a 0193     	 str r3,[sp,#4]
+ 329 002c FFF7FEFF 	 bl xEventGroupSetBits
+ 330 0030 019B     	 ldr r3,[sp,#4]
+ 331 0032 1C43     	 orr r4,r3
+ 332 0034 231C     	 mov r3,r4
+ 333 0036 2B40     	 and r3,r5
+ 334 0038 AB42     	 cmp r3,r5
+ 335 003a 04D1     	 bne .L68
+ 336 003c 3368     	 ldr r3,[r6]
+ 337 003e 009F     	 ldr r7,[sp]
+ 338 0040 AB43     	 bic r3,r5
+ 339 0042 3360     	 str r3,[r6]
+ 340 0044 0BE0     	 b .L69
+ 341              	.L68:
+ 342 0046 002F     	 cmp r7,#0
+ 343 0048 08D0     	 beq .L70
+ 344 004a A021     	 mov r1,#160
+ 345 004c C904     	 lsl r1,r1,#19
+ 346 004e 301D     	 add r0,r6,#4
+ 347 0050 2943     	 orr r1,r5
+ 348 0052 3A1C     	 mov r2,r7
+ 349 0054 FFF7FEFF 	 bl vTaskPlaceOnUnorderedEventList
+ 350 0058 009C     	 ldr r4,[sp]
+ 351 005a 00E0     	 b .L69
+ 352              	.L70:
+ 353 005c 3468     	 ldr r4,[r6]
+ 354              	.L69:
+ 355 005e FFF7FEFF 	 bl xTaskResumeAll
+ 356 0062 002F     	 cmp r7,#0
+ 357 0064 16D0     	 beq .L71
+ 358 0066 0028     	 cmp r0,#0
+ 359 0068 01D1     	 bne .L72
+ 360 006a FFF7FEFF 	 bl vPortYield
+ 361              	.L72:
+ 362 006e FFF7FEFF 	 bl uxTaskResetEventItemValue
+ 363 0072 041C     	 mov r4,r0
+ 364 0074 8301     	 lsl r3,r0,#6
+ 365 0076 0BD4     	 bmi .L73
+ 366 0078 FFF7FEFF 	 bl vPortEnterCritical
+ 367 007c 3468     	 ldr r4,[r6]
+ 368 007e 231C     	 mov r3,r4
+ 369 0080 2B40     	 and r3,r5
+ 370 0082 AB42     	 cmp r3,r5
+ 371 0084 02D1     	 bne .L74
+ 372 0086 231C     	 mov r3,r4
+ 373 0088 AB43     	 bic r3,r5
+ 374 008a 3360     	 str r3,[r6]
+ 375              	.L74:
+ 376 008c FFF7FEFF 	 bl vPortExitCritical
+ 377              	.L73:
+ 378 0090 2402     	 lsl r4,r4,#8
+ 379 0092 240A     	 lsr r4,r4,#8
+ 380              	.L71:
+ 381 0094 201C     	 mov r0,r4
+ 382              	 
+ 383 0096 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 385              	 .section .text.vEventGroupDelete,"ax",%progbits
+ 386              	 .align 1
+ 387              	 .global vEventGroupDelete
+ 388              	 .code 16
+ 389              	 .thumb_func
+ 391              	vEventGroupDelete:
+ 392 0000 10B5     	 push {r4,lr}
+ 393 0002 041C     	 mov r4,r0
+ 394 0004 FFF7FEFF 	 bl vTaskSuspendAll
+ 395              	.L79:
+ 396 0008 6368     	 ldr r3,[r4,#4]
+ 397 000a 002B     	 cmp r3,#0
+ 398 000c 0BD0     	 beq .L83
+ 399 000e 231C     	 mov r3,r4
+ 400 0010 2069     	 ldr r0,[r4,#16]
+ 401 0012 0C33     	 add r3,r3,#12
+ 402 0014 9842     	 cmp r0,r3
+ 403 0016 01D1     	 bne .L80
+ 404              	
+ 405 0018 72B6     	 cpsid i
+ 406              	
+ 407              	 .code 16
+ 408              	.L81:
+ 409 001a FEE7     	 b .L81
+ 410              	.L80:
+ 411 001c 8021     	 mov r1,#128
+ 412 001e 8904     	 lsl r1,r1,#18
+ 413 0020 FFF7FEFF 	 bl xTaskRemoveFromUnorderedEventList
+ 414 0024 F0E7     	 b .L79
+ 415              	.L83:
+ 416 0026 201C     	 mov r0,r4
+ 417 0028 FFF7FEFF 	 bl vPortFree
+ 418              	 
+ 419 002c FFF7FEFF 	 bl xTaskResumeAll
+ 420 0030 10BD     	 pop {r4,pc}
+ 422              	 .section .text.vEventGroupSetBitsCallback,"ax",%progbits
+ 423              	 .align 1
+ 424              	 .global vEventGroupSetBitsCallback
+ 425              	 .code 16
+ 426              	 .thumb_func
+ 428              	vEventGroupSetBitsCallback:
+ 429 0000 08B5     	 push {r3,lr}
+ 430 0002 FFF7FEFF 	 bl xEventGroupSetBits
+ 431              	 
+ 432 0006 08BD     	 pop {r3,pc}
+ 434              	 .section .text.vEventGroupClearBitsCallback,"ax",%progbits
+ 435              	 .align 1
+ 436              	 .global vEventGroupClearBitsCallback
+ 437              	 .code 16
+ 438              	 .thumb_func
+ 440              	vEventGroupClearBitsCallback:
+ 441 0000 08B5     	 push {r3,lr}
+ 442 0002 FFF7FEFF 	 bl xEventGroupClearBits
+ 443              	 
+ 444 0006 08BD     	 pop {r3,pc}
+ 446              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 event_groups.c
+    {standard input}:15     .text.xEventGroupCreate:00000000 $t
+    {standard input}:20     .text.xEventGroupCreate:00000000 xEventGroupCreate
+    {standard input}:35     .text.xEventGroupWaitBits:00000000 $t
+    {standard input}:40     .text.xEventGroupWaitBits:00000000 xEventGroupWaitBits
+    {standard input}:162    .text.xEventGroupClearBits:00000000 $t
+    {standard input}:167    .text.xEventGroupClearBits:00000000 xEventGroupClearBits
+    {standard input}:200    .text.xEventGroupGetBitsFromISR:00000000 $t
+    {standard input}:205    .text.xEventGroupGetBitsFromISR:00000000 xEventGroupGetBitsFromISR
+    {standard input}:216    .text.xEventGroupSetBits:00000000 $t
+    {standard input}:221    .text.xEventGroupSetBits:00000000 xEventGroupSetBits
+    {standard input}:292    .text.xEventGroupSync:00000000 $t
+    {standard input}:297    .text.xEventGroupSync:00000000 xEventGroupSync
+    {standard input}:386    .text.vEventGroupDelete:00000000 $t
+    {standard input}:391    .text.vEventGroupDelete:00000000 vEventGroupDelete
+    {standard input}:423    .text.vEventGroupSetBitsCallback:00000000 $t
+    {standard input}:428    .text.vEventGroupSetBitsCallback:00000000 vEventGroupSetBitsCallback
+    {standard input}:435    .text.vEventGroupClearBitsCallback:00000000 $t
+    {standard input}:440    .text.vEventGroupClearBitsCallback:00000000 vEventGroupClearBitsCallback
+
+UNDEFINED SYMBOLS
+pvPortMalloc
+vListInitialise
+vTaskSuspendAll
+vTaskPlaceOnUnorderedEventList
+xTaskResumeAll
+vPortYield
+uxTaskResetEventItemValue
+vPortEnterCritical
+vPortExitCritical
+ulSetInterruptMaskFromISR
+vClearInterruptMaskFromISR
+xTaskRemoveFromUnorderedEventList
+vPortFree

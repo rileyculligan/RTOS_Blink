@@ -1,0 +1,299 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "xmc_eru.c"
+  14              	 .section .text.XMC_ERU_ETL_Init,"ax",%progbits
+  15              	 .align 1
+  16              	 .global XMC_ERU_ETL_Init
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	XMC_ERU_ETL_Init:
+  21 0000 70B5     	 push {r4,r5,r6,lr}
+  22 0002 0C1C     	 mov r4,r1
+  23 0004 051C     	 mov r5,r0
+  24 0006 161C     	 mov r6,r2
+  25 0008 FFF7FEFF 	 bl XMC_ERU_Enable
+  26 000c 0F21     	 mov r1,#15
+  27 000e A200     	 lsl r2,r4,#2
+  28 0010 9140     	 lsl r1,r1,r2
+  29 0012 2B68     	 ldr r3,[r5]
+  30 0014 0434     	 add r4,r4,#4
+  31 0016 8B43     	 bic r3,r1
+  32 0018 3168     	 ldr r1,[r6]
+  33 001a A400     	 lsl r4,r4,#2
+  34 001c 9140     	 lsl r1,r1,r2
+  35 001e 0B43     	 orr r3,r1
+  36 0020 2B60     	 str r3,[r5]
+  37 0022 7368     	 ldr r3,[r6,#4]
+  38              	 
+  39 0024 6351     	 str r3,[r4,r5]
+  40 0026 70BD     	 pop {r4,r5,r6,pc}
+  42              	 .section .text.XMC_ERU_OGU_Init,"ax",%progbits
+  43              	 .align 1
+  44              	 .global XMC_ERU_OGU_Init
+  45              	 .code 16
+  46              	 .thumb_func
+  48              	XMC_ERU_OGU_Init:
+  49 0000 70B5     	 push {r4,r5,r6,lr}
+  50 0002 161C     	 mov r6,r2
+  51 0004 0C1C     	 mov r4,r1
+  52 0006 051C     	 mov r5,r0
+  53 0008 0834     	 add r4,r4,#8
+  54 000a FFF7FEFF 	 bl XMC_ERU_Enable
+  55 000e 3368     	 ldr r3,[r6]
+  56 0010 A400     	 lsl r4,r4,#2
+  57 0012 6351     	 str r3,[r4,r5]
+  58              	 
+  59 0014 70BD     	 pop {r4,r5,r6,pc}
+  61              	 .section .text.XMC_ERU_ETL_SetInput,"ax",%progbits
+  62              	 .align 1
+  63              	 .global XMC_ERU_ETL_SetInput
+  64              	 .code 16
+  65              	 .thumb_func
+  67              	XMC_ERU_ETL_SetInput:
+  68 0000 30B5     	 push {r4,r5,lr}
+  69 0002 8C00     	 lsl r4,r1,#2
+  70 0004 0F21     	 mov r1,#15
+  71 0006 A140     	 lsl r1,r1,r4
+  72 0008 0568     	 ldr r5,[r0]
+  73 000a 9B00     	 lsl r3,r3,#2
+  74 000c 8D43     	 bic r5,r1
+  75 000e 1343     	 orr r3,r2
+  76 0010 A340     	 lsl r3,r3,r4
+  77 0012 2A1C     	 mov r2,r5
+  78 0014 1A43     	 orr r2,r3
+  79 0016 0260     	 str r2,[r0]
+  80              	 
+  81 0018 30BD     	 pop {r4,r5,pc}
+  83              	 .section .text.XMC_ERU_ETL_SetSource,"ax",%progbits
+  84              	 .align 1
+  85              	 .global XMC_ERU_ETL_SetSource
+  86              	 .code 16
+  87              	 .thumb_func
+  89              	XMC_ERU_ETL_SetSource:
+  90 0000 0F23     	 mov r3,#15
+  91 0002 0431     	 add r1,r1,#4
+  92 0004 10B5     	 push {r4,lr}
+  93 0006 8900     	 lsl r1,r1,#2
+  94 0008 1A40     	 and r2,r3
+  95 000a 1302     	 lsl r3,r2,#8
+  96 000c 0C58     	 ldr r4,[r1,r0]
+  97 000e 024A     	 ldr r2,.L5
+  98              	 
+  99 0010 2240     	 and r2,r4
+ 100 0012 1A43     	 orr r2,r3
+ 101 0014 0A50     	 str r2,[r1,r0]
+ 102 0016 10BD     	 pop {r4,pc}
+ 103              	.L6:
+ 104              	 .align 2
+ 105              	.L5:
+ 106 0018 FFF0FFFF 	 .word -3841
+ 108              	 .section .text.XMC_ERU_ETL_SetEdgeDetection,"ax",%progbits
+ 109              	 .align 1
+ 110              	 .global XMC_ERU_ETL_SetEdgeDetection
+ 111              	 .code 16
+ 112              	 .thumb_func
+ 114              	XMC_ERU_ETL_SetEdgeDetection:
+ 115 0000 0323     	 mov r3,#3
+ 116 0002 10B5     	 push {r4,lr}
+ 117 0004 0C24     	 mov r4,#12
+ 118 0006 0431     	 add r1,r1,#4
+ 119 0008 8900     	 lsl r1,r1,#2
+ 120 000a 1A40     	 and r2,r3
+ 121 000c 9300     	 lsl r3,r2,#2
+ 122 000e 0A58     	 ldr r2,[r1,r0]
+ 123              	 
+ 124 0010 A243     	 bic r2,r4
+ 125 0012 1A43     	 orr r2,r3
+ 126 0014 0A50     	 str r2,[r1,r0]
+ 127 0016 10BD     	 pop {r4,pc}
+ 129              	 .section .text.XMC_ERU_ETL_SetStatusFlagMode,"ax",%progbits
+ 130              	 .align 1
+ 131              	 .global XMC_ERU_ETL_SetStatusFlagMode
+ 132              	 .code 16
+ 133              	 .thumb_func
+ 135              	XMC_ERU_ETL_SetStatusFlagMode:
+ 136 0000 0123     	 mov r3,#1
+ 137 0002 10B5     	 push {r4,lr}
+ 138 0004 0224     	 mov r4,#2
+ 139 0006 0431     	 add r1,r1,#4
+ 140 0008 8900     	 lsl r1,r1,#2
+ 141 000a 1A40     	 and r2,r3
+ 142 000c 5300     	 lsl r3,r2,#1
+ 143 000e 0A58     	 ldr r2,[r1,r0]
+ 144              	 
+ 145 0010 A243     	 bic r2,r4
+ 146 0012 1A43     	 orr r2,r3
+ 147 0014 0A50     	 str r2,[r1,r0]
+ 148 0016 10BD     	 pop {r4,pc}
+ 150              	 .section .text.XMC_ERU_ETL_EnableOutputTrigger,"ax",%progbits
+ 151              	 .align 1
+ 152              	 .global XMC_ERU_ETL_EnableOutputTrigger
+ 153              	 .code 16
+ 154              	 .thumb_func
+ 156              	XMC_ERU_ETL_EnableOutputTrigger:
+ 157 0000 0723     	 mov r3,#7
+ 158 0002 10B5     	 push {r4,lr}
+ 159 0004 7024     	 mov r4,#112
+ 160 0006 0431     	 add r1,r1,#4
+ 161 0008 8900     	 lsl r1,r1,#2
+ 162 000a 1A40     	 and r2,r3
+ 163 000c 1301     	 lsl r3,r2,#4
+ 164 000e 0A58     	 ldr r2,[r1,r0]
+ 165              	 
+ 166 0010 A243     	 bic r2,r4
+ 167 0012 1A43     	 orr r2,r3
+ 168 0014 0A50     	 str r2,[r1,r0]
+ 169 0016 0122     	 mov r2,#1
+ 170 0018 0B58     	 ldr r3,[r1,r0]
+ 171 001a 1343     	 orr r3,r2
+ 172 001c 0B50     	 str r3,[r1,r0]
+ 173 001e 10BD     	 pop {r4,pc}
+ 175              	 .section .text.XMC_ERU_ETL_DisableOutputTrigger,"ax",%progbits
+ 176              	 .align 1
+ 177              	 .global XMC_ERU_ETL_DisableOutputTrigger
+ 178              	 .code 16
+ 179              	 .thumb_func
+ 181              	XMC_ERU_ETL_DisableOutputTrigger:
+ 182 0000 0122     	 mov r2,#1
+ 183 0002 0431     	 add r1,r1,#4
+ 184 0004 8900     	 lsl r1,r1,#2
+ 185 0006 0B58     	 ldr r3,[r1,r0]
+ 186              	 
+ 187 0008 9343     	 bic r3,r2
+ 188 000a 0B50     	 str r3,[r1,r0]
+ 189 000c 7047     	 bx lr
+ 191              	 .section .text.XMC_ERU_OGU_EnablePatternDetection,"ax",%progbits
+ 192              	 .align 1
+ 193              	 .global XMC_ERU_OGU_EnablePatternDetection
+ 194              	 .code 16
+ 195              	 .thumb_func
+ 197              	XMC_ERU_OGU_EnablePatternDetection:
+ 198 0000 0F23     	 mov r3,#15
+ 199 0002 0831     	 add r1,r1,#8
+ 200 0004 8900     	 lsl r1,r1,#2
+ 201 0006 1A40     	 and r2,r3
+ 202 0008 10B5     	 push {r4,lr}
+ 203 000a 1303     	 lsl r3,r2,#12
+ 204 000c 0C58     	 ldr r4,[r1,r0]
+ 205 000e 044A     	 ldr r2,.L12
+ 206              	 
+ 207 0010 2240     	 and r2,r4
+ 208 0012 1A43     	 orr r2,r3
+ 209 0014 0A50     	 str r2,[r1,r0]
+ 210 0016 0422     	 mov r2,#4
+ 211 0018 0B58     	 ldr r3,[r1,r0]
+ 212 001a 1343     	 orr r3,r2
+ 213 001c 0B50     	 str r3,[r1,r0]
+ 214 001e 10BD     	 pop {r4,pc}
+ 215              	.L13:
+ 216              	 .align 2
+ 217              	.L12:
+ 218 0020 FF0FFFFF 	 .word -61441
+ 220              	 .section .text.XMC_ERU_OGU_DisablePatternDetection,"ax",%progbits
+ 221              	 .align 1
+ 222              	 .global XMC_ERU_OGU_DisablePatternDetection
+ 223              	 .code 16
+ 224              	 .thumb_func
+ 226              	XMC_ERU_OGU_DisablePatternDetection:
+ 227 0000 0422     	 mov r2,#4
+ 228 0002 0831     	 add r1,r1,#8
+ 229 0004 8900     	 lsl r1,r1,#2
+ 230 0006 0B58     	 ldr r3,[r1,r0]
+ 231              	 
+ 232 0008 9343     	 bic r3,r2
+ 233 000a 0B50     	 str r3,[r1,r0]
+ 234 000c 7047     	 bx lr
+ 236              	 .section .text.XMC_ERU_OGU_EnablePeripheralTrigger,"ax",%progbits
+ 237              	 .align 1
+ 238              	 .global XMC_ERU_OGU_EnablePeripheralTrigger
+ 239              	 .code 16
+ 240              	 .thumb_func
+ 242              	XMC_ERU_OGU_EnablePeripheralTrigger:
+ 243 0000 10B5     	 push {r4,lr}
+ 244 0002 0324     	 mov r4,#3
+ 245 0004 0831     	 add r1,r1,#8
+ 246 0006 8900     	 lsl r1,r1,#2
+ 247 0008 0B58     	 ldr r3,[r1,r0]
+ 248 000a 2240     	 and r2,r4
+ 249 000c A343     	 bic r3,r4
+ 250 000e 1A43     	 orr r2,r3
+ 251 0010 0A50     	 str r2,[r1,r0]
+ 252              	 
+ 253 0012 10BD     	 pop {r4,pc}
+ 255              	 .section .text.XMC_ERU_OGU_DisablePeripheralTrigger,"ax",%progbits
+ 256              	 .align 1
+ 257              	 .global XMC_ERU_OGU_DisablePeripheralTrigger
+ 258              	 .code 16
+ 259              	 .thumb_func
+ 261              	XMC_ERU_OGU_DisablePeripheralTrigger:
+ 262 0000 0322     	 mov r2,#3
+ 263 0002 0831     	 add r1,r1,#8
+ 264 0004 8900     	 lsl r1,r1,#2
+ 265 0006 0B58     	 ldr r3,[r1,r0]
+ 266              	 
+ 267 0008 9343     	 bic r3,r2
+ 268 000a 0B50     	 str r3,[r1,r0]
+ 269 000c 7047     	 bx lr
+ 271              	 .section .text.XMC_ERU_OGU_SetServiceRequestMode,"ax",%progbits
+ 272              	 .align 1
+ 273              	 .global XMC_ERU_OGU_SetServiceRequestMode
+ 274              	 .code 16
+ 275              	 .thumb_func
+ 277              	XMC_ERU_OGU_SetServiceRequestMode:
+ 278 0000 0323     	 mov r3,#3
+ 279 0002 10B5     	 push {r4,lr}
+ 280 0004 3024     	 mov r4,#48
+ 281 0006 0831     	 add r1,r1,#8
+ 282 0008 8900     	 lsl r1,r1,#2
+ 283 000a 1A40     	 and r2,r3
+ 284 000c 1301     	 lsl r3,r2,#4
+ 285 000e 0A58     	 ldr r2,[r1,r0]
+ 286              	 
+ 287 0010 A243     	 bic r2,r4
+ 288 0012 1A43     	 orr r2,r3
+ 289 0014 0A50     	 str r2,[r1,r0]
+ 290 0016 10BD     	 pop {r4,pc}
+ 292              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc_eru.c
+    {standard input}:15     .text.XMC_ERU_ETL_Init:00000000 $t
+    {standard input}:20     .text.XMC_ERU_ETL_Init:00000000 XMC_ERU_ETL_Init
+    {standard input}:43     .text.XMC_ERU_OGU_Init:00000000 $t
+    {standard input}:48     .text.XMC_ERU_OGU_Init:00000000 XMC_ERU_OGU_Init
+    {standard input}:62     .text.XMC_ERU_ETL_SetInput:00000000 $t
+    {standard input}:67     .text.XMC_ERU_ETL_SetInput:00000000 XMC_ERU_ETL_SetInput
+    {standard input}:84     .text.XMC_ERU_ETL_SetSource:00000000 $t
+    {standard input}:89     .text.XMC_ERU_ETL_SetSource:00000000 XMC_ERU_ETL_SetSource
+    {standard input}:106    .text.XMC_ERU_ETL_SetSource:00000018 $d
+    {standard input}:109    .text.XMC_ERU_ETL_SetEdgeDetection:00000000 $t
+    {standard input}:114    .text.XMC_ERU_ETL_SetEdgeDetection:00000000 XMC_ERU_ETL_SetEdgeDetection
+    {standard input}:130    .text.XMC_ERU_ETL_SetStatusFlagMode:00000000 $t
+    {standard input}:135    .text.XMC_ERU_ETL_SetStatusFlagMode:00000000 XMC_ERU_ETL_SetStatusFlagMode
+    {standard input}:151    .text.XMC_ERU_ETL_EnableOutputTrigger:00000000 $t
+    {standard input}:156    .text.XMC_ERU_ETL_EnableOutputTrigger:00000000 XMC_ERU_ETL_EnableOutputTrigger
+    {standard input}:176    .text.XMC_ERU_ETL_DisableOutputTrigger:00000000 $t
+    {standard input}:181    .text.XMC_ERU_ETL_DisableOutputTrigger:00000000 XMC_ERU_ETL_DisableOutputTrigger
+    {standard input}:192    .text.XMC_ERU_OGU_EnablePatternDetection:00000000 $t
+    {standard input}:197    .text.XMC_ERU_OGU_EnablePatternDetection:00000000 XMC_ERU_OGU_EnablePatternDetection
+    {standard input}:218    .text.XMC_ERU_OGU_EnablePatternDetection:00000020 $d
+    {standard input}:221    .text.XMC_ERU_OGU_DisablePatternDetection:00000000 $t
+    {standard input}:226    .text.XMC_ERU_OGU_DisablePatternDetection:00000000 XMC_ERU_OGU_DisablePatternDetection
+    {standard input}:237    .text.XMC_ERU_OGU_EnablePeripheralTrigger:00000000 $t
+    {standard input}:242    .text.XMC_ERU_OGU_EnablePeripheralTrigger:00000000 XMC_ERU_OGU_EnablePeripheralTrigger
+    {standard input}:256    .text.XMC_ERU_OGU_DisablePeripheralTrigger:00000000 $t
+    {standard input}:261    .text.XMC_ERU_OGU_DisablePeripheralTrigger:00000000 XMC_ERU_OGU_DisablePeripheralTrigger
+    {standard input}:272    .text.XMC_ERU_OGU_SetServiceRequestMode:00000000 $t
+    {standard input}:277    .text.XMC_ERU_OGU_SetServiceRequestMode:00000000 XMC_ERU_OGU_SetServiceRequestMode
+
+UNDEFINED SYMBOLS
+XMC_ERU_Enable

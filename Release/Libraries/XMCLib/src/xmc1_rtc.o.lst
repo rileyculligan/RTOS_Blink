@@ -1,0 +1,195 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "xmc1_rtc.c"
+  14              	 .section .text.XMC_RTC_Enable,"ax",%progbits
+  15              	 .align 1
+  16              	 .global XMC_RTC_Enable
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	XMC_RTC_Enable:
+  21 0000 8020     	 mov r0,#128
+  22 0002 08B5     	 push {r3,lr}
+  23 0004 C000     	 lsl r0,r0,#3
+  24 0006 FFF7FEFF 	 bl XMC_SCU_CLOCK_UngatePeripheralClock
+  25              	 
+  26 000a 08BD     	 pop {r3,pc}
+  28              	 .section .text.XMC_RTC_Disable,"ax",%progbits
+  29              	 .align 1
+  30              	 .global XMC_RTC_Disable
+  31              	 .code 16
+  32              	 .thumb_func
+  34              	XMC_RTC_Disable:
+  35 0000 8020     	 mov r0,#128
+  36 0002 08B5     	 push {r3,lr}
+  37 0004 C000     	 lsl r0,r0,#3
+  38 0006 FFF7FEFF 	 bl XMC_SCU_CLOCK_GatePeripheralClock
+  39              	 
+  40 000a 08BD     	 pop {r3,pc}
+  42              	 .section .text.XMC_RTC_SetDebugMode,"ax",%progbits
+  43              	 .align 1
+  44              	 .global XMC_RTC_SetDebugMode
+  45              	 .code 16
+  46              	 .thumb_func
+  48              	XMC_RTC_SetDebugMode:
+  49 0000 0221     	 mov r1,#2
+  50 0002 034A     	 ldr r2,.L4
+  51              	 
+  52 0004 5368     	 ldr r3,[r2,#4]
+  53 0006 8B43     	 bic r3,r1
+  54 0008 1843     	 orr r0,r3
+  55 000a 5060     	 str r0,[r2,#4]
+  56 000c 7047     	 bx lr
+  57              	.L5:
+  58 000e C046     	 .align 2
+  59              	.L4:
+  60 0010 000A0140 	 .word 1073809920
+  62              	 .section .text.XMC_RTC_EnableEvent,"ax",%progbits
+  63              	 .align 1
+  64              	 .global XMC_RTC_EnableEvent
+  65              	 .code 16
+  66              	 .thumb_func
+  68              	XMC_RTC_EnableEvent:
+  69 0000 024A     	 ldr r2,.L7
+  70              	 
+  71 0002 1369     	 ldr r3,[r2,#16]
+  72 0004 1843     	 orr r0,r3
+  73 0006 1061     	 str r0,[r2,#16]
+  74 0008 7047     	 bx lr
+  75              	.L8:
+  76 000a C046     	 .align 2
+  77              	.L7:
+  78 000c 000A0140 	 .word 1073809920
+  80              	 .section .text.XMC_RTC_DisableEvent,"ax",%progbits
+  81              	 .align 1
+  82              	 .global XMC_RTC_DisableEvent
+  83              	 .code 16
+  84              	 .thumb_func
+  86              	XMC_RTC_DisableEvent:
+  87 0000 024A     	 ldr r2,.L10
+  88              	 
+  89 0002 1369     	 ldr r3,[r2,#16]
+  90 0004 8343     	 bic r3,r0
+  91 0006 1361     	 str r3,[r2,#16]
+  92 0008 7047     	 bx lr
+  93              	.L11:
+  94 000a C046     	 .align 2
+  95              	.L10:
+  96 000c 000A0140 	 .word 1073809920
+  98              	 .section .text.XMC_RTC_ClearEvent,"ax",%progbits
+  99              	 .align 1
+ 100              	 .global XMC_RTC_ClearEvent
+ 101              	 .code 16
+ 102              	 .thumb_func
+ 104              	XMC_RTC_ClearEvent:
+ 105 0000 024A     	 ldr r2,.L13
+ 106              	 
+ 107 0002 5369     	 ldr r3,[r2,#20]
+ 108 0004 1843     	 orr r0,r3
+ 109 0006 5061     	 str r0,[r2,#20]
+ 110 0008 7047     	 bx lr
+ 111              	.L14:
+ 112 000a C046     	 .align 2
+ 113              	.L13:
+ 114 000c 000A0140 	 .word 1073809920
+ 116              	 .section .text.XMC_RTC_IsEnabled,"ax",%progbits
+ 117              	 .align 1
+ 118              	 .global XMC_RTC_IsEnabled
+ 119              	 .code 16
+ 120              	 .thumb_func
+ 122              	XMC_RTC_IsEnabled:
+ 123 0000 8020     	 mov r0,#128
+ 124 0002 08B5     	 push {r3,lr}
+ 125 0004 C000     	 lsl r0,r0,#3
+ 126 0006 FFF7FEFF 	 bl XMC_SCU_CLOCK_IsPeripheralClockGated
+ 127 000a 0123     	 mov r3,#1
+ 128 000c 5840     	 eor r0,r3
+ 129 000e C0B2     	 uxtb r0,r0
+ 130              	 
+ 131 0010 08BD     	 pop {r3,pc}
+ 133              	 .section .text.XMC_RTC_Init,"ax",%progbits
+ 134              	 .align 1
+ 135              	 .global XMC_RTC_Init
+ 136              	 .code 16
+ 137              	 .thumb_func
+ 139              	XMC_RTC_Init:
+ 140 0000 38B5     	 push {r3,r4,r5,lr}
+ 141 0002 104C     	 ldr r4,.L22
+ 142 0004 6368     	 ldr r3,[r4,#4]
+ 143 0006 DB07     	 lsl r3,r3,#31
+ 144 0008 1AD4     	 bmi .L17
+ 145 000a 051C     	 mov r5,r0
+ 146 000c FFF7FEFF 	 bl XMC_RTC_IsEnabled
+ 147 0010 0028     	 cmp r0,#0
+ 148 0012 01D1     	 bne .L18
+ 149 0014 FFF7FEFF 	 bl XMC_RTC_Enable
+ 150              	.L18:
+ 151 0018 288A     	 ldrh r0,[r5,#16]
+ 152 001a FFF7FEFF 	 bl XMC_RTC_SetPrescaler
+ 153              	.L19:
+ 154 001e 1822     	 mov r2,#24
+ 155 0020 094B     	 ldr r3,.L22+4
+ 156 0022 996C     	 ldr r1,[r3,#72]
+ 157 0024 1142     	 tst r1,r2
+ 158 0026 FAD1     	 bne .L19
+ 159 0028 2A68     	 ldr r2,[r5]
+ 160 002a 2262     	 str r2,[r4,#32]
+ 161 002c 6A68     	 ldr r2,[r5,#4]
+ 162 002e 6262     	 str r2,[r4,#36]
+ 163              	.L20:
+ 164 0030 0622     	 mov r2,#6
+ 165 0032 996C     	 ldr r1,[r3,#72]
+ 166 0034 1142     	 tst r1,r2
+ 167 0036 FBD1     	 bne .L20
+ 168 0038 AB68     	 ldr r3,[r5,#8]
+ 169 003a A361     	 str r3,[r4,#24]
+ 170 003c EB68     	 ldr r3,[r5,#12]
+ 171 003e E361     	 str r3,[r4,#28]
+ 172              	.L17:
+ 173 0040 0020     	 mov r0,#0
+ 174              	 
+ 175 0042 38BD     	 pop {r3,r4,r5,pc}
+ 176              	.L23:
+ 177              	 .align 2
+ 178              	.L22:
+ 179 0044 000A0140 	 .word 1073809920
+ 180 0048 00000140 	 .word 1073807360
+ 182              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc1_rtc.c
+    {standard input}:15     .text.XMC_RTC_Enable:00000000 $t
+    {standard input}:20     .text.XMC_RTC_Enable:00000000 XMC_RTC_Enable
+    {standard input}:29     .text.XMC_RTC_Disable:00000000 $t
+    {standard input}:34     .text.XMC_RTC_Disable:00000000 XMC_RTC_Disable
+    {standard input}:43     .text.XMC_RTC_SetDebugMode:00000000 $t
+    {standard input}:48     .text.XMC_RTC_SetDebugMode:00000000 XMC_RTC_SetDebugMode
+    {standard input}:60     .text.XMC_RTC_SetDebugMode:00000010 $d
+    {standard input}:63     .text.XMC_RTC_EnableEvent:00000000 $t
+    {standard input}:68     .text.XMC_RTC_EnableEvent:00000000 XMC_RTC_EnableEvent
+    {standard input}:78     .text.XMC_RTC_EnableEvent:0000000c $d
+    {standard input}:81     .text.XMC_RTC_DisableEvent:00000000 $t
+    {standard input}:86     .text.XMC_RTC_DisableEvent:00000000 XMC_RTC_DisableEvent
+    {standard input}:96     .text.XMC_RTC_DisableEvent:0000000c $d
+    {standard input}:99     .text.XMC_RTC_ClearEvent:00000000 $t
+    {standard input}:104    .text.XMC_RTC_ClearEvent:00000000 XMC_RTC_ClearEvent
+    {standard input}:114    .text.XMC_RTC_ClearEvent:0000000c $d
+    {standard input}:117    .text.XMC_RTC_IsEnabled:00000000 $t
+    {standard input}:122    .text.XMC_RTC_IsEnabled:00000000 XMC_RTC_IsEnabled
+    {standard input}:134    .text.XMC_RTC_Init:00000000 $t
+    {standard input}:139    .text.XMC_RTC_Init:00000000 XMC_RTC_Init
+    {standard input}:179    .text.XMC_RTC_Init:00000044 $d
+
+UNDEFINED SYMBOLS
+XMC_SCU_CLOCK_UngatePeripheralClock
+XMC_SCU_CLOCK_GatePeripheralClock
+XMC_SCU_CLOCK_IsPeripheralClockGated
+XMC_RTC_SetPrescaler
